@@ -43,6 +43,10 @@ HimRakshak demonstrates how virtual slope-monitoring stations can send sensor-li
 - Three independent in-memory virtual stations with separate scenarios, sequence counters, latest readings, and histories.
 - Deterministic simulator scenarios: `normal`, `heavy_rain`, `slope_shift`, and `vibration_burst`.
 - Software-only reliability operations: drop, delay, release, deliver, duplicate, stale, disconnect, and reconnect.
+- Software-only virtual LoRa channel and edge gateway with deterministic airtime,
+  link, delivery, duplicate, retry, and bounded-queue simulation.
+- Additive v2 radio/gateway diagnostics while preserving every v1 route and
+  backend risk/sequence authority.
 - Incoming device sequence preservation; duplicate and out-of-order packets are rejected without replacing accepted station state.
 - Request-body size limit of 64 KiB and an allowlist of the three registered station IDs.
 - In remote mode, a configurable per-station ingestion interval (default 3 seconds) and administrative protection for mutation/fault-injection routes.
@@ -63,6 +67,9 @@ HimRakshak demonstrates how virtual slope-monitoring stations can send sensor-li
 | Testing | Python `unittest` and firmware contract tests |
 
 There is no React, FastAPI, database, machine-learning model, live weather integration, or physical LoRa driver in the current implementation.
+The virtual LoRa channel and gateway are deterministic software models only;
+they do not transmit RF or establish field range, reliability, or regulatory
+compliance.
 
 ## Repository structure
 

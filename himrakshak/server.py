@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+from datetime import datetime, timezone
 import hmac
 import json
 import math
@@ -17,6 +18,11 @@ from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import unquote, urlsplit
 
+from .gateway import (
+    GatewayIdempotencyConflictError,
+    VirtualEdgeGateway,
+)
+from .lora_simulator import LoRaPacket, VirtualLoRaChannel
 from .risk import MODEL_ID
 from .schema import SchemaValidationError
 from .stations import (
@@ -172,6 +178,10 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
     def rate_limiter(self) -> IngestionRateLimiter:
         return self.server.rate_limiter  # type: ignore[attr-defined]
 
+    @property
+    def gateway(self) -> VirtualEdgeGateway:
+        return self.server.gateway  # type: ignore[attr-defined]
+
     def log_message(self, format: str, *args: Any) -> None:
         return
 
@@ -324,9 +334,114 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
             return None
         return station, action
 
+    def _v2_json(self, data: Mapping[str, Any]) -> dict[str, Any]:
+        return {
+            "api_version": 2,
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "data": dict(data),
+        }
+
+    def _handle_v2_get(self, path: str) -> bool:
+        if path == "/api/v2/radio/config":
+            self._send_json(HTTPStatus.OK, self._v2_json(self.gateway.get_radio_config()))
+            return True
+        if path == "/api/v2/radio/status":
+            self._send_json(HTTPStatus.OK, self._v2_json(self.gateway.get_status()))
+            return True
+        if path == "/api/v2/gateway/health":
+            status = self.gateway.get_status()
+            self._send_json(
+                HTTPStatus.OK,
+                self._v2_json(
+                    {
+                        "gateway_id": status["gateway_id"],
+                        "status": status["status"],
+                        "process_uptime_seconds": round(time.monotonic() - self.server.gateway_started_at, 3),
+                        "channel_connected": status["channel_connected"],
+                        "backend_reachable": True,
+                        "queued_packets": status["queued_packets"],
+                        "last_successful_forward_at": status["last_successful_forward_at"],
+                        "last_error": status["last_error"],
+                        "software_simulation": True,
+                    }
+                ),
+            )
+            return True
+        prefix = "/api/v2/stations/"
+        suffix = "/radio-diagnostics"
+        if path.startswith(prefix) and path.endswith(suffix):
+            node_id = unquote(path[len(prefix) : -len(suffix)]).strip("/")
+            try:
+                data = self.gateway.get_node_status(node_id)
+            except (KeyError, ValueError):
+                self._send_error(HTTPStatus.NOT_FOUND, "Unknown station")
+                return True
+            self._send_json(HTTPStatus.OK, self._v2_json(data))
+            return True
+        return False
+
+    def _handle_v2_post(self, path: str) -> bool:
+        if path != "/api/v2/radio/transmissions":
+            return False
+        if not self._check_admin_auth():
+            return True
+        payload = self._read_json()
+        if payload is None:
+            return True
+        try:
+            transmission_id = payload.get("transmission_id")
+            idempotency_key = payload.get("idempotency_key")
+            node_id = payload.get("node_id")
+            sequence = payload.get("device_sequence")
+            reading = payload.get("payload")
+            if not all(isinstance(value, str) and value.strip() for value in (transmission_id, idempotency_key, node_id)):
+                raise ValueError("transmission_id, idempotency_key, and node_id are required strings")
+            if isinstance(sequence, bool) or not isinstance(sequence, int) or sequence < 0:
+                raise ValueError("device_sequence must be a non-negative integer")
+            if not isinstance(reading, dict):
+                raise ValueError("payload must be a JSON object")
+            if payload.get("channel_profile", "baseline") != "baseline":
+                raise ValueError("channel_profile must be baseline")
+            if reading.get("node_id", reading.get("node")) != node_id:
+                raise ValueError("payload node_id must match node_id")
+            normalized = self.gateway.station_manager.get(node_id)
+            del normalized
+            reading_bytes = json.dumps(reading, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+            packet = LoRaPacket(
+                packet_id=idempotency_key,
+                attempt_id=transmission_id,
+                node_id=node_id,
+                sequence=sequence,
+                attempt_number=payload.get("attempt_number", 1),
+                payload=reading_bytes,
+            )
+            result = self.gateway.submit_packet(packet, idempotency_key=idempotency_key)
+            data = {
+                "transmission_id": transmission_id,
+                "idempotency_key": idempotency_key,
+                "status": "scheduled" if result.status == "queued" else result.status,
+                "attempt": packet.attempt_number,
+                "channel": "virtual-lora",
+                "reason_code": result.reason_code,
+                "scheduled_copies": result.scheduled_copies,
+            }
+            self._send_json(HTTPStatus.OK, self._v2_json(data))
+        except GatewayIdempotencyConflictError as exc:
+            self._send_error(HTTPStatus.CONFLICT, str(exc))
+        except (KeyError, ValueError, TypeError) as exc:
+            self._send_error(
+                HTTPStatus.NOT_FOUND if isinstance(exc, KeyError) else HTTPStatus.BAD_REQUEST,
+                str(exc),
+            )
+        except Exception:
+            self._send_error(HTTPStatus.INTERNAL_SERVER_ERROR, "Transmission could not be processed")
+        return True
+
     def do_GET(self) -> None:
         self._discard_request_body()
         path = self._api_path()
+        if path.startswith("/api/v2/") and self._handle_v2_get(path):
+            return
         if path == "/frontend" or path.startswith("/frontend/"):
             self._serve_frontend(path)
             return
@@ -414,6 +529,8 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path = self._api_path()
+        if path.startswith("/api/v2/") and self._handle_v2_post(path):
+            return
         fault = self._fault_action(path)
         if fault is not None:
             if not self._check_admin_auth():
@@ -575,10 +692,38 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
                 "Reliability request could not be processed",
             )
 
+    def do_PUT(self) -> None:
+        path = self._api_path()
+        if path != "/api/v2/radio/config":
+            self._method_not_allowed()
+            return
+        if not self._check_admin_auth():
+            return
+        payload = self._read_json()
+        if payload is None:
+            return
+        try:
+            expected_revision = payload.get("expected_revision")
+            if expected_revision is not None and (
+                isinstance(expected_revision, bool)
+                or not isinstance(expected_revision, int)
+            ):
+                raise ValueError("expected_revision must be an integer")
+            data = self.gateway.update_radio_config(payload, expected_revision)
+            self._send_json(HTTPStatus.OK, self._v2_json(data))
+        except ValueError as exc:
+            status = (
+                HTTPStatus.CONFLICT
+                if "stale radio configuration revision" in str(exc)
+                else HTTPStatus.BAD_REQUEST
+            )
+            self._send_error(status, str(exc))
+        except Exception:
+            self._send_error(HTTPStatus.INTERNAL_SERVER_ERROR, "Radio configuration could not be updated")
+
     def _method_not_allowed(self) -> None:
         self._send_error(HTTPStatus.METHOD_NOT_ALLOWED, "Method not allowed")
 
-    do_PUT = _method_not_allowed
     do_PATCH = _method_not_allowed
     do_DELETE = _method_not_allowed
 
@@ -606,6 +751,9 @@ class HimRakshakServer(ThreadingHTTPServer):
             )
         self.station_manager = StationManager(seed=seed)
         self.rate_limiter = IngestionRateLimiter(self.config.rate_limit_interval)
+        self.channel = VirtualLoRaChannel(seed=seed)
+        self.gateway = VirtualEdgeGateway(self.channel, self.station_manager)
+        self.gateway_started_at = time.monotonic()
         super().__init__((self.config.host, self.config.port), HimRakshakHandler)
 
 

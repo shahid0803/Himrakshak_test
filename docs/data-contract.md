@@ -91,3 +91,13 @@ missing battery value.
 The sender owns `sequence`. The backend preserves accepted device sequences,
 rejects duplicate and stale values with HTTP 409, and separately maintains
 server event ordering and the Python simulator's next generated sequence.
+
+## Virtual gateway payloads
+
+Phase 5 transports the same canonical reading as UTF-8 JSON bytes inside a
+`LoRaPacket`. The gateway validates those bytes with `validate_reading()` and
+then calls `StationManager.ingest()`; it does not trust or preserve a
+sender-supplied risk assessment. Radio metadata (packet/attempt identity,
+copy index, simulated timestamps, RSSI, and SNR) remains separate from the
+sensor reading. `transport: "VIRTUAL_LORA_SIMULATION"` identifies the software
+channel and does not imply physical RF transmission.

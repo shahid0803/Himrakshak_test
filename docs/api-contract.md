@@ -180,3 +180,29 @@ Senders can use this metadata to reconcile delivery without bypassing backend
 checks. This remains a software demonstration with synthetic readings and
 illustrative thresholds, not a validated landslide prediction or field safety
 system.
+
+## Phase 5 virtual gateway routes
+
+The additive v2 routes connect the software-only virtual LoRa channel to the
+existing station manager. Every v2 response uses:
+
+```json
+{"api_version":2,"generated_at":"...","data":{}}
+```
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `POST` | `/api/v2/radio/transmissions` | Validate and schedule a virtual packet |
+| `GET` | `/api/v2/radio/config` | Read the emulator profile |
+| `PUT` | `/api/v2/radio/config` | Admin-only profile update with optional revision |
+| `GET` | `/api/v2/radio/status` | Read channel/gateway simulation counters |
+| `GET` | `/api/v2/stations/{node_id}/radio-diagnostics` | Read per-node gateway diagnostics |
+| `GET` | `/api/v2/gateway/health` | Read process and dependency health |
+
+The transmission route reports scheduling, not backend acceptance. Virtual
+time and a gateway consumer determine when a queued packet is delivered.
+Configuration mutation and transmission submission use the existing
+`X-HimRakshak-Admin` boundary in remote mode; local mode retains the existing
+development behavior. No admin secret is returned in any response. These
+routes expose simulation outcomes and explicitly do not represent physical
+radio measurements.

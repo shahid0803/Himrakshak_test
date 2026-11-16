@@ -63,6 +63,62 @@ class ServerTests(unittest.TestCase):
         self.assertIsNone(state["latest"])
         self.assertEqual(state["events"], [])
 
+    def test_v2_radio_and_gateway_diagnostics(self):
+        status, response = self.request("GET", "/api/v2/radio/config")
+        self.assertEqual(status, 200)
+        self.assertEqual(response["api_version"], 2)
+        self.assertFalse(response["data"]["is_physical_radio"])
+        status, response = self.request(
+            "POST",
+            "/api/v2/radio/transmissions",
+            {
+                "transmission_id": "tx-hr01-0-a1",
+                "idempotency_key": "HR-01:0:a1",
+                "node_id": "HR-01",
+                "device_sequence": 0,
+                "created_at": "2026-10-27T12:30:00Z",
+                "payload": self.packet(transport="VIRTUAL_LORA_SIMULATION"),
+                "channel_profile": "baseline",
+            },
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(response["data"]["status"], "scheduled")
+        self.server.gateway.advance_simulation(1000)
+        status, diagnostics = self.request(
+            "GET", "/api/v2/stations/HR-01/radio-diagnostics"
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(diagnostics["data"]["accepted_by_backend"], 1)
+        status, health = self.request("GET", "/api/v2/gateway/health")
+        self.assertEqual(status, 200)
+        self.assertTrue(health["data"]["backend_reachable"])
+
+    def test_v2_config_revision_and_validation(self):
+        status, current = self.request("GET", "/api/v2/radio/config")
+        self.assertEqual(status, 200)
+        revision = current["data"]["revision"]
+        status, updated = self.request(
+            "PUT",
+            "/api/v2/radio/config",
+            {"expected_revision": revision, "spreading_factor": 10},
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(updated["data"]["spreading_factor"], 10)
+        status, error = self.request(
+            "PUT",
+            "/api/v2/radio/config",
+            {"expected_revision": revision, "spreading_factor": 11},
+        )
+        self.assertEqual(status, 409)
+        self.assertIn("error", error)
+        status, error = self.request(
+            "POST",
+            "/api/v2/radio/transmissions",
+            {"node_id": "HR-99"},
+        )
+        self.assertEqual(status, 400)
+        self.assertIn("error", error)
+
     def test_canonical_and_alias_ingestion(self):
         status, result = self.request("POST", "/api/readings", self.packet())
         self.assertEqual(status, 200)
@@ -411,6 +467,24 @@ class ServerCloudSecurityTests(unittest.TestCase):
         )
         self.assertEqual(status, 401)
         self.assertIn("Missing administrative authorization header", err["error"]["message"])
+
+    def test_v2_radio_mutations_require_admin_key_but_diagnostics_are_read_only(self):
+        status, _, _ = self.request("GET", "/api/v2/radio/config")
+        self.assertEqual(status, 200)
+        status, err, _ = self.request(
+            "PUT",
+            "/api/v2/radio/config",
+            {"spreading_factor": 10},
+        )
+        self.assertEqual(status, 401)
+        self.assertIn("Missing administrative authorization", err["error"]["message"])
+        status, err, _ = self.request(
+            "POST",
+            "/api/v2/radio/transmissions",
+            {"transmission_id": "tx", "idempotency_key": "key"},
+        )
+        self.assertEqual(status, 401)
+        self.assertIn("Missing administrative authorization", err["error"]["message"])
 
         # Invalid auth header -> 403
         status, err, _ = self.request(

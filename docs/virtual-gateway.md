@@ -48,6 +48,11 @@ Gateway statistics distinguish channel delivery, gateway validation, and backend
 ingestion. Histories, idempotency entries, and channel queues are bounded.
 State is in memory and is lost on process restart.
 
+Validation diagnostics use distinct outcomes for channel loss or queue-full,
+gateway unavailability, invalid/schema payloads, duplicate logical packets,
+stale sequences, and backend rejection. A gateway history timestamp records
+processing time; it does not replace the sensor timestamp in the payload.
+
 ## API v2 diagnostics
 
 The server adds these routes without changing API v1:
@@ -75,3 +80,10 @@ a `LoRaPacket` and submit it through this interface. The future integration must
 continue to use `StationManager.ingest()` and the existing risk authority.
 No firmware, frontend, physical radio, solar, battery, or new risk model is
 included in Phase 5.
+
+## Phase 7 validation boundary
+
+Phase 7 validates the merged Phase 6 source contract and the complete
+software-only path with deterministic Python tests. Arduino CLI, PlatformIO,
+and live Wokwi execution remain separate validation capabilities and must not
+be inferred from source-level checks.

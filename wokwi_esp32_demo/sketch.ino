@@ -137,6 +137,15 @@ Reading readSensors() {
   return reading;
 }
 
+Reading roundedReading(const Reading &reading) {
+  Reading rounded = reading;
+  rounded.moisture = round(reading.moisture * 10.0f) / 10.0f;
+  rounded.tilt = round(reading.tilt * 10.0f) / 10.0f;
+  rounded.vibration = round(reading.vibration * 10.0f) / 10.0f;
+  rounded.battery = round(reading.battery * 10.0f) / 10.0f;
+  return rounded;
+}
+
 String makePayload(const Reading &reading, unsigned long sequence) {
   StaticJsonDocument<768> doc;
   doc["node_id"] = HIMRAKSHAK_STATION_ID;
@@ -282,7 +291,7 @@ void setup() {
 
 void loop() {
   ensureWiFi();
-  Reading reading = readSensors();
+  Reading reading = roundedReading(readSensors());
   const char *risk = localRisk(reading);
   setIndicators(risk);
 

@@ -139,3 +139,13 @@ The simulator creates synthetic values only. It does not use physical sensors,
 real weather, live data, hardware libraries, network access, LoRa radio,
 machine learning, or an API. Thresholds are illustrative demonstration rules
 and provide no guarantee that a landslide will or will not occur.
+
+## Firmware comparison
+
+The ESP32-S3 Wokwi sketch mirrors this formula and these thresholds for local
+indicators only. It rounds moisture, tilt, vibration, and battery to one
+decimal place before both local assessment and serialization, so its displayed
+assessment uses the same measurement values sent to the backend. The Python
+engine remains authoritative and recalculates the result after gateway/schema
+validation. Firmware comparison is source-level unless an Arduino/Wokwi
+runtime is available.

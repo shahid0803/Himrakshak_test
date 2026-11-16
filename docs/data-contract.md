@@ -101,3 +101,17 @@ sender-supplied risk assessment. Radio metadata (packet/attempt identity,
 copy index, simulated timestamps, RSSI, and SNR) remains separate from the
 sensor reading. `transport: "VIRTUAL_LORA_SIMULATION"` identifies the software
 channel and does not imply physical RF transmission.
+
+## Phase 7 validation boundaries
+
+Sensor acquisition time remains the `timestamp` inside the reading. Gateway
+and station event records add separate UTC processing timestamps; they do not
+overwrite the sensor timestamp or treat device uptime as UTC. Radio copy,
+send, and receive timing is simulated metadata.
+
+Client-provided `risk`, `risk_level`, `risk_score_demo`, `demo_score`, and
+`reasons` fields are retained as unknown metadata when present, but the
+backend recalculates the authoritative assessment with
+`himrakshak-demo-risk-engine-v1`. The validation suite exercises boundaries,
+non-finite values, invalid timestamps, aliases, packet byte limits, duplicate
+copies, stale sequences, and full gateway-to-station delivery.

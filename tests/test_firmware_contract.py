@@ -40,7 +40,7 @@ class FirmwareContractTests(unittest.TestCase):
             self.assertIn(marker, virtual)
 
     def test_local_alerts_and_sensor_acquisition_are_independent_of_network(self):
-        self.assertLess(self.source.index("Reading reading = readSensors()"),
+        self.assertLess(self.source.index("Reading reading = roundedReading(readSensors())"),
                         self.source.index("serviceQueue();"))
         for marker in (
             "mpu.begin()",

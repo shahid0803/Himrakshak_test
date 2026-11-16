@@ -32,6 +32,12 @@ jobs:
           mkdir -p site
           cp index.html site/index.html
           test -s site/index.html
+          cp -R frontend site/frontend
+          test -s site/frontend/css/tokens.css
+          test -s site/frontend/css/layout.css
+          test -s site/frontend/css/components.css
+          test -s site/frontend/js/app.js
+          test -s site/frontend/js/api-client.js
           test "$(find site -maxdepth 1 -type f | wc -l)" -eq 1
 
       - name: Upload Pages artifact

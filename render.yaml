@@ -13,3 +13,5 @@ services:
         value: "3"
       - key: HIMRAKSHAK_ADMIN_KEY
         generateValue: true
+      - key: HIMRAKSHAK_DEVICE_TOKENS
+        sync: false

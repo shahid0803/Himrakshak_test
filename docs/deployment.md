@@ -6,7 +6,10 @@ This document describes deployment procedures for HimRakshak across static hosti
 
 ## 1. Static demo deployment (GitHub Pages)
 
-The public static HimRakshak demo is published as a GitHub Pages static site. The site contains only the self-contained `index.html` dashboard; Python source, tests, documentation, Wokwi files, caches, and local snapshots remain in the source repository but are not copied into the Pages artifact.
+The public static HimRakshak demo is published as a GitHub Pages static site.
+The artifact contains `index.html` and the complete `frontend/` asset tree;
+Python source, tests, documentation, Wokwi files, caches, and local snapshots
+remain in the source repository and are not copied into the Pages artifact.
 
 ### Deployment workflow
 
@@ -14,7 +17,7 @@ The public static HimRakshak demo is published as a GitHub Pages static site. Th
 
 1. Checks out the repository.
 2. Configures GitHub Pages.
-3. Creates a clean `site/` directory containing only `index.html`.
+3. Creates a clean `site/` directory containing `index.html` and `frontend/`.
 4. Verifies that the entry page exists and that no extra top-level artifact files were created.
 5. Uploads the directory with `actions/upload-pages-artifact`.
 6. Deploys it through the `github-pages` environment with `actions/deploy-pages`.
@@ -91,6 +94,7 @@ python -m himrakshak.server --allow-remote
 | `PORT` | Set by cloud host | `10000` (in remote mode) | TCP port allocated by the cloud container router. |
 | `PYTHONUNBUFFERED` | Recommended | `1` | Ensures real-time standard output and error logging. |
 | `HIMRAKSHAK_ADMIN_KEY` | Recommended | `None` | Shared administrative secret. When set, all `/simulate` and `/faults/*` mutation routes require header `X-HimRakshak-Admin: <key>`. In remote mode, if this variable is unset, mutation routes are completely disabled (HTTP 403) for security. |
+| `HIMRAKSHAK_DEVICE_TOKENS` | Required for remote telemetry | `None` | JSON object mapping registered station IDs to station-scoped tokens. Remote reading routes require the matching `X-HimRakshak-Device-Token`; if unset, ingestion is disabled. |
 | `HIMRAKSHAK_INGEST_MIN_INTERVAL_SECONDS` | Optional | `3.0` (in remote mode) | Minimum elapsed seconds between accepted readings per station. Prevents resource exhaustion from rapid sender loops. Exceeded requests return HTTP 429 with `Retry-After`. |
 
 ---
@@ -109,9 +113,12 @@ or firmware revision as deployed.
 2. Connect the GitHub repository `shahid0803/Himrakshak` and select the `main` branch.
 3. Review the `himrakshak` web service shown by `render.yaml`.
 4. Keep the **Free** plan selected; do not add a paid database or other paid resource.
-5. Apply the Blueprint. Render generates `HIMRAKSHAK_ADMIN_KEY` as a secret environment value.
+5. Apply the Blueprint. Render generates `HIMRAKSHAK_ADMIN_KEY`; add a secret
+   `HIMRAKSHAK_DEVICE_TOKENS` JSON mapping before enabling remote telemetry.
 6. Wait for the deploy to finish, then open the service URL shown in the Render dashboard.
-7. Keep the generated admin key in Render only. Never copy it into `index.html`, browser developer tools, GitHub, or a public Wokwi sketch.
+7. Keep both the generated admin key and device-token mapping in Render only.
+   Never copy them into `index.html`, browser developer tools, GitHub, or a
+   public Wokwi sketch.
 
 ### Web service parameters
 
@@ -175,11 +182,12 @@ Confirm that:
 
 ### Cloud security controls
 
-1. **Station Allowlisting:** Public ingestion accepts readings only for registered stations: `HR-01`, `HR-02`, and `HR-03`. Unrecognized stations return HTTP 404.
+1. **Station Allowlisting:** Ingestion accepts readings only for registered stations: `HR-01`, `HR-02`, and `HR-03`. Unrecognized stations return HTTP 404.
 2. **Sequence Conflict Detection:** Incoming device packets are sequence-validated. Duplicate and out-of-order stale sequence numbers are rejected with HTTP 409 Conflict without altering the station's latest accepted reading.
 3. **Payload Limit:** Request bodies larger than 64 KiB are rejected with HTTP 413.
-4. **Administrative Protection:** Simulated fault-injection endpoints cannot be tampered with by public internet users. When running with `--allow-remote`, mutations are blocked unless authorized with `X-HimRakshak-Admin`.
-5. **No Wildcard CORS:** The deployment follows a unified single-service model where the dashboard (`/`) and API (`/api/`) share the same origin, eliminating cross-origin exposure.
+4. **Device Authentication:** Remote telemetry requires the station-scoped token from `HIMRAKSHAK_DEVICE_TOKENS`; the shared admin key is not used as a firmware credential. Missing or invalid tokens return HTTP 401/403.
+5. **Administrative Protection:** Simulated fault-injection endpoints cannot be tampered with by public internet users. When running with `--allow-remote`, mutations are blocked unless authorized with `X-HimRakshak-Admin`.
+6. **No Wildcard CORS:** The deployment follows a unified single-service model where the dashboard (`/`) and API (`/api/`) share the same origin, eliminating cross-origin exposure.
 
 ### Dashboard synchronization
 

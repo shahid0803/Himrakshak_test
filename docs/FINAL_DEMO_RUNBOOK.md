@@ -14,7 +14,7 @@ communication.
 Virtual sensors
   -> ESP32/Wokwi firmware
   -> Wokwi-GUEST Wi-Fi
-  -> HTTPS POST /api/stations/{id}/readings
+  -> HTTPS POST /api/v2/radio/transmissions with station device token
   -> Render Python backend
   -> schema + sequence validation
   -> demonstration risk engine
@@ -93,7 +93,8 @@ firmware code.
 - `GET /api/state`: legacy HR-01-compatible latest state and global events
 - `GET /api/stations`: all station summaries
 - `GET /api/stations/HR-01` (or HR-02/HR-03): station history and communication
-- `POST /api/stations/{id}/readings`: public validated telemetry ingestion
+- `POST /api/stations/{id}/readings`: validated telemetry ingestion; remote
+  requests require the station-scoped device token
 
 Successful ingestion returns `reading` and backend `assessment`. Duplicate or
 stale sequences return HTTP 409 with `classification`, `sequence`, and

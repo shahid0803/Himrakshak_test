@@ -82,6 +82,11 @@
       return request("/api/stations/" + encodeURIComponent(id) + "/faults/" + encodeURIComponent(action), {
         method: "POST", body: payload || {}
       });
+    },
+    radioStatus: function () { return request("/api/v2/radio/status"); },
+    gatewayHealth: function () { return request("/api/v2/gateway/health"); },
+    radioDiagnostics: function (id) {
+      return request("/api/v2/stations/" + encodeURIComponent(id) + "/radio-diagnostics");
     }
   };
 })(window);

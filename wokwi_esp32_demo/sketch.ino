@@ -34,6 +34,16 @@ static const unsigned long WIFI_RETRY_INTERVAL_MS = 5000;
 static const unsigned long RETRY_MAX_MS = 60000;
 static const uint8_t MAX_PENDING_PACKETS = 10;
 
+enum DeviceState {
+  DEVICE_INITIALIZING,
+  DEVICE_MONITORING,
+  DEVICE_OFFLINE_QUEUEING,
+  DEVICE_RETRYING,
+  DEVICE_QUEUE_FULL,
+  DEVICE_SENSOR_FAULT,
+  DEVICE_LOCAL_ONLY
+};
+
 struct PendingPacket {
   bool occupied;
   String packetId;
@@ -62,8 +72,29 @@ unsigned long lastBuzzerAt = 0;
 unsigned long droppedPackets = 0;
 unsigned long deliveredPackets = 0;
 unsigned long retryPackets = 0;
+DeviceState deviceState = DEVICE_INITIALIZING;
 float filteredTilt = 0.0f;
 float previousAcceleration = 0.0f;
+
+const char *deviceStateName(DeviceState state) {
+  switch (state) {
+    case DEVICE_MONITORING: return "monitoring";
+    case DEVICE_OFFLINE_QUEUEING: return "offline_queueing";
+    case DEVICE_RETRYING: return "retrying";
+    case DEVICE_QUEUE_FULL: return "queue_full";
+    case DEVICE_SENSOR_FAULT: return "sensor_fault";
+    case DEVICE_LOCAL_ONLY: return "local_only";
+    default: return "initializing";
+  }
+}
+
+void setDeviceState(DeviceState state) {
+  if (deviceState != state) {
+    deviceState = state;
+    Serial.printf("Device state=%s queue_capacity=%u\n",
+                  deviceStateName(deviceState), MAX_PENDING_PACKETS);
+  }
+}
 
 String stationUrl() {
   return String(INGEST_URL);
@@ -173,6 +204,7 @@ void enqueueReading(const Reading &reading) {
   int slot = findFreePacket();
   if (slot < 0) {
     droppedPackets++;
+    setDeviceState(DEVICE_QUEUE_FULL);
     Serial.println("Queue full; local alert preserved and packet dropped");
     return;
   }
@@ -211,6 +243,9 @@ SubmitResult submitPacket(PendingPacket &packet) {
     diagnoseTransportFailure(0);
     return SUBMIT_RETRY;
   }
+  http.setTimeout(1500);
+  const char *responseHeaders[] = {"Retry-After"};
+  http.collectHeaders(responseHeaders, 1);
   packet.attemptNumber++;
   String attemptId = makeAttemptId(packet.packetId, packet.attemptNumber);
   String envelope = makeTransmissionEnvelope(
@@ -221,10 +256,12 @@ SubmitResult submitPacket(PendingPacket &packet) {
     http.addHeader("X-HimRakshak-Device-Token", HIMRAKSHAK_DEVICE_TOKEN);
   }
   int status = http.POST(envelope);
+  String retryAfter = http.header("Retry-After");
   String response = http.getString();
   http.end();
   if (status >= 200 && status < 300) {
     deliveredPackets++;
+    setDeviceState(DEVICE_MONITORING);
     Serial.printf("Delivered packet=%s attempt=%s\n",
                   packet.packetId.c_str(), attemptId.c_str());
     return SUBMIT_DELIVERED;
@@ -235,6 +272,12 @@ SubmitResult submitPacket(PendingPacket &packet) {
     Serial.printf("Permanent or reconciled response; packet removed from retry queue: %s\n",
                   response.c_str());
     return SUBMIT_PERMANENT_FAILURE;
+  }
+  if (status == 429 && retryAfter.length() > 0) {
+    unsigned long retrySeconds = retryAfter.toInt();
+    if (retrySeconds > 0) {
+      packet.retryDelayMs = min(RETRY_MAX_MS, retrySeconds * 1000UL);
+    }
   }
   return shouldRetry(status) ? SUBMIT_RETRY : SUBMIT_PERMANENT_FAILURE;
 }
@@ -249,6 +292,7 @@ void serviceQueue() {
       continue;
     }
     retryPackets++;
+    setDeviceState(DEVICE_RETRYING);
     pending[i].nextAttemptAt = now + pending[i].retryDelayMs;
     pending[i].retryDelayMs = min(RETRY_MAX_MS, pending[i].retryDelayMs * 2);
   }
@@ -259,6 +303,7 @@ void ensureWiFi() {
   if (millis() - lastWifiAttemptAt < WIFI_RETRY_INTERVAL_MS) return;
   lastWifiAttemptAt = millis();
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  setDeviceState(DEVICE_OFFLINE_QUEUEING);
   Serial.println("Wi-Fi connection attempt scheduled");
 }
 
@@ -277,7 +322,10 @@ void setup() {
 
   Wire.begin(PIN_I2C_SDA, PIN_I2C_SCL);
   mpuReady = mpu.begin();
-  if (!mpuReady) Serial.println("MPU6050 unavailable; using simulated tilt input");
+  if (!mpuReady) {
+    setDeviceState(DEVICE_SENSOR_FAULT);
+    Serial.println("MPU6050 unavailable; using simulated tilt input");
+  }
   else {
     mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
     mpu.setGyroRange(MPU6050_RANGE_500_DEG);
@@ -285,6 +333,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true);
   synchronizeClock();
+  if (mpuReady) setDeviceState(DEVICE_MONITORING);
   Serial.printf("HimRakshak %s ready; queue=%u\n",
                 HIMRAKSHAK_STATION_ID, MAX_PENDING_PACKETS);
 }
@@ -292,6 +341,7 @@ void setup() {
 void loop() {
   ensureWiFi();
   Reading reading = roundedReading(readSensors());
+  if (!mpuReady) setDeviceState(DEVICE_SENSOR_FAULT);
   const char *risk = localRisk(reading);
   setIndicators(risk);
 

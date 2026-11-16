@@ -63,7 +63,8 @@ Browser rendering time is outside the backend contract.
 
 The channel, gateway, schema, station, and API diagnostics distinguish packet
 loss, queue-full, gateway unavailability, invalid/schema payloads, duplicate
-logical packets, stale sequences, and backend rejection. Channel, gateway,
+logical packets, stale sequences, and backend rejection. Gateway recovery
+leaves queued channel packets available for reconciliation. Channel, gateway,
 idempotency, station event, and diagnostic histories are bounded in memory.
 Restarting the software state clears those in-memory caches; accepted
 historical data is not durable.

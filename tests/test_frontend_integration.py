@@ -82,7 +82,7 @@ context.HimRakshak.api.health().then(
         self.assertIn("Protected simulation requires local backend mode.", app)
         self.assertIn("Last known state is preserved.", app)
 
-    def test_phase3_api_surface_and_no_v2_endpoints(self):
+    def test_api_surface_uses_v1_and_read_only_v2_diagnostics(self):
         client = (ROOT / "frontend" / "js" / "api-client.js").read_text(encoding="utf-8")
         for endpoint in [
             "/api/health",
@@ -94,5 +94,10 @@ context.HimRakshak.api.health().then(
             "/faults/",
         ]:
             self.assertIn(endpoint, client)
-        self.assertNotRegex(client, r"/api/v2|/radio|/gateway|/power|/solar")
+        self.assertIn("/api/v2/radio/status", client)
+        self.assertIn("/api/v2/gateway/health", client)
+        self.assertIn("/api/v2/stations/", client)
+        self.assertNotIn("/api/v2/radio/transmissions", client)
+        self.assertNotIn("/api/v2/radio/config", client)
+        self.assertNotRegex(client, r"/power|/solar")
 

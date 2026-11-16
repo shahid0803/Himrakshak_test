@@ -7,6 +7,12 @@
     health: null,
     overview: null,
     detail: null,
+    radio: null,
+    stationRadio: null,
+    gateway: null,
+    dataState: "unavailable",
+    freshness: null,
+    recoveryEvents: [],
     station: "HR-01",
     events: [],
     browserEvents: [],
@@ -15,6 +21,7 @@
     error: null,
     lastSuccessAt: null,
     refreshInFlight: false,
+    lastRefreshAt: null,
     generation: 0
   };
 

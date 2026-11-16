@@ -24,7 +24,10 @@ class FrontendContractTests(unittest.TestCase):
         text = "\n".join(p.read_text(encoding="utf-8") for p in assets if p.is_file())
         self.assertNotRegex(text, r"\b(import|export)\s")
         self.assertNotRegex(text, r"(HIMRAKSHAK_ADMIN_KEY|Authorization:\s*Bearer)")
-        self.assertIn("Virtual LoRa diagnostics are not yet implemented", text)
+        self.assertIn("No synthetic cloud state was substituted", text)
+        self.assertIn("gateway_state", text)
+        for marker in ("live", "delayed", "stale", "disconnected", "recovered", "unavailable"):
+            self.assertIn(marker, text)
         self.assertIn("SOFTWARE SIMULATION", text)
 
     def test_pages_workflow_publishes_frontend(self):

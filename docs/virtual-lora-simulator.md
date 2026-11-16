@@ -97,6 +97,16 @@ copies, pending depth, simulated airtime, average simulated RSSI/SNR, and an
 explicit `simulated_channel_delivery_ratio`. Diagnostic history is bounded and
 marked `software_simulation`.
 
+## Phase 8 reliability boundary
+
+The simulator distinguishes loss, queue-full, gateway-unavailable, duplicate
+copies, and successful delivery. It does not retry packets itself: retry
+identity and backoff belong to the sender, while sequence reconciliation and
+backend acceptance belong to the gateway and station manager. A gateway outage
+does not remove already scheduled packets; the gateway controls whether due
+packets are consumed, allowing deterministic recovery after virtual time
+advances.
+
 ## Phase 5 boundary
 
 The future gateway can submit a `LoRaPacket`, inspect the immediate

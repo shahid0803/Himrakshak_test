@@ -26,9 +26,11 @@ identity (`transmission_id`) for retries.
 Sensor acquisition and local alert outputs run before network work and on every
 loop. Wi-Fi connection attempts are scheduled with `millis()`, not a blocking
 startup loop. A ten-entry RAM FIFO queues readings. Network failures, timeout,
-429, and 5xx responses retry with capped exponential backoff; permanent 400,
-401, 403, 404, and 409 responses are reported and removed rather than retried
-forever. A reset loses queued packets by design.
+429, and 5xx responses retry with capped exponential backoff; `Retry-After` is
+honored and bounded for 429 responses. Permanent 400, 401, 403, 404, and 409
+responses are reported and removed rather than retried forever. Device states
+expose offline queueing, retrying, queue full, sensor fault, and local-only
+operation. A reset loses queued packets by design.
 
 ## Authorization boundary
 

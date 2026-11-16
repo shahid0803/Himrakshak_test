@@ -24,8 +24,23 @@ class ReliabilityStats:
     last_delivered_sequence: int | None = None
 
     def as_dict(self, pending_count: int, connected: bool) -> dict[str, Any]:
+        if not connected:
+            device_state = "offline_queueing" if pending_count else "local_only"
+            radio_state = "channel_unavailable"
+            ingestion_state = "backend_unavailable"
+        elif pending_count:
+            device_state = "retrying" if self.last_outcome == "pending" else "offline_queueing"
+            radio_state = "queued"
+            ingestion_state = "pending"
+        else:
+            device_state = "monitoring"
+            radio_state = "delivered" if self.last_outcome == "delivered" else "idle"
+            ingestion_state = self.last_outcome or "pending"
         return {
             "connection_state": "connected" if connected else "disconnected",
+            "device_state": device_state,
+            "radio_state": radio_state,
+            "ingestion_state": ingestion_state,
             "packets_attempted": self.packets_attempted,
             "packets_delivered": self.packets_delivered,
             "packets_dropped": self.packets_dropped,

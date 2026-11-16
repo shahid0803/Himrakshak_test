@@ -43,6 +43,15 @@
       if (!isFinite(value)) return null;
       return Math.max(0, Math.floor(((now || Date.now()) - value) / 1000));
     },
+    freshness: function (timestamp, now, thresholds) {
+      thresholds = thresholds || { delayed: 30, stale: 120 };
+      if (!timestamp || timestamp === "SIMULATED") return "unavailable";
+      var age = H.mappers.ageSeconds(timestamp, now);
+      if (age === null) return "unavailable";
+      if (age >= thresholds.stale) return "stale";
+      if (age >= thresholds.delayed) return "delayed";
+      return "live";
+    },
     value: first
   };
 })(window);

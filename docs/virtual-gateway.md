@@ -37,12 +37,13 @@ decisions remain `StationManager` decisions and are returned as `duplicate` or
 
 ## Failure and recovery
 
-`set_gateway_available(False)` prevents new submissions and rejects deliveries
-that arrive while the gateway is unavailable. The virtual channel remains
-responsible for its bounded queue and simulated clock. Recovery does not erase
-accepted station history; callers can submit a new attempt with a distinct
-`attempt_id`, and idempotency prevents an already accepted logical packet from
-being ingested twice.
+`set_gateway_available(False)` prevents new submissions and leaves due
+deliveries in the channel queue while the gateway is unavailable. The virtual
+channel remains responsible for its bounded queue and simulated clock.
+Recovery does not erase accepted station history; queued packets are processed
+through the normal validation and sequence path, while a new attempt can use a
+distinct `attempt_id`. Idempotency prevents an already accepted logical packet
+from being ingested twice.
 
 Gateway statistics distinguish channel delivery, gateway validation, and backend
 ingestion. Histories, idempotency entries, and channel queues are bounded.
@@ -50,8 +51,10 @@ State is in memory and is lost on process restart.
 
 Validation diagnostics use distinct outcomes for channel loss or queue-full,
 gateway unavailability, invalid/schema payloads, duplicate logical packets,
-stale sequences, and backend rejection. A gateway history timestamp records
-processing time; it does not replace the sensor timestamp in the payload.
+stale sequences, and backend rejection. Status responses additionally expose
+gateway, channel, and ingestion state plus recovery and last-successful-forward
+timestamps. A gateway history timestamp records processing time; it does not
+replace the sensor timestamp in the payload.
 
 ## API v2 diagnostics
 

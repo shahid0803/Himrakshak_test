@@ -1,1 +1,23 @@
-window.HimRakshak=window.HimRakshak||{};HimRakshak.router=(function(){function go(route){route=route||location.hash.slice(1)||'overview';document.querySelectorAll('.route').forEach(function(x){x.classList.toggle('active',x.id==='route-'+route)});document.querySelectorAll('.nav button').forEach(function(x){x.setAttribute('aria-current',x.dataset.route===route?'true':'false')});var title=document.getElementById('page-title');if(title)title.textContent=route.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase()});if(HimRakshak.views&&HimRakshak.views.render)HimRakshak.views.render(route)}return{init:function(){window.addEventListener('hashchange',function(){go()});document.querySelectorAll('[data-route]').forEach(function(x){x.addEventListener('click',function(){location.hash=x.dataset.route})});go()}}})()
+(function (root) {
+  "use strict";
+  var H = root.HimRakshak = root.HimRakshak || {};
+  var routes = ["overview", "stations", "live-monitoring", "lora-network", "simulation-lab", "alerts-events", "diagnostics"];
+  function current() {
+    var route = (root.location.hash || "#overview").slice(1);
+    return routes.indexOf(route) >= 0 ? route : "overview";
+  }
+  function go(route) {
+    root.location.hash = routes.indexOf(route) >= 0 ? route : "overview";
+  }
+  H.router = {
+    current: current,
+    go: go,
+    init: function (onChange) {
+      root.addEventListener("hashchange", function () { onChange(current()); });
+      H.qAll("[data-route]").forEach(function (button) {
+        button.addEventListener("click", function () { go(button.getAttribute("data-route")); });
+      });
+      onChange(current());
+    }
+  };
+})(window);

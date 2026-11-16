@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hmac
 import json
@@ -61,6 +61,7 @@ class ServerConfig:
     allow_remote: bool
     admin_key: str | None
     rate_limit_interval: float
+    device_tokens: Mapping[str, str] = field(default_factory=dict)
 
 
 def resolve_server_config(
@@ -77,6 +78,31 @@ def resolve_server_config(
     admin_key = (
         admin_key_raw.strip() if admin_key_raw and admin_key_raw.strip() else None
     )
+    device_tokens_raw = env.get("HIMRAKSHAK_DEVICE_TOKENS")
+    device_tokens: dict[str, str] = {}
+    if device_tokens_raw and device_tokens_raw.strip():
+        try:
+            parsed_tokens = json.loads(device_tokens_raw)
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                "HIMRAKSHAK_DEVICE_TOKENS must be a JSON object mapping station IDs to tokens"
+            ) from exc
+        if not isinstance(parsed_tokens, dict):
+            raise ValueError(
+                "HIMRAKSHAK_DEVICE_TOKENS must be a JSON object mapping station IDs to tokens"
+            )
+        valid_stations = {node_id for node_id, _ in STATION_ROSTER}
+        for station_id, token in parsed_tokens.items():
+            if (
+                not isinstance(station_id, str)
+                or station_id not in valid_stations
+                or not isinstance(token, str)
+                or not token.strip()
+            ):
+                raise ValueError(
+                    "HIMRAKSHAK_DEVICE_TOKENS may contain only registered station IDs and non-empty string tokens"
+                )
+            device_tokens[station_id] = token.strip()
 
     rate_limit_raw = env.get("HIMRAKSHAK_INGEST_MIN_INTERVAL_SECONDS")
     if rate_limit_raw is not None and rate_limit_raw.strip():
@@ -123,6 +149,7 @@ def resolve_server_config(
         allow_remote=allow_remote,
         admin_key=admin_key,
         rate_limit_interval=rate_limit_interval,
+        device_tokens=device_tokens,
     )
 
 
@@ -233,7 +260,6 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
         config = self.server_config
         if not config.allow_remote and not config.admin_key:
             return True
-
         if not config.admin_key:
             self._discard_request_body()
             self._send_error(
@@ -260,6 +286,50 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
             return False
 
         return True
+
+    def _valid_admin_auth(self) -> bool:
+        config = self.server_config
+        provided = self.headers.get("X-HimRakshak-Admin")
+        return bool(
+            config.admin_key
+            and provided
+            and hmac.compare_digest(provided, config.admin_key)
+        )
+
+    def _check_device_auth(self, station_id: str) -> bool:
+        """Require a station-scoped device token for remote telemetry."""
+        if not self.server_config.allow_remote:
+            return True
+        expected = self.server_config.device_tokens.get(station_id)
+        if not expected:
+            self._discard_request_body()
+            self._send_error(
+                HTTPStatus.FORBIDDEN,
+                f"Device telemetry ingestion is disabled for station {station_id!r}",
+            )
+            return False
+        provided = self.headers.get("X-HimRakshak-Device-Token")
+        if not provided:
+            self._discard_request_body()
+            self._send_error(
+                HTTPStatus.UNAUTHORIZED,
+                "Missing device authorization header (X-HimRakshak-Device-Token)",
+            )
+            return False
+        if not hmac.compare_digest(provided, expected):
+            self._discard_request_body()
+            self._send_error(
+                HTTPStatus.FORBIDDEN,
+                "Invalid device credentials",
+            )
+            return False
+        return True
+
+    def _check_transmission_auth(self, station_id: str) -> bool:
+        """Allow admin emulator calls or station-scoped device telemetry."""
+        if not self.server_config.allow_remote or self._valid_admin_auth():
+            return True
+        return self._check_device_auth(station_id)
 
     def _read_json(self) -> dict[str, Any] | None:
         length_text = self.headers.get("Content-Length")
@@ -383,7 +453,16 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
     def _handle_v2_post(self, path: str) -> bool:
         if path != "/api/v2/radio/transmissions":
             return False
-        if not self._check_admin_auth():
+        if (
+            self.server_config.allow_remote
+            and not self._valid_admin_auth()
+            and not self.headers.get("X-HimRakshak-Device-Token")
+        ):
+            self._discard_request_body()
+            self._send_error(
+                HTTPStatus.UNAUTHORIZED,
+                "Missing administrative authorization or device authorization header",
+            )
             return True
         payload = self._read_json()
         if payload is None:
@@ -400,6 +479,8 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
                 raise ValueError("device_sequence must be a non-negative integer")
             if not isinstance(reading, dict):
                 raise ValueError("payload must be a JSON object")
+            if not self._check_transmission_auth(node_id):
+                return True
             if payload.get("channel_profile", "baseline") != "baseline":
                 raise ValueError("channel_profile must be baseline")
             if reading.get("node_id", reading.get("node")) != node_id:
@@ -613,6 +694,8 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
             if operation == "simulate":
                 result = self.manager.simulate(station_id, payload.get("scenario"))
             else:
+                if not self._check_device_auth(station_id):
+                    return
                 retry_after = self.rate_limiter.check_and_record(station_id)
                 if retry_after is not None:
                     self._send_rate_limit_error(station_id, retry_after)
@@ -661,6 +744,8 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
                 elif action == "delay":
                     result = self.manager.delay_packet(station_id, reading)
                 else:
+                    if not self._check_device_auth(station_id):
+                        return
                     result = self.manager.deliver_packet(
                         station_id, reading, f"reliability {action}"
                     )

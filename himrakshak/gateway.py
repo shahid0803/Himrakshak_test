@@ -66,11 +66,15 @@ class VirtualEdgeGateway:
             self.channel.profile = profile
         self._lock = threading.RLock()
         self._available = True
+        self._gateway_state = "available"
         self._started_at = time.monotonic()
         self._last_transition_at = self._now()
+        self._last_recovery_at: str | None = None
         self._last_received_at: str | None = None
         self._last_successful_forward_at: str | None = None
         self._last_error: str | None = None
+        self._last_channel_state = "idle"
+        self._last_ingestion_state = "pending"
         self._revision = 1
         self._idempotency: OrderedDict[str, tuple[str, TransmissionResult]] = OrderedDict()
         self._accepted_packet_ids: OrderedDict[str, None] = OrderedDict()
@@ -175,11 +179,14 @@ class VirtualEdgeGateway:
                 effective = conditions or self.config.default_conditions
                 result = self.channel.transmit(packet, effective)
             if result.status == "queued":
+                self._last_channel_state = "queued"
                 self._stats["channel_queued"] += 1
             elif result.status == "lost":
+                self._last_channel_state = "lost"
                 self._stats["lost_packets"] += 1
                 node["lost"] += 1
             elif result.status == "gateway_unavailable":
+                self._last_channel_state = "channel_unavailable"
                 self._stats["gateway_unavailable"] += 1
             self._idempotency[key] = (fingerprint, result)
             self._idempotency.move_to_end(key)
@@ -196,10 +203,13 @@ class VirtualEdgeGateway:
             self._last_received_at = self._now()
             if not self._available:
                 self._stats["gateway_unavailable"] += 1
+                self._last_channel_state = "channel_unavailable"
+                self._last_ingestion_state = "backend_unavailable"
                 self._last_error = "gateway unavailable while processing delivery"
                 self._record("delivery_gateway_unavailable", packet)
                 return {"status": "gateway_unavailable", "packet_id": packet.packet_id}
             if packet.packet_id in self._accepted_packet_ids:
+                self._last_ingestion_state = "duplicate"
                 self._stats["duplicate_logical_packets_rejected"] += 1
                 self._node(packet.node_id)["duplicate"] += 1
                 self._record("duplicate_logical_packet", packet)
@@ -215,11 +225,13 @@ class VirtualEdgeGateway:
                     )
             except (UnicodeDecodeError, json.JSONDecodeError, SchemaValidationError, ValueError) as exc:
                 self._stats["invalid_packets"] += 1
+                self._last_ingestion_state = "schema_rejected"
                 self._node(packet.node_id)["invalid"] += 1
                 self._last_error = str(exc)
                 self._record("invalid_packet", packet, error=str(exc))
                 return {"status": "invalid", "packet_id": packet.packet_id, "error": str(exc)}
             self._stats["accepted_by_gateway"] += 1
+            self._last_channel_state = "delivered"
             self._node(packet.node_id)["accepted_by_gateway"] += 1
             try:
                 result = self.station_manager.ingest(
@@ -230,6 +242,7 @@ class VirtualEdgeGateway:
                 self._node(packet.node_id)[classification] += 1
                 if classification == "stale":
                     self._stats["stale_rejections"] += 1
+                self._last_ingestion_state = classification
                 self._last_error = str(exc)
                 self._record("backend_" + classification, packet, error=str(exc))
                 return {
@@ -239,6 +252,7 @@ class VirtualEdgeGateway:
                     "classification": classification,
                 }
             except Exception as exc:
+                self._last_ingestion_state = "backend_unavailable"
                 self._last_error = str(exc)
                 self._record("backend_rejected", packet, error=str(exc))
                 return {"status": "backend_rejected", "packet_id": packet.packet_id, "error": str(exc)}
@@ -247,6 +261,8 @@ class VirtualEdgeGateway:
             self._node(packet.node_id)["accepted_by_backend"] += 1
             self._last_successful_forward_at = self._now()
             self._last_error = None
+            self._last_ingestion_state = "accepted"
+            self._gateway_state = "available"
             self._record("backend_accepted", packet)
             return {
                 "status": "accepted",
@@ -265,6 +281,12 @@ class VirtualEdgeGateway:
 
     def receive_ready(self, max_items: int | None = None) -> list[dict[str, Any]]:
         with self._lock:
+            if not self._available:
+                # Leave due channel packets queued so recovery can process them.
+                self._last_channel_state = "channel_unavailable"
+                self._last_ingestion_state = "backend_unavailable"
+                self._stats["gateway_unavailable"] += 1
+                return []
             deliveries = self.channel.receive_ready(max_items)
             self._stats["channel_primary_deliveries"] += sum(
                 1 for delivery in deliveries if not delivery.duplicate
@@ -285,6 +307,11 @@ class VirtualEdgeGateway:
             if self._available != available:
                 self._available = available
                 self._last_transition_at = self._now()
+                if available:
+                    self._gateway_state = "recovering"
+                    self._last_recovery_at = self._last_transition_at
+                else:
+                    self._gateway_state = "unavailable"
             self._record("gateway_available" if available else "gateway_unavailable")
 
     def get_status(self) -> dict[str, Any]:
@@ -294,7 +321,10 @@ class VirtualEdgeGateway:
                 "gateway_id": self.config.gateway_id,
                 "status": "healthy" if self._available else "unavailable",
                 "available": self._available,
+                "gateway_state": self._gateway_state,
                 "channel_connected": self._available,
+                "channel_state": self._last_channel_state,
+                "ingestion_state": self._last_ingestion_state,
                 "queued_packets": len(self.channel._queue),
                 "delivered_transmissions": channel_stats["primary_deliveries"],
                 "dropped_transmissions": channel_stats["packets_lost"],
@@ -302,6 +332,7 @@ class VirtualEdgeGateway:
                 "last_transition_at": self._last_transition_at,
                 "last_received_packet_at": self._last_received_at,
                 "last_successful_forward_at": self._last_successful_forward_at,
+                "last_recovery_at": self._last_recovery_at,
                 "last_error": self._last_error,
                 "software_simulation": True,
             }
@@ -313,6 +344,9 @@ class VirtualEdgeGateway:
             return {
                 "node_id": node_id,
                 "connection_state": "connected" if self._available else "disconnected",
+                "gateway_state": self._gateway_state,
+                "channel_state": self._last_channel_state,
+                "ingestion_state": self._last_ingestion_state,
                 "pending_transmissions": sum(
                     1 for item in self.channel._queue if item[2].packet.node_id == node_id
                 ),
@@ -413,6 +447,12 @@ class VirtualEdgeGateway:
             self._history.clear()
             self._stats = {key: 0 for key in self._stats}
             self._node_stats.clear()
+            self._available = True
+            self._last_transition_at = self._now()
             self._last_received_at = None
             self._last_successful_forward_at = None
             self._last_error = None
+            self._gateway_state = "available"
+            self._last_recovery_at = None
+            self._last_channel_state = "idle"
+            self._last_ingestion_state = "pending"

@@ -410,11 +410,25 @@ class ServerConfigTests(unittest.TestCase):
     def test_rate_limit_and_admin_env(self):
         env = {
             "HIMRAKSHAK_ADMIN_KEY": "my-secret-token",
+            "HIMRAKSHAK_DEVICE_TOKENS": '{"HR-01":"device-01","HR-02":"device-02"}',
             "HIMRAKSHAK_INGEST_MIN_INTERVAL_SECONDS": "4.5",
         }
         cfg = resolve_server_config(allow_remote_arg=True, environ=env)
         self.assertEqual(cfg.admin_key, "my-secret-token")
+        self.assertEqual(cfg.device_tokens["HR-01"], "device-01")
         self.assertEqual(cfg.rate_limit_interval, 4.5)
+
+    def test_invalid_device_token_configuration_is_rejected(self):
+        with self.assertRaises(ValueError):
+            resolve_server_config(
+                allow_remote_arg=True,
+                environ={"HIMRAKSHAK_DEVICE_TOKENS": "not-json"},
+            )
+        with self.assertRaises(ValueError):
+            resolve_server_config(
+                allow_remote_arg=True,
+                environ={"HIMRAKSHAK_DEVICE_TOKENS": '{"HR-99":"token"}'},
+            )
 
 
 class ServerCloudSecurityTests(unittest.TestCase):
@@ -425,6 +439,7 @@ class ServerCloudSecurityTests(unittest.TestCase):
             allow_remote=True,
             admin_key="secret-admin-pass",
             rate_limit_interval=0.5,
+            device_tokens={"HR-01": "secret-device-01"},
         )
         self.server = HimRakshakServer(config, seed=42)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
@@ -536,14 +551,20 @@ class ServerCloudSecurityTests(unittest.TestCase):
     def test_cloud_rate_limiting_returns_429_with_retry_after(self):
         # First reading accepted
         status, res, _ = self.request(
-            "POST", "/api/stations/HR-01/readings", self.packet(sequence=1)
+            "POST",
+            "/api/stations/HR-01/readings",
+            self.packet(sequence=1),
+            headers={"X-HimRakshak-Device-Token": "secret-device-01"},
         )
         self.assertEqual(status, 200)
         self.assertEqual(res["reading"]["sequence"], 1)
 
         # Rapid second reading is rate-limited
         status, err, headers = self.request(
-            "POST", "/api/stations/HR-01/readings", self.packet(sequence=2)
+            "POST",
+            "/api/stations/HR-01/readings",
+            self.packet(sequence=2),
+            headers={"X-HimRakshak-Device-Token": "secret-device-01"},
         )
         self.assertEqual(status, 429)
         self.assertIn("Retry-After", headers)
@@ -552,6 +573,28 @@ class ServerCloudSecurityTests(unittest.TestCase):
         # Latest state is untouched by the rate-limited request
         status, detail, _ = self.request("GET", "/api/stations/HR-01")
         self.assertEqual(detail["station"]["latest"]["reading"]["sequence"], 1)
+
+    def test_cloud_reading_requires_station_scoped_device_token(self):
+        packet = self.packet(sequence=10)
+        status, err, _ = self.request("POST", "/api/stations/HR-01/readings", packet)
+        self.assertEqual(status, 401)
+        self.assertIn("Missing device authorization", err["error"]["message"])
+        status, err, _ = self.request(
+            "POST",
+            "/api/stations/HR-01/readings",
+            packet,
+            headers={"X-HimRakshak-Device-Token": "wrong"},
+        )
+        self.assertEqual(status, 403)
+        self.assertIn("Invalid device credentials", err["error"]["message"])
+        status, result, _ = self.request(
+            "POST",
+            "/api/stations/HR-01/readings",
+            packet,
+            headers={"X-HimRakshak-Device-Token": "secret-device-01"},
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(result["reading"]["sequence"], 10)
 
     def test_admin_key_not_leaked_in_responses(self):
         status, err, _ = self.request(
@@ -571,6 +614,7 @@ class ServerCloudNoAdminKeyTests(unittest.TestCase):
             allow_remote=True,
             admin_key=None,
             rate_limit_interval=0.0,
+            device_tokens={"HR-01": "device-01"},
         )
         self.server = HimRakshakServer(config, seed=42)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
@@ -582,11 +626,13 @@ class ServerCloudNoAdminKeyTests(unittest.TestCase):
         self.server.server_close()
         self.thread.join(timeout=2)
 
-    def request(self, method, path, body=None):
+    def request(self, method, path, body=None, headers=None):
         connection = HTTPConnection(self.host, self.port, timeout=3)
         encoded = json.dumps(body).encode("utf-8") if body is not None else None
-        headers = {"Content-Type": "application/json", "Connection": "close"}
-        connection.request(method, path, body=encoded, headers=headers)
+        request_headers = {"Content-Type": "application/json", "Connection": "close"}
+        if headers:
+            request_headers.update(headers)
+        connection.request(method, path, body=encoded, headers=request_headers)
         response = connection.getresponse()
         raw = response.read()
         connection.close()
@@ -604,7 +650,7 @@ class ServerCloudNoAdminKeyTests(unittest.TestCase):
         self.assertEqual(status, 403)
         self.assertIn("disabled in remote mode", err["error"]["message"])
 
-        # But reading ingestion remains available!
+        # Reading ingestion requires the station-scoped device token.
         packet = {
             "node_id": "HR-01",
             "sequence": 1,
@@ -614,7 +660,15 @@ class ServerCloudNoAdminKeyTests(unittest.TestCase):
             "vibration_level": 10.0,
             "battery_pct": 90.0,
         }
-        status, res = self.request("POST", "/api/stations/HR-01/readings", packet)
+        status, err = self.request("POST", "/api/stations/HR-01/readings", packet)
+        self.assertEqual(status, 401)
+        self.assertIn("Missing device authorization", err["error"]["message"])
+        status, res = self.request(
+            "POST",
+            "/api/stations/HR-01/readings",
+            packet,
+            headers={"X-HimRakshak-Device-Token": "device-01"},
+        )
         self.assertEqual(status, 200)
         self.assertEqual(res["reading"]["sequence"], 1)
 

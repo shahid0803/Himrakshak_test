@@ -34,12 +34,12 @@ operation. A reset loses queued packets by design.
 
 ## Authorization boundary
 
-The Phase 5 v2 transmission route currently uses the existing admin
-authorization boundary for remote mode. Firmware does not contain or request an
-admin credential. The optional `HIMRAKSHAK_DEVICE_TOKEN` compile-time hook is
-empty by default and is documented as a future device-scoped mechanism; the
-current server does not accept it. This is an explicit integration limitation,
-not a reason to weaken backend authorization.
+The Phase 5 v2 transmission route accepts a station-scoped device token in
+remote mode. Firmware does not contain or request an admin credential. The
+optional `HIMRAKSHAK_DEVICE_TOKEN` compile-time hook is empty by default and
+must be supplied outside tracked source for a live demonstration; the server
+maps it through `HIMRAKSHAK_DEVICE_TOKENS`. The token cannot change radio
+configuration or invoke administrative routes.
 
 ## Validation boundary
 

@@ -96,9 +96,11 @@ normalizes it with `validate_reading()`, recalculates risk with
 Incoming risk fields are ignored. Rejected packets do not replace `latest` or
 add an event.
 
-The public cloud ingestion route is a temporary academic demonstration
-endpoint. It does not authenticate device identity and must not receive
-secrets or sensitive data.
+The remote ingestion route requires the station-scoped
+`X-HimRakshak-Device-Token` configured through `HIMRAKSHAK_DEVICE_TOKENS`.
+Local mode remains open for development. If the remote mapping is absent,
+ingestion is disabled; device tokens are temporary demonstration credentials
+and must not be committed or reused as administrative keys.
 
 ### `POST /api/simulate`
 
@@ -117,7 +119,8 @@ independent of the other two stations.
 ### `POST /api/stations/{node_id}/readings`
 
 Accepts a canonical or alias packet whose normalized `node_id` matches the
-URL. The backend preserves the incoming device-assigned `sequence` after validation.
+URL. The backend preserves the incoming device-assigned `sequence` after
+validation. Remote requests require the token mapped to the URL station.
 It advances its simulator's next sequence to remain greater than any accepted
 device sequence, but it does not replace device sequence values with an
 internal counter. Identity mismatches are rejected with `400`.
@@ -201,8 +204,8 @@ existing station manager. Every v2 response uses:
 
 The transmission route reports scheduling, not backend acceptance. Virtual
 time and a gateway consumer determine when a queued packet is delivered.
-Configuration mutation and transmission submission use the existing
-`X-HimRakshak-Admin` boundary in remote mode; local mode retains the existing
-development behavior. No admin secret is returned in any response. These
-routes expose simulation outcomes and explicitly do not represent physical
-radio measurements.
+Configuration mutation uses `X-HimRakshak-Admin` in remote mode. Transmission
+submission accepts that admin header for emulator operation or the
+station-scoped device token for firmware telemetry. No secret is returned in
+any response. These routes expose simulation outcomes and explicitly do not
+represent physical radio measurements.

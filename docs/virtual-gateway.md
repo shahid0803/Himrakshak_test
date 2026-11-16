@@ -60,7 +60,8 @@ replace the sensor timestamp in the payload.
 
 The server adds these routes without changing API v1:
 
-* `POST /api/v2/radio/transmissions` — admin-bound emulator submission.
+* `POST /api/v2/radio/transmissions` — admin-bound emulator or device-token
+  firmware submission.
 * `GET /api/v2/radio/config` and admin `PUT /api/v2/radio/config`.
 * `GET /api/v2/radio/status`.
 * `GET /api/v2/stations/{node_id}/radio-diagnostics`.
@@ -69,8 +70,9 @@ The server adds these routes without changing API v1:
 v2 responses use the documented `{api_version, generated_at, data}` envelope.
 Configuration changes use the existing `X-HimRakshak-Admin` boundary and
 `expected_revision` returns `409` when stale. Request bodies retain the server's
-64 KiB limit and JSON validation. Read-only diagnostics state that the radio is
-not physical and expose no credentials.
+64 KiB limit and JSON validation. Remote transmissions may use only the token
+mapped to their station; read-only diagnostics state that the radio is not
+physical and expose no credentials.
 
 The v2 transmission endpoint schedules a packet; virtual time and gateway
 consumers determine when it becomes a received delivery. It does not silently

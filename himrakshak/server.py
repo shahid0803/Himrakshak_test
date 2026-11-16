@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import hmac
 import json
 import math
+import mimetypes
 import os
 import threading
 import time
@@ -31,6 +32,18 @@ from .stations import (
 API_VERSION = 1
 MAX_BODY_BYTES = 64 * 1024
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+FRONTEND_ROOT = (PROJECT_ROOT / "frontend").resolve()
+FRONTEND_MIME_TYPES = {
+    ".css": "text/css; charset=utf-8",
+    ".js": "text/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".webp": "image/webp",
+    ".ico": "image/x-icon",
+}
 
 
 @dataclass(frozen=True)
@@ -314,6 +327,9 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         self._discard_request_body()
         path = self._api_path()
+        if path == "/frontend" or path.startswith("/frontend/"):
+            self._serve_frontend(path)
+            return
         if path == "/api/health":
             self._send_json(
                 HTTPStatus.OK,
@@ -365,6 +381,36 @@ class HimRakshakHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
             return
         self._send_error(HTTPStatus.NOT_FOUND, "Resource not found")
+
+    def _serve_frontend(self, path: str) -> None:
+        """Serve only regular files beneath the fixed frontend allowlist."""
+        relative = unquote(path[len("/frontend") :]).lstrip("/")
+        if not relative or "\\" in relative or "\x00" in relative:
+            self._send_error(HTTPStatus.NOT_FOUND, "Resource not found")
+            return
+        candidate = (FRONTEND_ROOT / Path(relative)).resolve()
+        try:
+            candidate.relative_to(FRONTEND_ROOT)
+        except ValueError:
+            self._send_error(HTTPStatus.NOT_FOUND, "Resource not found")
+            return
+        if not candidate.is_file():
+            self._send_error(HTTPStatus.NOT_FOUND, "Resource not found")
+            return
+        try:
+            body = candidate.read_bytes()
+        except OSError:
+            self._send_error(HTTPStatus.NOT_FOUND, "Resource not found")
+            return
+        content_type = FRONTEND_MIME_TYPES.get(candidate.suffix.lower())
+        if content_type is None:
+            content_type = mimetypes.guess_type(candidate.name)[0] or "application/octet-stream"
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Connection", "close")
+        self.end_headers()
+        self.wfile.write(body)
 
     def do_POST(self) -> None:
         path = self._api_path()

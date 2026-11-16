@@ -4,7 +4,7 @@
   "editor": "wokwi",
   "parts": [
     {
-      "type": "wokwi-esp32-devkit-v1",
+      "type": "wokwi-esp32-s3-devkitc-1",
       "id": "esp",
       "top": 0,
       "left": 145,
@@ -46,6 +46,13 @@
         "color": "blue",
         "label": "VIBRATION BURST"
       }
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "mpu",
+      "top": 250,
+      "left": 180,
+      "attrs": {}
     },
     {
       "type": "wokwi-led",
@@ -133,7 +140,7 @@
     ],
     [
       "potMoist:SIG",
-      "esp:34",
+      "esp:4",
       "green",
       [
         "v0"
@@ -157,7 +164,7 @@
     ],
     [
       "potTilt:SIG",
-      "esp:35",
+      "esp:5",
       "green",
       [
         "v0"
@@ -181,7 +188,7 @@
     ],
     [
       "potBattery:SIG",
-      "esp:32",
+      "esp:6",
       "green",
       [
         "v0"
@@ -189,7 +196,7 @@
     ],
     [
       "vibButton:1.l",
-      "esp:18",
+      "esp:7",
       "green",
       [
         "v0"
@@ -204,7 +211,7 @@
       ]
     ],
     [
-      "esp:25",
+      "esp:15",
       "rGreen:2",
       "green",
       [
@@ -228,7 +235,7 @@
       ]
     ],
     [
-      "esp:26",
+      "esp:16",
       "rYellow:2",
       "green",
       [
@@ -252,7 +259,7 @@
       ]
     ],
     [
-      "esp:27",
+      "esp:17",
       "rRed:2",
       "green",
       [
@@ -276,7 +283,7 @@
       ]
     ],
     [
-      "esp:23",
+      "esp:18",
       "buzzer:1",
       "green",
       [
@@ -287,6 +294,38 @@
       "buzzer:2",
       "esp:GND.1",
       "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "mpu:VCC",
+      "esp:3V3",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "mpu:GND",
+      "esp:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "mpu:SDA",
+      "esp:8",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "mpu:SCL",
+      "esp:9",
+      "green",
       [
         "v0"
       ]

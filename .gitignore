@@ -40,3 +40,4 @@ HimRakshak-OpenCode/
 *.p12
 *.sqlite
 *.db
+wokwi_esp32_demo/secrets.h

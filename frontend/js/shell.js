@@ -1,0 +1,1 @@
+window.HimRakshak=window.HimRakshak||{};HimRakshak.shell={init:function(){var b=document.querySelector('.menu'),s=document.querySelector('.sidebar');if(b)b.addEventListener('click',function(){s.classList.toggle('open')});document.querySelectorAll('.nav button').forEach(function(n){n.addEventListener('click',function(){s.classList.remove('open')})})}};

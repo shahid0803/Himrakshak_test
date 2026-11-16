@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"secondary-fixed-dim":"#92d3c3","surface-variant":"#d7e3ff","on-tertiary":"#ffffff","tertiary-fixed-dim":"#b8c4ff","primary-container":"#1b4d3e","surface":"#f9f9ff","on-error-container":"#93000a","border-subtle":"#E2E8F0","on-tertiary-container":"#9caeff","on-primary-fixed":"#002117","on-primary":"#ffffff","inverse-on-surface":"#ecf0ff","background":"#f9f9ff","on-error":"#ffffff","primary-fixed":"#baeed9","tertiary-fixed":"#dde1ff","on-secondary-fixed-variant":"#025045","surface-card":"#FFFFFF","outline-variant":"#c0c9c3","secondary":"#27695c","surface-container-highest":"#d7e3ff","surface-container-low":"#f0f3ff","on-tertiary-fixed-variant":"#173bab","text-muted":"#64748B","on-primary-container":"#8abda9","status-safe":"#15803D","error":"#ba1a1a","status-warning":"#D97706","secondary-container":"#abeddc","on-secondary-container":"#2c6d60","tertiary":"#002480","primary":"#003629","on-background":"#0e1c31","primary-fixed-dim":"#9ed1bd","on-surface-variant":"#404945","status-critical":"#DC2626","surface-bright":"#f9f9ff","inverse-primary":"#9ed1bd","error-container":"#ffdad6","tertiary-container":"#1439a9","background-canvas":"#F6F8FA","surface-tint":"#376757","on-surface":"#0e1c31","surface-container":"#e8eeff","on-secondary-fixed":"#00201a","on-secondary":"#ffffff","surface-dim":"#cddaf8","inverse-surface":"#243147","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#1d4f40","outline":"#707974","on-tertiary-fixed":"#001453","status-inactive":"#64748B","surface-container-high":"#dfe8ff","secondary-fixed":"#aeefdf"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","gutter-desktop":"1.5rem","margin-desktop":"2rem","space-md":"1rem"},"fontFamily":{"data-metric":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"headline-lg":["Inter"],"label-lg":["JetBrains Mono"],"headline-xl-mobile":["Inter"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-xl":["Inter"],"label-md":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"data-metric":["28px",{"lineHeight":"32px","letterSpacing":"-0.03em","fontWeight":"700"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-background-canvas font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-card border-b border-border-subtle shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><img alt="HimRakshak Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrA0v5gGztK_KxO3xXO_671Sm5TrU2lmX2AldIt8767aturerEXYOi8rX7xDS9Jh1pxJFUAGv8EQZ6xm1b4Uroov_yIcT08wI7HBIUT5X6bSsjhFjEWvsu3tgkDDkh1olxVqrAJSeirsUVULXfZhTSK0sSgnYHtXbJqfx2bu1s9m8U_24GAaQnNljksa7g5caGVLWATqjwqcTSWjSQFRXGGAVZZT8iKgpWpWBIqoUJQ"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary">HimRakshak</span><span class="inline-flex items-center px-space-xs py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm uppercase tracking-wider">Node v2.4</span></div><span class="hidden lg:inline text-text-muted font-body-sm text-body-sm leading-none">Himalayan Landslide Telemetry &amp; Early Warning System</span></div></div><div class="hidden xl:flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-amber-50 border border-amber-200 text-status-warning"><span class="w-1.5 h-1.5 rounded-full bg-status-warning animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">SOFTWARE SIMULATION ENVIRONMENT</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="material-symbols-outlined text-sm text-secondary">route</span><span class="font-label-sm text-label-sm">Sector 4: NH-109 Rudraprayag-Gaurikund</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-emerald-50 border border-emerald-200 text-status-safe"><span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm">GW-01: LoRa 868MHz [-84 dBm]</span></div><div class="flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle font-label-sm text-label-sm text-text-muted"><span class="text-on-surface font-semibold">11:42:08 IST</span><span class="w-px h-3 bg-border-subtle"></span><span>PKT: 148,290</span></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="w-2 h-2 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm uppercase text-text-muted">Broadcast</span><span class="font-label-sm text-label-sm text-status-safe font-semibold">READY</span></div><button aria-label="Notifications" class="relative p-1.5 rounded text-text-muted hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-critical"></span></button><div class="flex items-center gap-space-sm pl-space-xs border-l border-border-subtle"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQDRt3c5ov4B3IRrwnzwOiQOZ4P-06QpwgKrHpORjVud0SO8VFO2xWafkeanSaDIW_U6RKm3i-OYieexHkHKHPVgdB5o43ePRCq3zvpQQhQkdQ47bxOxKBLvtyz_XTR_KPxDWr14gpcybmF0Pv6vUvUjw4jRtN7TTihrjh1Av-InTbyWzFA1xFeSsPdWLmRcV5qqzNMAs-9wnJXd9QCJ4bz3OQHsR3aW5T6otSGE"/><div class="hidden md:flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Capt. V. Negi</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Safety Cmd • Sector 4</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-7 w-64 bg-surface-card border-r border-border-subtle z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-sm"><div class="px-space-sm py-space-xs mb-space-xs text-text-muted font-label-sm text-label-sm uppercase tracking-wider font-semibold">Mission Control</div><nav class="space-y-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="overview" href="#">Overview</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="sensor-stations" href="#">Sensor Stations</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="lora-network" href="#">LoRa Network</a><a aria-current="page" class="flex items-center px-space-sm py-2 rounded transition-colors bg-primary-container text-on-primary-container font-semibold" data-path="live-monitoring" href="#">Live Monitoring</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="simulation-lab" href="#">Simulation Lab</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="alerts-and-events" href="#">Alerts &amp; Events</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="system-diagnostics" href="#">System Diagnostics</a><a class="flex items-center px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-sm border-t border-border-subtle bg-surface-container-low/50"><div class="p-space-sm rounded bg-surface-card border border-border-subtle space-y-1.5"><div class="flex items-center justify-between text-text-muted font-label-sm text-label-sm"><span class="uppercase tracking-wider">Active Nodes</span><span class="font-semibold text-status-safe">3/3 ONLINE</span></div><div class="space-y-1"><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-01 Kaliasaur</span><span class="text-status-safe font-semibold">NORMAL</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-02 Sirobagarh</span><span class="text-status-warning font-semibold">ELEVATED</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-03 Rudraprayag</span><span class="text-status-safe font-semibold">NORMAL</span></div></div></div></div></aside><div class="pl-64"><main class="relative pt-16 pb-8 bg-background-canvas min-h-screen"><div class="flex flex-col w-full">
+<div class="px-space-md py-space-sm space-y-space-md">
+<!-- SIMULATION & SAFETY MANDATE BANNER -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm px-space-md py-space-xs rounded bg-surface-container-low border border-border-subtle shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center px-space-xs py-0.5 rounded bg-amber-100 text-status-warning font-label-sm text-label-sm font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning mr-1.5 animate-pulse"></span>
+          Software Simulation Environment
+        </span>
+<span class="font-label-sm text-label-sm text-text-muted hidden md:inline">
+          All telemetry values, RF PHY frames, and inclinometer vectors are synthetically generated for protocol validation and early hazard drill simulation.
+        </span>
+</div>
+<div class="flex items-center gap-space-md shrink-0">
+<span class="font-label-sm text-label-sm text-text-muted font-medium">Validation ID: <span class="font-label-sm text-on-surface">SIM-CORR-4B-998</span></span>
+<button class="flex items-center gap-1.5 px-space-xs py-0.5 rounded bg-rose-50 text-status-critical font-label-sm text-label-sm font-semibold hover:bg-rose-100 transition-colors" id="siren-state-btn">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+<span>AUDIO KLAXON ARMED</span>
+</button>
+</div>
+</div>
+<!-- PRIMARY CORRIDOR TELEMETRY RIBBON (KPI SUMMARY) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Corridor Info -->
+<div class="p-space-sm rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-body-sm text-body-sm text-text-muted uppercase tracking-wider font-semibold">Corridor Target</span>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded bg-surface-container-low font-label-sm text-label-sm text-primary font-bold">SEC-04</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">NH-109 Rudraprayag</div>
+<div class="font-label-sm text-label-sm text-text-muted flex items-center justify-between mt-2 pt-1 border-t border-border-subtle/50">
+<span>Gaurikund Highway Cut</span>
+<span class="text-on-surface font-semibold">KM 42.6</span>
+</div>
+</div>
+<!-- Gateway Status -->
+<div class="p-space-sm rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-body-sm text-body-sm text-text-muted uppercase tracking-wider font-semibold">Gateway Basecamp</span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span> ONLINE
+          </span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">99.8%</span>
+<span class="font-label-sm text-label-sm text-text-muted">Uptime (14d)</span>
+</div>
+<div class="font-label-sm text-label-sm text-text-muted flex items-center justify-between mt-2 pt-1 border-t border-border-subtle/50">
+<span>868.100 MHz SF9/BW125</span>
+<span class="text-on-surface font-semibold">138ms RTT</span>
+</div>
+</div>
+<!-- Aggregate Hazard Index -->
+<div class="p-space-sm rounded bg-surface-card border border-amber-200 bg-amber-50/20 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-body-sm text-body-sm text-status-warning uppercase tracking-wider font-semibold">Hazard Index</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-amber-100 text-status-warning font-label-sm text-label-sm font-bold">HIGH RISK</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-status-warning font-bold">74<span class="text-headline-sm font-normal text-text-muted">/100</span></span>
+<span class="font-label-sm text-label-sm text-status-critical font-semibold animate-pulse">+6 pts / 30m</span>
+</div>
+<div class="font-label-sm text-label-sm text-text-muted flex items-center justify-between mt-2 pt-1 border-t border-border-subtle/50">
+<span>Toe Instability Alert</span>
+<span class="text-status-warning font-semibold">Tier 2 State</span>
+</div>
+</div>
+<!-- Mesh Topology Transmit Rate -->
+<div class="p-space-sm rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-body-sm text-body-sm text-text-muted uppercase tracking-wider font-semibold">RF Spectrum &amp; PDR</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">98.4% PDR</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">12</span>
+<span class="font-label-sm text-label-sm text-text-muted">pkts / minute</span>
+</div>
+<div class="w-full mt-2 pt-1 border-t border-border-subtle/50">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-text-muted mb-1">
+<span>Airtime (1% Duty Limit)</span>
+<span class="text-on-surface font-semibold">0.82%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 82%;"></div>
+</div>
+</div>
+</div>
+<!-- Ingest Engine Controls -->
+<div class="p-space-sm rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-body-sm text-body-sm text-text-muted uppercase tracking-wider font-semibold">Ingest Influx</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-safe animate-ping"></span>
+<span class="font-label-sm text-label-sm text-status-safe font-bold">1-SEC LIVE</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Sync: Delta Buffer</span>
+<span class="font-label-sm text-label-sm text-text-muted">0 Dropped Packets</span>
+</div>
+<button class="px-space-xs py-1 rounded bg-surface-container-low border border-border-subtle hover:bg-surface-variant font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1" id="toggle-stream-btn">
+<span class="material-symbols-outlined text-sm">pause</span> Pause
+          </button>
+</div>
+<div class="font-label-sm text-label-sm text-text-muted flex items-center justify-between mt-2 pt-1 border-t border-border-subtle/50">
+<span>Active Nodes Online</span>
+<span class="text-status-safe font-semibold">3 / 3 Synchronized</span>
+</div>
+</div>
+</div>
+<!-- MAIN TWO-COLUMN SECTION: SLOPPING CROSS-SECTION VISUALIZER & DENSE CHRONO AUDIT -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- Interactive Schematic Terrain Cross-Section (8 Cols) -->
+<div class="xl:col-span-8 p-space-md rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between relative overflow-hidden">
+<!-- Header Ribbon inside Card -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm pb-space-xs border-b border-border-subtle">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Elevation Slope Cross-Section &amp; Mesh Relay Topology</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm uppercase font-semibold">2,500m → 1,750m ASL</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Dynamic structural view showing stratigraphy, saturated phreatic table, and wireless LoRa vector pathing.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-1 rounded bg-surface-container-low text-text-muted">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> HR-01 (Nominal)
+            </span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-1 rounded bg-amber-50 text-status-warning">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> HR-02 (Elevated)
+            </span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-1 rounded bg-rose-50 text-status-critical">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span> HR-03 (Creep Risk)
+            </span>
+</div>
+</div>
+<!-- Cross Section Graphic SVG Canvas -->
+<div class="relative w-full aspect-[16/8] sm:aspect-[21/9] bg-surface-container-low/40 rounded overflow-hidden flex items-center justify-center">
+<svg class="w-full h-full" preserveaspectratio="xMidYMid meet" viewbox="0 0 950 420">
+<defs>
+<lineargradient id="skyGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#EFF6FF" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#F8FAFC" stop-opacity="0.2"></stop>
+</lineargradient>
+<lineargradient id="soilColluvium" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#D97706" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#B45309" stop-opacity="0.32"></stop>
+</lineargradient>
+<lineargradient id="bedrock" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#475569" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#1E293B" stop-opacity="0.65"></stop>
+</lineargradient>
+<pattern height="8" id="hatch" patterntransform="rotate(45 0 0)" patternunits="userSpaceOnUse" width="8">
+<line stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1" x1="0" x2="0" y1="0" y2="8"></line>
+</pattern>
+</defs>
+<!-- Sky backdrop with elevation grid lines -->
+<rect fill="url(#skyGrad)" height="420" width="950" x="0" y="0"></rect>
+<g opacity="0.6" stroke="#CBD5E1" stroke-dasharray="3,3" stroke-width="0.8">
+<line x1="50" x2="900" y1="70" y2="70"></line>
+<line x1="50" x2="900" y1="150" y2="150"></line>
+<line x1="50" x2="900" y1="230" y2="230"></line>
+<line x1="50" x2="900" y1="310" y2="310"></line>
+</g>
+<text class="text-[10px] fill-slate-400 font-mono" x="60" y="65">2,500m ASL - Ridge Crest</text>
+<text class="text-[10px] fill-slate-400 font-mono" x="60" y="145">2,200m ASL - Mid Slope Tier</text>
+<text class="text-[10px] fill-slate-400 font-mono" x="60" y="225">1,900m ASL - Colluvial Chute</text>
+<text class="text-[10px] fill-slate-400 font-mono" x="60" y="305">1,750m ASL - Mandakini River &amp; NH-109</text>
+<!-- Geological Base Layer: Bedrock -->
+<polygon fill="url(#bedrock)" points="110,95 240,140 470,225 680,315 880,370 950,380 950,420 50,420 50,110"></polygon>
+<polygon fill="url(#hatch)" points="110,95 240,140 470,225 680,315 880,370 950,380 950,420 50,420 50,110"></polygon>
+<!-- Colluvium / Overburden Soil Layer -->
+<polygon fill="url(#soilColluvium)" points="110,75 320,135 550,215 740,305 820,345 870,355 880,370 680,315 470,225 240,140 110,95"></polygon>
+<!-- Saturated Water Phreatic Surface (Dashed Blue Wave) -->
+<path d="M 280,180 Q 420,220 560,250 T 820,335" fill="none" opacity="0.85" stroke="#2563EB" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<text class="text-[9px] fill-blue-700 font-mono font-semibold" transform="rotate(18, 430, 240)" x="430" y="240">Phreatic Table (78.4% Saturation)</text>
+<!-- Highway Cut NH-109 Slice -->
+<rect fill="#334155" height="8" rx="2" width="60" x="740" y="302"></rect>
+<text class="text-[9px] fill-slate-700 font-mono font-bold" x="742" y="297">NH-109 Highway</text>
+<!-- Mandakini River Bed -->
+<path d="M 850,375 Q 890,365 940,385 L 950,420 L 850,420 Z" fill="#0284C7" opacity="0.4"></path>
+<text class="text-[10px] fill-blue-900 font-mono font-bold" x="865" y="405">Mandakini River</text>
+<!-- LoRa Mesh Relay Links -->
+<!-- Direct Vector HR-01 to Basecamp GW-01 -->
+<line opacity="0.45" stroke="#15803D" stroke-dasharray="4,4" stroke-width="1.2" x1="160" x2="880" y1="80" y2="340"></line>
+<!-- Relay Vector HR-03 (Chute) to HR-02 (Relay Node) -->
+<line opacity="0.8" stroke="#DC2626" stroke-dasharray="3,3" stroke-width="2" x1="680" x2="440" y1="280" y2="180">
+<animate attributename="stroke-dashoffset" dur="1.2s" repeatcount="indefinite" values="24;0"></animate>
+</line>
+<text class="text-[9px] fill-red-700 font-mono font-bold" transform="rotate(-23, 560, 215)" x="560" y="215">Hop 1: Uplink Relay (HR-03 → HR-02)</text>
+<!-- Relay Vector HR-02 to Basecamp GW-01 -->
+<line opacity="0.85" stroke="#2563EB" stroke-dasharray="4,3" stroke-width="2" x1="440" x2="880" y1="180" y2="340">
+<animate attributename="stroke-dashoffset" dur="1.5s" repeatcount="indefinite" values="24;0"></animate>
+</line>
+<text class="text-[9px] fill-blue-700 font-mono font-bold" transform="rotate(20, 650, 245)" x="650" y="245">Hop 2: Forwarding to Basecamp GW-01</text>
+<!-- NODE HR-01 Pin (Ridge Anchor, 2,450m) -->
+<g transform="translate(160, 80)">
+<circle cx="0" cy="0" fill="#ECFDF5" r="14" stroke="#10B981" stroke-width="1.5"></circle>
+<circle cx="0" cy="0" fill="#047857" r="5"></circle>
+<!-- Callout badge -->
+<rect fill="#FFFFFF" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" height="42" rx="4" stroke="#CBD5E1" stroke-width="1" width="135" x="18" y="-22"></rect>
+<text class="text-[10px] font-bold fill-slate-800 font-mono" x="24" y="-8">HR-01 CREST ANCHOR</text>
+<text class="text-[9px] fill-emerald-700 font-mono font-semibold" x="24" y="5">2,450m • Tilt: 1.2° (NOMINAL)</text>
+<text class="text-[8px] fill-slate-500 font-mono" x="24" y="16">RSSI: -78 dBm • Direct GW</text>
+</g>
+<!-- NODE HR-02 Pin (Mid-Slope Colluvium, 2,180m) -->
+<g transform="translate(440, 180)">
+<circle cx="0" cy="0" fill="#FFFBEB" r="16" stroke="#F59E0B" stroke-width="2"></circle>
+<circle cx="0" cy="0" fill="#D97706" r="6"></circle>
+<circle cx="0" cy="0" fill="none" opacity="0.6" r="22" stroke="#F59E0B" stroke-dasharray="2,2" stroke-width="1">
+<animate attributename="r" dur="2s" repeatcount="indefinite" values="16;28"></animate>
+<animate attributename="opacity" dur="2s" repeatcount="indefinite" values="0.8;0"></animate>
+</circle>
+<!-- Callout badge -->
+<rect fill="#FFFFFF" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" height="44" rx="4" stroke="#CBD5E1" stroke-width="1" width="145" x="22" y="-24"></rect>
+<text class="text-[10px] font-bold fill-amber-700 font-mono" x="28" y="-10">HR-02 MID-SLOPE RELAY</text>
+<text class="text-[9px] fill-amber-800 font-mono font-semibold" x="28" y="3">2,180m • Moisture: 78.4% VWC</text>
+<text class="text-[8px] fill-slate-500 font-mono" x="28" y="14">Tilt: 5.8° • Forwarding Hub</text>
+</g>
+<!-- NODE HR-03 Pin (Debris Chute Toe, 1,840m) -->
+<g transform="translate(680, 280)">
+<circle cx="0" cy="0" fill="#FEF2F2" r="18" stroke="#DC2626" stroke-width="2.5"></circle>
+<circle cx="0" cy="0" fill="#B91C1C" r="7"></circle>
+<circle cx="0" cy="0" fill="none" r="26" stroke="#DC2626" stroke-dasharray="3,2" stroke-width="1.5">
+<animate attributename="r" dur="1.2s" repeatcount="indefinite" values="16;36"></animate>
+<animate attributename="opacity" dur="1.2s" repeatcount="indefinite" values="1;0"></animate>
+</circle>
+<!-- Callout badge -->
+<rect fill="#FFFFFF" filter="drop-shadow(0 2px 6px rgba(220,38,38,0.12))" height="52" rx="4" stroke="#FCA5A5" stroke-width="1.2" width="155" x="-170" y="-30"></rect>
+<text class="text-[10px] font-bold fill-red-700 font-mono" x="-164" y="-16">HR-03 DEBRIS CHUTE TOE</text>
+<text class="text-[9px] fill-red-600 font-mono font-bold" x="-164" y="-4">CRITICAL: 14.2° (+0.82°/h)</text>
+<text class="text-[9px] fill-slate-600 font-mono" x="-164" y="8">1,840m ASL • Geophone 0.44g</text>
+<text class="text-[8px] fill-amber-600 font-mono font-semibold" x="-164" y="18">↑ Relaying via Node HR-02</text>
+</g>
+<!-- GATEWAY GW-01 Mast Pin (Basecamp, 1,750m) -->
+<g transform="translate(880, 340)">
+<polygon fill="#1E293B" points="-8,25 0,-15 8,25"></polygon>
+<circle cx="0" cy="-15" fill="#2563EB" r="5"></circle>
+<line stroke="#1E293B" stroke-width="2" x1="-12" x2="12" y1="-8" y2="-8"></line>
+<line stroke="#1E293B" stroke-width="2" x1="-8" x2="8" y1="2" y2="2"></line>
+<!-- Basecamp Label -->
+<rect fill="#1E293B" height="22" rx="3" width="140" x="-70" y="30"></rect>
+<text class="text-[9px] fill-white font-mono font-bold" text-anchor="middle" x="0" y="44">GW-01 BASECAMP</text>
+</g>
+</svg>
+<!-- Floating Map Legend overlay bottom-left -->
+<div class="absolute bottom-2 left-2 bg-surface-card/90 backdrop-blur-sm p-1.5 rounded border border-border-subtle flex flex-col gap-0.5 text-[10px] font-mono text-text-muted">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-amber-500 rounded-sm"></span> Colluvial Mantle (Active Shear Zone)
+            </div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 border-b-2 border-dashed border-blue-600"></span> Phreatic Water Boundary
+            </div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-slate-600 rounded-sm"></span> Bedrock Basal Interface
+            </div>
+</div>
+</div>
+<!-- Visualizer Footer Strip -->
+<div class="mt-space-sm pt-space-xs border-t border-border-subtle flex flex-wrap items-center justify-between font-label-sm text-label-sm text-text-muted">
+<div class="flex items-center gap-space-md">
+<span>Mesh Topology: <strong class="text-on-surface">Auto-Forming Multi-Hop Tree</strong></span>
+<span>Terrain Dip: <strong class="text-on-surface">42° Angle of Repose</strong></span>
+</div>
+<div>
+<span>Shear Failure Plane Depth: <strong class="text-status-warning">3.8m BGL at HR-03</strong></span>
+</div>
+</div>
+</div>
+<!-- Real-Time Event & Critical Hazard Incident Log (4 Cols) -->
+<div class="xl:col-span-4 p-space-md rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-xs border-b border-border-subtle mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-lg text-primary">warning</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Hazard &amp; Event Stream</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm font-semibold">12 Events Today</span>
+</div>
+<!-- Log Severity Filter Toggles -->
+<div class="flex items-center gap-1 mb-space-sm">
+<button class="px-2 py-0.5 rounded bg-primary-container text-on-primary font-label-sm text-label-sm font-medium">All (12)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-text-muted hover:text-on-surface font-label-sm text-label-sm">Hazards (4)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-text-muted hover:text-on-surface font-label-sm text-label-sm">RF / Mesh (8)</button>
+</div>
+<!-- Chronological Scroll Feed -->
+<div class="space-y-2 max-h-[340px] overflow-y-auto pr-1">
+<!-- Event 1: Critical Acceleration -->
+<div class="p-space-xs rounded bg-red-50/70 border-l-2 border-status-critical">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="font-bold text-status-critical flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-critical"></span> NODE HR-03
+                </span>
+<span class="text-text-muted font-mono">11:42:01 IST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5 font-medium leading-tight">Angular tilt rate acceleration exceeded 0.75°/hr (Current: +0.82°/hr).</p>
+<div class="flex items-center justify-between mt-1 text-[11px] font-mono text-status-critical">
+<span>Total Pitch: 14.2°</span>
+<span class="font-bold underline cursor-pointer hover:opacity-80">ACKNOWLEDGED</span>
+</div>
+</div>
+<!-- Event 2: Local Klaxon Trigger -->
+<div class="p-space-xs rounded bg-amber-50/70 border-l-2 border-status-warning">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="font-bold text-status-warning flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span> AUTONOMOUS KLAXON
+                </span>
+<span class="text-text-muted font-mono">11:41:40 IST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5 font-medium leading-tight">Piezo buzzer pulse warning emitted at NH-109 Chute toe crossing.</p>
+<div class="flex items-center justify-between mt-1 text-[11px] font-mono text-text-muted">
+<span>Duration: 15s • 104dB</span>
+<span class="text-status-safe">DISPATCH VERIFIED</span>
+</div>
+</div>
+<!-- Event 3: Soil Moisture Threshold -->
+<div class="p-space-xs rounded bg-surface-container-low border-l-2 border-amber-500">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="font-bold text-amber-800 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> NODE HR-02
+                </span>
+<span class="text-text-muted font-mono">11:39:15 IST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5 font-medium leading-tight">Soil moisture VWC crossed field capacity into saturation zone (78.4% VWC).</p>
+<div class="flex items-center justify-between mt-1 text-[11px] font-mono text-text-muted">
+<span>Depth: 1.2m SensArray</span>
+<span>Pore-Pressure: High</span>
+</div>
+</div>
+<!-- Event 4: Mesh Route Recalculated -->
+<div class="p-space-xs rounded bg-surface-container-low border-l-2 border-blue-500">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="font-bold text-blue-800 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> LORA MESH PHY
+                </span>
+<span class="text-text-muted font-mono">11:36:52 IST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5 font-medium leading-tight">Route table update: HR-03 LOS obstructed by talus cliff; hopping via HR-02.</p>
+<div class="flex items-center justify-between mt-1 text-[11px] font-mono text-text-muted">
+<span>Hop Count: 2</span>
+<span class="text-status-safe">METRIC OK</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs mt-space-sm border-t border-border-subtle flex items-center justify-between">
+<button class="px-space-xs py-1 rounded border border-border-subtle text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span> Export Incident CSV
+          </button>
+<span class="font-label-sm text-label-sm text-text-muted">Sync: SQLite RingBuffer</span>
+</div>
+</div>
+</div>
+<!-- 3-NODE LIVE SENSOR TELEMETRY CARDS (HR-01, HR-02, HR-03) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- NODE HR-01 (Ridge Crest Anchor) -->
+<div class="p-space-md rounded bg-surface-card border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<!-- Node Header -->
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-metric text-headline-sm text-on-surface font-bold">HR-01</span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span> NOMINAL
+              </span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">2,450m ASL</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-sm">Bedrock Crest Anchor • Direct Gateway Vector Link</p>
+<!-- Hardware Vital Ribbon -->
+<div class="grid grid-cols-3 gap-1 p-space-xs rounded bg-surface-container-low mb-space-sm text-center font-mono">
+<div>
+<div class="text-[10px] text-text-muted">BATTERY</div>
+<div class="text-body-sm font-bold text-on-surface">3.34V <span class="text-status-safe text-[10px]">96%</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">RSSI / SNR</div>
+<div class="text-body-sm font-bold text-on-surface">-78 <span class="text-text-muted text-[10px]">/ 9dB</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">TX PWR</div>
+<div class="text-body-sm font-bold text-on-surface">14 dBm</div>
+</div>
+</div>
+<!-- Sensor Gauges / Metrics -->
+<div class="space-y-space-xs">
+<!-- Soil Moisture Metric -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">water_drop</span>
+<span class="font-label-sm text-label-sm text-text-muted">Soil Moisture (VWC)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">22.4%</span>
+<span class="font-label-sm text-label-sm text-text-muted ml-1">(Dry Porous)</span>
+</div>
+</div>
+<!-- Inclinometer Vector -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">screen_rotation</span>
+<span class="font-label-sm text-label-sm text-text-muted">Biaxial Tilt (Pitch/Roll)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">P: 1.2° / R: 0.4°</span>
+</div>
+</div>
+<!-- Geophone RMS Vibration -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">vibration</span>
+<span class="font-label-sm text-label-sm text-text-muted">Geophone RMS (g)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-status-safe">0.02 g</span>
+<span class="font-label-sm text-label-sm text-text-muted ml-1">Ambient</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-border-subtle flex items-center justify-between font-label-sm text-label-sm text-text-muted">
+<span>Relay: Direct to GW-01</span>
+<span class="text-status-safe font-semibold">Mesh Anchor Active</span>
+</div>
+</div>
+<!-- NODE HR-02 (Mid-Slope Relay & Saturation Sentry) -->
+<div class="p-space-md rounded bg-surface-card border border-amber-200 shadow-sm flex flex-col justify-between">
+<div>
+<!-- Node Header -->
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-metric text-headline-sm text-on-surface font-bold">HR-02</span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-100 text-status-warning font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span> ELEVATED
+              </span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">2,180m ASL</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-sm">Mid-Slope Colluvium Mantle • Active Multi-Hop Relay Hub</p>
+<!-- Hardware Vital Ribbon -->
+<div class="grid grid-cols-3 gap-1 p-space-xs rounded bg-surface-container-low mb-space-sm text-center font-mono">
+<div>
+<div class="text-[10px] text-text-muted">BATTERY</div>
+<div class="text-body-sm font-bold text-on-surface">3.28V <span class="text-status-safe text-[10px]">88%</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">RSSI / SNR</div>
+<div class="text-body-sm font-bold text-on-surface">-84 <span class="text-text-muted text-[10px]">/ 6dB</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">FORWARDED</div>
+<div class="text-body-sm font-bold text-primary">84 pkts/h</div>
+</div>
+</div>
+<!-- Sensor Gauges / Metrics -->
+<div class="space-y-space-xs">
+<!-- Soil Moisture Metric -->
+<div class="flex items-center justify-between p-1.5 rounded bg-amber-50/60 border border-amber-200">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-status-warning">water_drop</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Soil Moisture (VWC)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-status-warning">78.4%</span>
+<span class="font-label-sm text-label-sm text-status-warning ml-1">(Near Saturated)</span>
+</div>
+</div>
+<!-- Inclinometer Vector -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">screen_rotation</span>
+<span class="font-label-sm text-label-sm text-text-muted">Biaxial Tilt (Pitch/Roll)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-status-warning">P: 5.8° / R: 2.1°</span>
+<span class="font-label-sm text-label-sm text-text-muted ml-1">(+0.12°/h)</span>
+</div>
+</div>
+<!-- Geophone RMS Vibration -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">vibration</span>
+<span class="font-label-sm text-label-sm text-text-muted">Geophone RMS (g)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">0.09 g</span>
+<span class="font-label-sm text-label-sm text-text-muted ml-1">Micro-tremor</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-border-subtle flex items-center justify-between font-label-sm text-label-sm text-text-muted">
+<span>Relaying for: <strong class="text-status-critical">Node HR-03</strong></span>
+<span class="text-status-warning font-semibold">Hydraulic Surcharge</span>
+</div>
+</div>
+<!-- NODE HR-03 (Debris Chute Toe - Critical Danger Zone) -->
+<div class="p-space-md rounded bg-surface-card border border-rose-300 shadow-sm flex flex-col justify-between">
+<div>
+<!-- Node Header -->
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-metric text-headline-sm text-status-critical font-bold">HR-03</span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-100 text-status-critical font-label-sm text-label-sm font-bold animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-status-critical"></span> CRITICAL HAZARD
+              </span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">1,840m ASL</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-sm">Debris Chute Toe • Highway Scarp Overburden</p>
+<!-- Hardware Vital Ribbon -->
+<div class="grid grid-cols-3 gap-1 p-space-xs rounded bg-surface-container-low mb-space-sm text-center font-mono">
+<div>
+<div class="text-[10px] text-text-muted">BATTERY</div>
+<div class="text-body-sm font-bold text-on-surface">3.22V <span class="text-status-safe text-[10px]">81%</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">RSSI / SNR</div>
+<div class="text-body-sm font-bold text-on-surface">-96 <span class="text-text-muted text-[10px]">/ 1dB</span></div>
+</div>
+<div>
+<div class="text-[10px] text-text-muted">RELAY PATH</div>
+<div class="text-body-sm font-bold text-status-warning">via HR-02</div>
+</div>
+</div>
+<!-- Sensor Gauges / Metrics -->
+<div class="space-y-space-xs">
+<!-- Inclinometer Vector Critical -->
+<div class="flex items-center justify-between p-1.5 rounded bg-red-50 border border-red-200">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-status-critical">report</span>
+<span class="font-label-sm text-label-sm text-status-critical font-bold">Biaxial Tilt (Creep Accel)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-status-critical">14.2° Pitch</span>
+<span class="font-label-sm text-label-sm text-status-critical font-semibold block">+0.82° / hour</span>
+</div>
+</div>
+<!-- Soil Moisture Metric -->
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">water_drop</span>
+<span class="font-label-sm text-label-sm text-text-muted">Soil Moisture (VWC)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-on-surface">64.1%</span>
+<span class="font-label-sm text-label-sm text-text-muted ml-1">(Liquid Limit)</span>
+</div>
+</div>
+<!-- Geophone RMS Vibration -->
+<div class="flex items-center justify-between p-1.5 rounded bg-red-50/50 border border-red-100">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-status-critical">vibration</span>
+<span class="font-label-sm text-label-sm text-text-muted">Geophone RMS (g)</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-status-critical">0.44 g</span>
+<span class="font-label-sm text-label-sm text-status-critical ml-1 font-semibold">Active Creep</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-border-subtle flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-status-critical font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-status-critical animate-ping"></span> AUTO SIREN: ACTIVATED
+          </span>
+<button class="px-2 py-0.5 rounded bg-status-critical text-on-error font-mono text-[11px] font-bold hover:bg-red-700">
+            DISPATCH CREW
+          </button>
+</div>
+</div>
+</div>
+<!-- LIVE RADIO PACKET PHY ACTIVITY & RAW FRAME TELEMETRY (LOW LATENCY CONSOLE) -->
+<div class="p-space-md rounded bg-surface-card border border-border-subtle shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm pb-space-xs border-b border-border-subtle">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-lg">radar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">PHY Radio Activity &amp; Demodulated LoRa Frames</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-low text-text-muted font-mono font-semibold">
+            SX1262 Engine • 868.1 MHz
+          </span>
+</div>
+<div class="flex items-center gap-space-md font-label-sm text-label-sm text-text-muted font-mono">
+<span>Buffer: <strong class="text-on-surface">1,024 Frames FIFO</strong></span>
+<span>CRC Valid: <strong class="text-status-safe">100.0%</strong></span>
+<button class="text-primary hover:underline font-semibold">Freeze Frame Stream</button>
+</div>
+</div>
+<!-- High-Density Telemetry Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-mono text-label-sm text-label-sm">
+<thead>
+<tr class="bg-surface-container-low text-text-muted border-b border-border-subtle">
+<th class="py-2 px-space-xs font-semibold">TIMESTAMP</th>
+<th class="py-2 px-space-xs font-semibold">DEV ADDR</th>
+<th class="py-2 px-space-xs font-semibold">ORIGIN NODE</th>
+<th class="py-2 px-space-xs font-semibold">ROUTE HOP</th>
+<th class="py-2 px-space-xs font-semibold text-right">RSSI</th>
+<th class="py-2 px-space-xs font-semibold text-right">SNR</th>
+<th class="py-2 px-space-xs font-semibold text-right">FREQ OFFSET</th>
+<th class="py-2 px-space-xs font-semibold">DECODED TELEMETRY PAYLOAD</th>
+<th class="py-2 px-space-xs font-semibold text-center">CRC</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle/50 text-on-surface" id="radio-log-tbody">
+<!-- Frame Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-1.5 px-space-xs text-text-muted font-medium">11:42:08.114</td>
+<td class="py-1.5 px-space-xs font-bold text-primary">0x4A8103</td>
+<td class="py-1.5 px-space-xs font-bold text-status-critical">HR-03 (Chute Toe)</td>
+<td class="py-1.5 px-space-xs text-status-warning font-semibold">1-Hop via HR-02</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-96 dBm</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">+1.4 dB</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-142 Hz</td>
+<td class="py-1.5 px-space-xs font-mono text-on-surface">
+<span class="text-status-critical font-bold">P:14.2° R:2.8°</span> | VWC:64.1% | G:0.44g | BAT:3.22V
+              </td>
+<td class="py-1.5 px-space-xs text-center"><span class="px-1 py-0.5 rounded bg-emerald-50 text-status-safe font-bold text-[9px]">OK</span></td>
+</tr>
+<!-- Frame Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-1.5 px-space-xs text-text-muted font-medium">11:42:07.410</td>
+<td class="py-1.5 px-space-xs font-bold text-primary">0x4A8102</td>
+<td class="py-1.5 px-space-xs font-bold text-status-warning">HR-02 (Mid-Slope)</td>
+<td class="py-1.5 px-space-xs text-status-safe font-semibold">Direct GW-01</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-84 dBm</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">+6.8 dB</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">+84 Hz</td>
+<td class="py-1.5 px-space-xs font-mono text-on-surface">
+                P:5.8° R:2.1° | <span class="text-status-warning font-bold">VWC:78.4%</span> | G:0.09g | BAT:3.28V
+              </td>
+<td class="py-1.5 px-space-xs text-center"><span class="px-1 py-0.5 rounded bg-emerald-50 text-status-safe font-bold text-[9px]">OK</span></td>
+</tr>
+<!-- Frame Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-1.5 px-space-xs text-text-muted font-medium">11:42:05.882</td>
+<td class="py-1.5 px-space-xs font-bold text-primary">0x4A8101</td>
+<td class="py-1.5 px-space-xs font-bold text-status-safe">HR-01 (Ridge Crest)</td>
+<td class="py-1.5 px-space-xs text-status-safe font-semibold">Direct GW-01</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-78 dBm</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">+9.2 dB</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-12 Hz</td>
+<td class="py-1.5 px-space-xs font-mono text-on-surface">
+                P:1.2° R:0.4° | VWC:22.4% | G:0.02g | BAT:3.34V
+              </td>
+<td class="py-1.5 px-space-xs text-center"><span class="px-1 py-0.5 rounded bg-emerald-50 text-status-safe font-bold text-[9px]">OK</span></td>
+</tr>
+<!-- Frame Row 4 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-1.5 px-space-xs text-text-muted font-medium">11:42:03.090</td>
+<td class="py-1.5 px-space-xs font-bold text-primary">0x4A8103</td>
+<td class="py-1.5 px-space-xs font-bold text-status-critical">HR-03 (Chute Toe)</td>
+<td class="py-1.5 px-space-xs text-status-warning font-semibold">1-Hop via HR-02</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-95 dBm</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">+1.1 dB</td>
+<td class="py-1.5 px-space-xs text-right text-text-muted">-150 Hz</td>
+<td class="py-1.5 px-space-xs font-mono text-on-surface">
+<span class="text-status-critical font-bold">P:14.1° R:2.7°</span> | VWC:63.9% | G:0.41g | BAT:3.22V
+              </td>
+<td class="py-1.5 px-space-xs text-center"><span class="px-1 py-0.5 rounded bg-emerald-50 text-status-safe font-bold text-[9px]">OK</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Radio PHY Diagnostic Summary -->
+<div class="mt-space-sm pt-space-xs border-t border-border-subtle flex flex-wrap items-center justify-between font-label-sm text-label-sm text-text-muted">
+<div class="flex items-center gap-space-md">
+<span>Modulation: <strong class="text-on-surface">LoRa Spread-Spectrum (CSS)</strong></span>
+<span>Spreading Factor: <strong class="text-on-surface">SF9 @ BW 125 kHz</strong></span>
+<span>Coding Rate: <strong class="text-on-surface">4/5</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span>Airtime consumed: <strong class="text-on-surface font-mono">184.2 ms / frame</strong></span>
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive toggle for streaming state simulation
+  (function initLiveTelemetryControls() {
+    const streamBtn = document.getElementById('toggle-stream-btn');
+    const sirenBtn = document.getElementById('siren-state-btn');
+    let isStreaming = true;
+
+    if (streamBtn) {
+      streamBtn.addEventListener('click', () => {
+        isStreaming = !isStreaming;
+        if (isStreaming) {
+          streamBtn.innerHTML = '<span class="material-symbols-outlined text-sm">pause</span> Pause';
+          streamBtn.classList.remove('bg-amber-100', 'text-status-warning');
+        } else {
+          streamBtn.innerHTML = '<span class="material-symbols-outlined text-sm">play_arrow</span> Resume';
+          streamBtn.classList.add('bg-amber-100', 'text-status-warning');
+        }
+      });
+    }
+
+    if (sirenBtn) {
+      sirenBtn.addEventListener('click', () => {
+        if (sirenBtn.classList.contains('bg-rose-50')) {
+          sirenBtn.classList.remove('bg-rose-50', 'text-status-critical');
+          sirenBtn.classList.add('bg-slate-100', 'text-text-muted');
+          sirenBtn.innerHTML = '<span class="material-symbols-outlined text-sm">notifications_off</span><span>AUDIO MUTED</span>';
+        } else {
+          sirenBtn.classList.add('bg-rose-50', 'text-status-critical');
+          sirenBtn.classList.remove('bg-slate-100', 'text-text-muted');
+          sirenBtn.innerHTML = '<span class="material-symbols-outlined text-sm">notifications_active</span><span>AUDIO KLAXON ARMED</span>';
+        }
+      });
+    }
+  })();
+</script></main></div><footer class="fixed bottom-0 left-0 right-0 h-7 z-50 bg-surface-card border-t border-border-subtle flex items-center justify-between px-space-md text-text-muted font-label-sm text-label-sm"><div class="flex items-center gap-space-sm truncate"><span class="w-1.5 h-1.5 rounded-full bg-status-safe shrink-0"></span><span class="truncate">Offline-First Protocol v2.4 • Simulated Local Mesh MeshID: HM-868-ALPHA • Zero Cellular Dependency Mode</span></div><div class="shrink-0 hidden md:block text-text-muted">All readings for illustrative test validation</div></footer></body></html>

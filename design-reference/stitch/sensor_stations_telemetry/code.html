@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"secondary-fixed-dim":"#92d3c3","surface-variant":"#d7e3ff","on-tertiary":"#ffffff","tertiary-fixed-dim":"#b8c4ff","primary-container":"#1b4d3e","surface":"#f9f9ff","on-error-container":"#93000a","border-subtle":"#E2E8F0","on-tertiary-container":"#9caeff","on-primary-fixed":"#002117","on-primary":"#ffffff","inverse-on-surface":"#ecf0ff","background":"#f9f9ff","on-error":"#ffffff","primary-fixed":"#baeed9","tertiary-fixed":"#dde1ff","on-secondary-fixed-variant":"#025045","surface-card":"#FFFFFF","outline-variant":"#c0c9c3","secondary":"#27695c","surface-container-highest":"#d7e3ff","surface-container-low":"#f0f3ff","on-tertiary-fixed-variant":"#173bab","text-muted":"#64748B","on-primary-container":"#8abda9","status-safe":"#15803D","error":"#ba1a1a","status-warning":"#D97706","secondary-container":"#abeddc","on-secondary-container":"#2c6d60","tertiary":"#002480","primary":"#003629","on-background":"#0e1c31","primary-fixed-dim":"#9ed1bd","on-surface-variant":"#404945","status-critical":"#DC2626","surface-bright":"#f9f9ff","inverse-primary":"#9ed1bd","error-container":"#ffdad6","tertiary-container":"#1439a9","background-canvas":"#F6F8FA","surface-tint":"#376757","on-surface":"#0e1c31","surface-container":"#e8eeff","on-secondary-fixed":"#00201a","on-secondary":"#ffffff","surface-dim":"#cddaf8","inverse-surface":"#243147","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#1d4f40","outline":"#707974","on-tertiary-fixed":"#001453","status-inactive":"#64748B","surface-container-high":"#dfe8ff","secondary-fixed":"#aeefdf"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","gutter-desktop":"1.5rem","margin-desktop":"2rem","space-md":"1rem"},"fontFamily":{"data-metric":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"headline-lg":["Inter"],"label-lg":["JetBrains Mono"],"headline-xl-mobile":["Inter"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-xl":["Inter"],"label-md":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"data-metric":["28px",{"lineHeight":"32px","letterSpacing":"-0.03em","fontWeight":"700"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-background-canvas font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-card border-b border-border-subtle shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><img alt="HimRakshak Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrA0v5gGztK_KxO3xXO_671Sm5TrU2lmX2AldIt8767aturerEXYOi8rX7xDS9Jh1pxJFUAGv8EQZ6xm1b4Uroov_yIcT08wI7HBIUT5X6bSsjhFjEWvsu3tgkDDkh1olxVqrAJSeirsUVULXfZhTSK0sSgnYHtXbJqfx2bu1s9m8U_24GAaQnNljksa7g5caGVLWATqjwqcTSWjSQFRXGGAVZZT8iKgpWpWBIqoUJQ"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary">HimRakshak</span><span class="inline-flex items-center px-space-xs py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm uppercase tracking-wider">Node v2.4</span></div><span class="hidden lg:inline text-text-muted font-body-sm text-body-sm leading-none">Himalayan Landslide Telemetry &amp; Early Warning System</span></div></div><div class="hidden xl:flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-amber-50 border border-amber-200 text-status-warning"><span class="w-1.5 h-1.5 rounded-full bg-status-warning animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">SOFTWARE SIMULATION ENVIRONMENT</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="material-symbols-outlined text-sm text-secondary">route</span><span class="font-label-sm text-label-sm">Sector 4: NH-109 Rudraprayag-Gaurikund</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-emerald-50 border border-emerald-200 text-status-safe"><span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm">GW-01: LoRa 868MHz [-84 dBm]</span></div><div class="flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle font-label-sm text-label-sm text-text-muted"><span class="text-on-surface font-semibold">11:42:08 IST</span><span class="w-px h-3 bg-border-subtle"></span><span>PKT: 148,290</span></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="w-2 h-2 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm uppercase text-text-muted">Broadcast</span><span class="font-label-sm text-label-sm text-status-safe font-semibold">READY</span></div><button aria-label="Notifications" class="relative p-1.5 rounded text-text-muted hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-critical"></span></button><div class="flex items-center gap-space-sm pl-space-xs border-l border-border-subtle"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQDRt3c5ov4B3IRrwnzwOiQOZ4P-06QpwgKrHpORjVud0SO8VFO2xWafkeanSaDIW_U6RKm3i-OYieexHkHKHPVgdB5o43ePRCq3zvpQQhQkdQ47bxOxKBLvtyz_XTR_KPxDWr14gpcybmF0Pv6vUvUjw4jRtN7TTihrjh1Av-InTbyWzFA1xFeSsPdWLmRcV5qqzNMAs-9wnJXd9QCJ4bz3OQHsR3aW5T6otSGE"/><div class="hidden md:flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Capt. V. Negi</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Safety Cmd • Sector 4</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-7 w-64 bg-surface-card border-r border-border-subtle z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-sm"><div class="px-space-sm py-space-xs mb-space-xs text-text-muted font-label-sm text-label-sm uppercase tracking-wider font-semibold">Mission Control</div><nav class="space-y-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span>Overview</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 rounded transition-colors bg-primary-container text-on-primary-container font-semibold" data-path="sensor-stations" href="#"><span class="material-symbols-outlined text-lg">sensors</span><span>Sensor Stations</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="lora-network" href="#"><span class="material-symbols-outlined text-lg">hub</span><span>LoRa Network</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="live-monitoring" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Live Monitoring</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="simulation-lab" href="#"><span class="material-symbols-outlined text-lg">science</span><span>Simulation Lab</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="alerts-and-events" href="#"><span class="material-symbols-outlined text-lg">notifications_active</span><span>Alerts &amp; Events</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="system-diagnostics" href="#"><span class="material-symbols-outlined text-lg">memory</span><span>System Diagnostics</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">settings</span><span>Settings</span></a></nav></div><div class="p-space-sm border-t border-border-subtle bg-surface-container-low/50"><div class="p-space-sm rounded bg-surface-card border border-border-subtle space-y-1.5"><div class="flex items-center justify-between text-text-muted font-label-sm text-label-sm"><span class="uppercase tracking-wider">Active Nodes</span><span class="font-semibold text-status-safe">3/3 ONLINE</span></div><div class="space-y-1"><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-01 Kaliasaur</span><span class="text-status-safe font-semibold">NORMAL</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-02 Sirobagarh</span><span class="text-status-warning font-semibold">ELEVATED</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-03 Rudraprayag</span><span class="text-status-safe font-semibold">NORMAL</span></div></div></div></div></aside><div class="pl-64"><main class="relative pt-16 pb-8 bg-background-canvas min-h-screen"><div class="flex flex-col w-full">
+<!-- Station Selector Tab Ribbon -->
+<div class="p-space-md lg:p-space-lg bg-surface-card shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-text-muted uppercase tracking-wider">
+<span>Himalayan Surface Mesh Telemetry</span>
+<span>/</span>
+<span class="text-primary font-bold">NH-109 Escarpment Cluster</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-0.5">Sensor Stations Command &amp; Geotech Diagnostic</h1>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="px-space-md py-1.5 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors" onclick="refreshStationData()" type="button">
+<span class="material-symbols-outlined text-base text-primary">sync</span>
+<span>Poll Packet</span>
+</button>
+<button class="px-space-md py-1.5 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors" onclick="toggleRelayTest()" type="button">
+<span class="material-symbols-outlined text-base text-secondary">alt_route</span>
+<span>Trace Mesh Route</span>
+</button>
+<button class="px-space-md py-1.5 rounded bg-tertiary-container hover:bg-tertiary text-on-tertiary font-label-md text-label-md flex items-center gap-space-xs shadow-sm transition-colors" onclick="calibrateZeroTare()" type="button">
+<span class="material-symbols-outlined text-base">tune</span>
+<span>Zero-Tare Sensor</span>
+</button>
+</div>
+</div>
+<!-- Triple Station Switcher Segmented Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- HR-01 -->
+<a class="p-space-md rounded bg-surface-container-low hover:bg-surface-container transition-all group flex flex-col gap-1.5" href="javascript:void(0)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-safe"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">HR-01</span>
+<span class="font-label-sm text-label-sm text-text-muted">#08488</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-status-safe font-semibold uppercase">Stable</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted truncate">Ridge Top Anchor • 2,420m Bedrock Base</p>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-text-muted pt-1">
+<span>VWC: 34.2%</span>
+<span>Tilt: 0.4°</span>
+<span>RSSI: -76 dBm</span>
+</div>
+</a>
+<!-- HR-02 Active Station -->
+<a class="p-space-md rounded bg-primary-container text-on-primary-container shadow-md transition-all flex flex-col gap-1.5 relative overflow-hidden" href="javascript:void(0)">
+<div class="absolute top-0 right-0 w-24 h-24 bg-status-warning/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between relative z-10">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-warning animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm font-bold text-white">HR-02</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-primary/40 text-on-primary">SELECTED</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-status-warning text-white font-semibold uppercase">Elevated Risk</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-variant truncate relative z-10">Mid-Slope Escarpment • High Saturation Zone</p>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-primary-container pt-1 relative z-10 font-bold">
+<span>VWC: 78.4% [CRIT]</span>
+<span>Tilt: 4.12°</span>
+<span>Score: 68/100</span>
+</div>
+</a>
+<!-- HR-03 -->
+<a class="p-space-md rounded bg-surface-container-low hover:bg-surface-container transition-all group flex flex-col gap-1.5" href="javascript:void(0)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-status-critical"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">HR-03</span>
+<span class="font-label-sm text-label-sm text-text-muted">#08489</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-status-critical font-semibold uppercase">Debris Runout</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted truncate">Debris Chute Toe • Culvert Catchment 1,840m</p>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-text-muted pt-1">
+<span>VWC: 61.0%</span>
+<span>Tilt: 1.8°</span>
+<span>Via HR-02 Relay</span>
+</div>
+</a>
+</div>
+<!-- Active Station Metadata Banner -->
+<div class="p-space-md rounded bg-surface-container-low flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<div class="grid grid-cols-2 md:grid-cols-4 xl:flex xl:items-center gap-y-2 gap-x-space-lg text-left">
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase block">Hardware Platform</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">ESP32-S3 + SX1262 LoRa</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase block">Coordinates / Altitude</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">30°28'42.1"N 79°02'15.4"E • 2,180m</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase block">Firmware / Uptime</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">v1.4.2-loramesh • 48d 14h</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase block">Last Packet Ingest</span>
+<span class="font-label-md text-label-md text-status-safe font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-ping"></span>
+            Seq #08492 (12s ago)
+          </span>
+</div>
+</div>
+<!-- Risk Score Indicator Ribbon -->
+<div class="flex items-center gap-space-md w-full xl:w-auto justify-between xl:justify-end">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-text-muted uppercase block">Hazard Rating</span>
+<span class="font-data-metric text-data-metric text-status-warning leading-none">68<span class="font-label-md text-label-md text-text-muted">/100</span></span>
+</div>
+<div class="w-28 h-2.5 rounded bg-surface-card overflow-hidden">
+<div class="h-full bg-status-warning" style="width: 68%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Instrumentation Grid: 4 Core Gauges -->
+<div class="p-space-md lg:p-space-lg grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Sensor Gauge 1: Soil Moisture VWC Gauge -->
+<div class="p-space-md rounded bg-surface-card shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-lg">water_drop</span>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Volumetric Water Content</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-amber-50 text-status-warning font-semibold">LIQUEFACTION ZONE</span>
+</div>
+<div class="relative flex flex-col items-center justify-center my-space-md">
+<!-- SVG Semi-Circular Arc Meter -->
+<svg class="w-44 h-24 overflow-visible" viewbox="0 0 160 90">
+<!-- Background Track -->
+<path class="text-surface-container" d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="12"></path>
+<!-- Active Value Arc (78.4%) -->
+<path class="text-status-warning transition-all duration-700" d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="currentColor" stroke-dasharray="188.5" stroke-dashoffset="40.7" stroke-linecap="round" stroke-width="12"></path>
+<!-- Critical threshold pin -->
+<circle class="fill-status-critical" cx="128" cy="40" r="3"></circle>
+</svg>
+<div class="absolute bottom-0 text-center">
+<span class="font-data-metric text-data-metric text-on-surface">78.4<span class="font-label-md text-label-md text-text-muted font-normal">%</span></span>
+<span class="font-label-sm text-label-sm text-text-muted block -mt-1">Dielectric VWC</span>
+</div>
+</div>
+<!-- Threshold Distribution Legend -->
+<div class="pt-space-sm space-y-1 bg-surface-container-low p-space-sm rounded">
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted">
+<span>0 - 50% Dry/Nominal</span>
+<span class="text-status-safe font-semibold">Passed</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted">
+<span>50 - 75% Saturated</span>
+<span class="text-status-warning font-semibold">Exceeded</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-status-critical font-bold">
+<span>75 - 100% Critical Liquefaction</span>
+<span>ACTIVE (78.4%)</span>
+</div>
+</div>
+</div>
+<!-- Sensor Gauge 2: Dual-Axis Tilt Inclinometer -->
+<div class="p-space-md rounded bg-surface-card shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-lg">explore</span>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Dual-Axis Inclinometer</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-primary font-semibold">CREEP DETECTED</span>
+</div>
+<!-- Visual 2D Tilt Bubble Target -->
+<div class="flex items-center justify-center my-space-sm">
+<div class="relative w-36 h-36 rounded-full bg-surface-container-low flex items-center justify-center shadow-inner">
+<!-- Crosshairs -->
+<div class="absolute inset-x-2 h-px bg-border-subtle"></div>
+<div class="absolute inset-y-2 w-px bg-border-subtle"></div>
+<!-- Concentric angle rings -->
+<div class="w-24 h-24 rounded-full border border-dashed border-outline-variant opacity-60"></div>
+<div class="w-12 h-12 rounded-full border border-outline-variant opacity-40"></div>
+<!-- Offset Gyro Bubble Indicator -->
+<div class="absolute w-5 h-5 rounded-full bg-status-warning shadow-md flex items-center justify-center text-[9px] font-bold text-white transition-all transform translate-x-3 -translate-y-2">
+            ●
+          </div>
+<span class="absolute bottom-1.5 font-label-sm text-label-sm text-text-muted">Target 0.0°</span>
+</div>
+</div>
+<!-- Pitch / Roll Telemetry Metric Grid -->
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-low p-space-sm rounded">
+<div>
+<span class="font-label-sm text-label-sm text-text-muted block">Pitch Angle (X)</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">+3.20°</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted block">Roll Angle (Y)</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">-2.60°</span>
+</div>
+<div class="col-span-2 flex justify-between items-center pt-1 mt-1 border-t border-border-subtle/40">
+<span class="font-label-sm text-label-sm text-text-muted">Vector Mag: <strong class="text-on-surface">4.12°</strong></span>
+<span class="font-label-sm text-label-sm text-status-warning font-semibold">+0.45°/hr creep</span>
+</div>
+</div>
+</div>
+<!-- Sensor Gauge 3: Seismic Micro-Tremor FFT & RMS -->
+<div class="p-space-md rounded bg-surface-card shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-lg">vibration</span>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Tri-Axial Geophone RMS</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-semibold">HP FILTERED</span>
+</div>
+<!-- Real-time Spark Waveform Simulation -->
+<div class="my-space-sm">
+<div class="flex items-baseline justify-between mb-1">
+<div>
+<span class="font-data-metric text-data-metric text-on-surface">0.082</span>
+<span class="font-label-md text-label-md text-text-muted">g Peak</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Baseline: 0.015g</span>
+</div>
+<!-- SVG Micro-Tremor Waveform -->
+<div class="h-16 w-full bg-surface-container-low rounded flex items-center px-1 overflow-hidden">
+<svg class="w-full h-12" preserveaspectratio="none" viewbox="0 0 200 40">
+<path class="text-secondary" d="M 0 20 L 15 20 L 25 18 L 35 22 L 45 20 L 55 12 L 65 29 L 75 14 L 85 24 L 95 19 L 105 20 L 115 8 L 125 32 L 135 6 L 145 34 L 155 15 L 165 24 L 175 20 L 185 21 L 200 20" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="space-y-1 bg-surface-container-low p-space-sm rounded font-label-sm text-label-sm">
+<div class="flex justify-between text-text-muted">
+<span>Seismic Velocity:</span>
+<span class="text-on-surface font-semibold">1.42 mm/s</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Dominant FFT Frequency:</span>
+<span class="text-on-surface font-semibold">14.6 Hz</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Acoustic Micro-cracks:</span>
+<span class="text-status-warning font-semibold">7 bursts / hr</span>
+</div>
+</div>
+</div>
+<!-- Sensor Gauge 4: Power Subsystem & Thermal Management -->
+<div class="p-space-md rounded bg-surface-card shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-lg">solar_power</span>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Power &amp; Thermals</span>
+</div>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-semibold">HARVESTING</span>
+</div>
+<!-- Battery Pack Visual Status -->
+<div class="my-space-sm flex items-center justify-between gap-space-md">
+<div class="flex-1">
+<div class="flex items-baseline gap-1">
+<span class="font-data-metric text-data-metric text-on-surface">88</span>
+<span class="font-label-md text-label-md text-text-muted">%</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted block">LiFePO4 3.34V</span>
+<!-- Battery bar -->
+<div class="w-full h-2 rounded bg-surface-container-low mt-1.5 overflow-hidden">
+<div class="h-full bg-status-safe" style="width: 88%;"></div>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low text-center">
+<span class="font-label-sm text-label-sm text-text-muted block">MPPT Charge</span>
+<span class="font-headline-sm text-headline-sm text-secondary">+180 mA</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-low p-space-sm rounded font-label-sm text-label-sm">
+<div>
+<span class="text-text-muted block">Ambient Temp:</span>
+<span class="font-semibold text-on-surface">8.4°C</span>
+</div>
+<div>
+<span class="text-text-muted block">Board MCU Temp:</span>
+<span class="font-semibold text-on-surface">14.1°C</span>
+</div>
+<div class="col-span-2 flex justify-between pt-1 border-t border-border-subtle/40 text-text-muted">
+<span>Est. Reserve Time:</span>
+<span class="text-status-safe font-semibold">14 Days Zero-Sun</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Synchronized 24-Hour Telemetry Historical Chart -->
+<div class="px-space-md lg:px-space-lg mb-space-md">
+<div class="p-space-md lg:p-space-lg rounded bg-surface-card shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">timeline</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">24-Hour Multi-Parameter Correlation Waveform</h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Synchronized time-series: Monsoonal Rain Infiltration vs. Inclinometer Shearing Strain</p>
+</div>
+<!-- Legend and Chart Filtering -->
+<div class="flex items-center flex-wrap gap-space-md font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-secondary"></span>
+<span class="text-on-surface">Soil Moisture (VWC %)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-status-warning"></span>
+<span class="text-on-surface">Tilt Angle (°)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-tertiary-container"></span>
+<span class="text-on-surface">Precipitation (mm/h)</span>
+</div>
+<div class="px-2 py-1 rounded bg-surface-container-low font-label-sm text-label-sm text-text-muted">
+            Interval: 15-Min Pings
+          </div>
+</div>
+</div>
+<!-- High Visual Density SVG Canvas Graph -->
+<div class="relative w-full h-72 bg-surface-container-low/40 rounded p-space-sm overflow-hidden flex flex-col justify-between">
+<!-- Y-Axis Guides & Metric Lines -->
+<div class="absolute inset-0 flex flex-col justify-between p- space-md pointer-events-none opacity-30">
+<div class="w-full border-b border-outline"></div>
+<div class="w-full border-b border-outline"></div>
+<div class="w-full border-b border-outline"></div>
+<div class="w-full border-b border-outline"></div>
+</div>
+<!-- Rainstorm Infiltration Highlight Zone (Hours 08 to 16) -->
+<div class="absolute top-0 bottom-0 left-[33%] right-[33%] bg-surface-variant/20 border-x border-dashed border-outline-variant pointer-events-none flex items-start justify-center pt-2">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-card text-tertiary shadow-sm">Rain Event: 44.8 mm Influx</span>
+</div>
+<!-- SVG Line Curves -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 240">
+<!-- Area Under Moisture Gradient -->
+<defs>
+<lineargradient id="moistureGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#27695c" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#27695c" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Soil Moisture Fill Area -->
+<path d="M 0 180 Q 200 178, 330 160 T 550 85 T 800 55 L 1000 45 L 1000 240 L 0 240 Z" fill="url(#moistureGradient)"></path>
+<!-- Rainfall Bar Outlines (Slate-Blue) -->
+<rect fill="#1439a9" height="80" opacity="0.3" width="14" x="330" y="160"></rect>
+<rect fill="#1439a9" height="110" opacity="0.3" width="14" x="360" y="130"></rect>
+<rect fill="#1439a9" height="130" opacity="0.4" width="14" x="390" y="110"></rect>
+<rect fill="#1439a9" height="150" opacity="0.5" width="14" x="420" y="90"></rect>
+<rect fill="#1439a9" height="120" opacity="0.4" width="14" x="450" y="120"></rect>
+<rect fill="#1439a9" height="90" opacity="0.3" width="14" x="480" y="150"></rect>
+<rect fill="#1439a9" height="60" opacity="0.2" width="14" x="510" y="180"></rect>
+<!-- Soil Moisture Curve (Teal #27695c) -->
+<path d="M 0 180 Q 200 178, 330 160 T 550 85 T 800 55 L 1000 45" fill="none" stroke="#27695c" stroke-linecap="round" stroke-width="3"></path>
+<!-- Tilt Angle Curve (Amber #D97706) - Latent response after saturation -->
+<path d="M 0 215 L 480 214 Q 600 210, 720 175 T 1000 120" fill="none" stroke="#D97706" stroke-dasharray="6,3" stroke-linecap="round" stroke-width="3"></path>
+<!-- Live Indicator Pin at latest coordinate -->
+<circle class="animate-pulse" cx="1000" cy="45" fill="#27695c" r="5"></circle>
+<circle class="animate-pulse" cx="1000" cy="120" fill="#D97706" r="5"></circle>
+</svg>
+<!-- Simulated Interactive Hover Tooltip (Positioned at Hour 18) -->
+<div class="absolute top-12 left-[62%] bg-surface-card p-space-sm rounded shadow-lg border border-border-subtle/50 pointer-events-none">
+<div class="font-label-sm text-label-sm text-text-muted pb-1 mb-1 border-b border-border-subtle">T+18h:00m IST (Yesterday 17:42)</div>
+<div class="font-label-sm text-label-sm flex flex-col gap-0.5">
+<span class="text-secondary font-bold">VWC: 74.2% [High Saturation]</span>
+<span class="text-status-warning font-bold">Tilt Vector: 3.10° (+0.32°/h)</span>
+<span class="text-tertiary-container">Rain: 3.4 mm/h tailing off</span>
+</div>
+</div>
+<!-- X-Axis Timeline Labels -->
+<div class="flex items-center justify-between font-label-sm text-label-sm text-text-muted pt-space-xs">
+<span>-24 Hours (11:42 IST)</span>
+<span>-18 Hours</span>
+<span>-12 Hours (Rain Influx)</span>
+<span>-6 Hours (Creep Trigger)</span>
+<span class="text-on-surface font-semibold">Latest (11:42 IST Now)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dual Bottom Block: LoRa Raw Frames & Autonomous System Control Panel -->
+<div class="p-space-md lg:p-space-lg pt-0 grid grid-cols-1 xl:grid-cols-3 gap-space-md">
+<!-- Raw LoRa Frame Log (2 Columns on Desktop) -->
+<div class="xl:col-span-2 p-space-md rounded bg-surface-card shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">dvr</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">LoRa Frame Stream Buffer (HR-02 &amp; Ingress Mesh)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Deterministic payload unpacker • 868.10 MHz Channel 0</p>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-1 rounded bg-surface-container-low text-text-muted font-mono">10 PKTS CACHED</span>
+</div>
+<!-- Raw Stream Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-label-sm text-label-sm">
+<thead>
+<tr class="bg-surface-container-low text-text-muted uppercase">
+<th class="py-2 px-3">Time</th>
+<th class="py-2 px-3">Seq</th>
+<th class="py-2 px-3">Payload (Hex)</th>
+<th class="py-2 px-3 text-right">VWC %</th>
+<th class="py-2 px-3 text-right">Tilt X/Y</th>
+<th class="py-2 px-3 text-right">RMS (g)</th>
+<th class="py-2 px-3 text-right">RSSI</th>
+<th class="py-2 px-3 text-right">SNR</th>
+<th class="py-2 px-3 text-center">CRC</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-label-sm">
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 text-on-surface">11:42:02</td>
+<td class="py-2 px-3 font-semibold text-primary">#08492</td>
+<td class="py-2 px-3 text-text-muted font-mono">A4 02 4E 03 20 E6 52 0D</td>
+<td class="py-2 px-3 text-right font-bold text-status-warning">78.4%</td>
+<td class="py-2 px-3 text-right text-on-surface">+3.2/-2.6</td>
+<td class="py-2 px-3 text-right text-on-surface">0.082</td>
+<td class="py-2 px-3 text-right text-text-muted">-84 dBm</td>
+<td class="py-2 px-3 text-right text-status-safe">+8.5 dB</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-bold">OK</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 text-on-surface">11:41:47</td>
+<td class="py-2 px-3 font-semibold text-primary">#08491</td>
+<td class="py-2 px-3 text-text-muted font-mono">A4 02 4E 03 1F E6 51 0D</td>
+<td class="py-2 px-3 text-right font-bold text-status-warning">78.2%</td>
+<td class="py-2 px-3 text-right text-on-surface">+3.1/-2.6</td>
+<td class="py-2 px-3 text-right text-on-surface">0.080</td>
+<td class="py-2 px-3 text-right text-text-muted">-84 dBm</td>
+<td class="py-2 px-3 text-right text-status-safe">+8.2 dB</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-bold">OK</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 text-on-surface">11:41:32</td>
+<td class="py-2 px-3 font-semibold text-primary">#08490</td>
+<td class="py-2 px-3 text-text-muted font-mono">A4 02 4D 03 1E E6 50 0D</td>
+<td class="py-2 px-3 text-right font-bold text-status-warning">78.1%</td>
+<td class="py-2 px-3 text-right text-on-surface">+3.1/-2.5</td>
+<td class="py-2 px-3 text-right text-on-surface">0.079</td>
+<td class="py-2 px-3 text-right text-text-muted">-85 dBm</td>
+<td class="py-2 px-3 text-right text-status-safe">+7.8 dB</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-bold">OK</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 text-on-surface">11:41:17</td>
+<td class="py-2 px-3 font-semibold text-secondary">#08489</td>
+<td class="py-2 px-3 text-text-muted font-mono">A4 03 3D 01 B4 22 4F 0E</td>
+<td class="py-2 px-3 text-right text-on-surface">61.0%</td>
+<td class="py-2 px-3 text-right text-on-surface">+1.8/-0.8</td>
+<td class="py-2 px-3 text-right text-on-surface">0.034</td>
+<td class="py-2 px-3 text-right text-text-muted">-92 dBm</td>
+<td class="py-2 px-3 text-right text-status-safe">+5.2 dB</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-bold">RELAY</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 text-on-surface">11:41:02</td>
+<td class="py-2 px-3 font-semibold text-primary">#08488</td>
+<td class="py-2 px-3 text-text-muted font-mono">A4 02 4D 03 1C E5 4E 0D</td>
+<td class="py-2 px-3 text-right font-bold text-status-warning">78.0%</td>
+<td class="py-2 px-3 text-right text-on-surface">+3.0/-2.5</td>
+<td class="py-2 px-3 text-right text-on-surface">0.081</td>
+<td class="py-2 px-3 text-right text-text-muted">-84 dBm</td>
+<td class="py-2 px-3 text-right text-status-safe">+8.0 dB</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-bold">OK</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- On-Node Autonomous Hardware Actions & Field Calibrations -->
+<div class="p-space-md rounded bg-surface-card shadow-sm flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-xl">settings_input_antenna</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Station Autonomous Directives</h3>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Edge rules enforced directly on ESP32 without server round-trip</p>
+</div>
+<div class="space-y-space-sm">
+<!-- Audio Warning Siren Status -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-status-warning">volume_up</span>
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface block">Acoustic Evac Siren</span>
+<span class="font-label-sm text-label-sm text-text-muted">Arm condition: Tilt &gt; 8° OR VWC &gt; 85%</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-amber-100 text-status-warning font-label-sm text-label-sm font-bold uppercase">ARMED</span>
+</div>
+<!-- LoRa Mesh Relay Flag -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-status-safe">alt_route</span>
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface block">Mesh Forwarder Role</span>
+<span class="font-label-sm text-label-sm text-text-muted">Acting relay hop for HR-03 (Toe Station)</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-status-safe font-label-sm text-label-sm font-bold uppercase">ACTIVE</span>
+</div>
+<!-- Calibration Offsets -->
+<div class="p-space-sm rounded bg-surface-container-low space-y-space-xs font-label-sm text-label-sm">
+<div class="flex justify-between text-text-muted">
+<span>Soil Dielectric Constant (κ):</span>
+<span class="font-mono font-bold text-on-surface">1.42 (Wet Loam)</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Gyro Pitch Zero Tare:</span>
+<span class="font-mono text-on-surface">+0.12° offset</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Geophone HP Filter Corner:</span>
+<span class="font-mono text-on-surface">2.5 Hz (2nd Order)</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs grid grid-cols-2 gap-space-xs">
+<button class="py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase font-semibold transition-colors" onclick="triggerManualAudit()" type="button">
+          Self-Diagnostic
+        </button>
+<button class="py-2 rounded bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm uppercase font-semibold shadow-sm transition-colors" onclick="exportStationLog()" type="button">
+          Export Log CSV
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function refreshStationData() {
+    const btn = event.currentTarget;
+    const icon = btn.querySelector('.material-symbols-outlined');
+    icon.classList.add('animate-spin');
+    setTimeout(() => {
+      icon.classList.remove('animate-spin');
+    }, 600);
+  }
+
+  function calibrateZeroTare() {
+    alert("Zero-Tare signal broadcast to HR-02 via LoRa packet #08493. Gyro baseline updated.");
+  }
+
+  function toggleRelayTest() {
+    alert("LoRa Mesh Path Trace: HR-03 -> [HR-02 Forwarder, RSSI: -84dBm] -> GW-01 Base Gateway. Latency: 42ms.");
+  }
+
+  function triggerManualAudit() {
+    alert("Sensor self-test passed: Geophone coils continuous, TDR moisture probe pulse 120ps, SX1262 PLL locked.");
+  }
+
+  function exportStationLog() {
+    alert("Exporting 24-hour telemetry bundle for Station HR-02 (CSV format).");
+  }
+</script></main></div><footer class="fixed bottom-0 left-0 right-0 h-7 z-50 bg-surface-card border-t border-border-subtle flex items-center justify-between px-space-md text-text-muted font-label-sm text-label-sm"><div class="flex items-center gap-space-sm truncate"><span class="w-1.5 h-1.5 rounded-full bg-status-safe shrink-0"></span><span class="truncate">Offline-First Protocol v2.4 • Simulated Local Mesh MeshID: HM-868-ALPHA • Zero Cellular Dependency Mode</span></div><div class="shrink-0 hidden md:block text-text-muted">All readings for illustrative test validation</div></footer></body></html>

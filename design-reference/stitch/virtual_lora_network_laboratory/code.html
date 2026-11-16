@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"secondary-fixed-dim":"#92d3c3","surface-variant":"#d7e3ff","on-tertiary":"#ffffff","tertiary-fixed-dim":"#b8c4ff","primary-container":"#1b4d3e","surface":"#f9f9ff","on-error-container":"#93000a","border-subtle":"#E2E8F0","on-tertiary-container":"#9caeff","on-primary-fixed":"#002117","on-primary":"#ffffff","inverse-on-surface":"#ecf0ff","background":"#f9f9ff","on-error":"#ffffff","primary-fixed":"#baeed9","tertiary-fixed":"#dde1ff","on-secondary-fixed-variant":"#025045","surface-card":"#FFFFFF","outline-variant":"#c0c9c3","secondary":"#27695c","surface-container-highest":"#d7e3ff","surface-container-low":"#f0f3ff","on-tertiary-fixed-variant":"#173bab","text-muted":"#64748B","on-primary-container":"#8abda9","status-safe":"#15803D","error":"#ba1a1a","status-warning":"#D97706","secondary-container":"#abeddc","on-secondary-container":"#2c6d60","tertiary":"#002480","primary":"#003629","on-background":"#0e1c31","primary-fixed-dim":"#9ed1bd","on-surface-variant":"#404945","status-critical":"#DC2626","surface-bright":"#f9f9ff","inverse-primary":"#9ed1bd","error-container":"#ffdad6","tertiary-container":"#1439a9","background-canvas":"#F6F8FA","surface-tint":"#376757","on-surface":"#0e1c31","surface-container":"#e8eeff","on-secondary-fixed":"#00201a","on-secondary":"#ffffff","surface-dim":"#cddaf8","inverse-surface":"#243147","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#1d4f40","outline":"#707974","on-tertiary-fixed":"#001453","status-inactive":"#64748B","surface-container-high":"#dfe8ff","secondary-fixed":"#aeefdf"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","gutter-desktop":"1.5rem","margin-desktop":"2rem","space-md":"1rem"},"fontFamily":{"data-metric":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"headline-lg":["Inter"],"label-lg":["JetBrains Mono"],"headline-xl-mobile":["Inter"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-xl":["Inter"],"label-md":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"data-metric":["28px",{"lineHeight":"32px","letterSpacing":"-0.03em","fontWeight":"700"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-background-canvas font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-card border-b border-border-subtle shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><img alt="HimRakshak Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrA0v5gGztK_KxO3xXO_671Sm5TrU2lmX2AldIt8767aturerEXYOi8rX7xDS9Jh1pxJFUAGv8EQZ6xm1b4Uroov_yIcT08wI7HBIUT5X6bSsjhFjEWvsu3tgkDDkh1olxVqrAJSeirsUVULXfZhTSK0sSgnYHtXbJqfx2bu1s9m8U_24GAaQnNljksa7g5caGVLWATqjwqcTSWjSQFRXGGAVZZT8iKgpWpWBIqoUJQ"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary">HimRakshak</span><span class="inline-flex items-center px-space-xs py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm uppercase tracking-wider">Node v2.4</span></div><span class="hidden lg:inline text-text-muted font-body-sm text-body-sm leading-none">Himalayan Landslide Telemetry &amp; Early Warning System</span></div></div><div class="hidden xl:flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-amber-50 border border-amber-200 text-status-warning"><span class="w-1.5 h-1.5 rounded-full bg-status-warning animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">SOFTWARE SIMULATION ENVIRONMENT</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="material-symbols-outlined text-sm text-secondary">route</span><span class="font-label-sm text-label-sm">Sector 4: NH-109 Rudraprayag-Gaurikund</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-emerald-50 border border-emerald-200 text-status-safe"><span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm">GW-01: LoRa 868MHz [-84 dBm]</span></div><div class="flex items-center gap-space-sm px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle font-label-sm text-label-sm text-text-muted"><span class="text-on-surface font-semibold">11:42:08 IST</span><span class="w-px h-3 bg-border-subtle"></span><span>PKT: 148,290</span></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low border border-border-subtle text-on-surface"><span class="w-2 h-2 rounded-full bg-status-safe"></span><span class="font-label-sm text-label-sm uppercase text-text-muted">Broadcast</span><span class="font-label-sm text-label-sm text-status-safe font-semibold">READY</span></div><button aria-label="Notifications" class="relative p-1.5 rounded text-text-muted hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-critical"></span></button><div class="flex items-center gap-space-sm pl-space-xs border-l border-border-subtle"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQDRt3c5ov4B3IRrwnzwOiQOZ4P-06QpwgKrHpORjVud0SO8VFO2xWafkeanSaDIW_U6RKm3i-OYieexHkHKHPVgdB5o43ePRCq3zvpQQhQkdQ47bxOxKBLvtyz_XTR_KPxDWr14gpcybmF0Pv6vUvUjw4jRtN7TTihrjh1Av-InTbyWzFA1xFeSsPdWLmRcV5qqzNMAs-9wnJXd9QCJ4bz3OQHsR3aW5T6otSGE"/><div class="hidden md:flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Capt. V. Negi</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Safety Cmd • Sector 4</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-7 w-64 bg-surface-card border-r border-border-subtle z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-sm"><div class="px-space-sm py-space-xs mb-space-xs text-text-muted font-label-sm text-label-sm uppercase tracking-wider font-semibold">Mission Control</div><nav class="space-y-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span>Overview</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="sensor-stations" href="#"><span class="material-symbols-outlined text-lg">sensors</span><span>Sensor Stations</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="lora-network" href="#"><span class="material-symbols-outlined text-lg">hub</span><span>LoRa Network</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="live-monitoring" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Live Monitoring</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="simulation-lab" href="#"><span class="material-symbols-outlined text-lg">science</span><span>Simulation Lab</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="alerts-and-events" href="#"><span class="material-symbols-outlined text-lg">notifications_active</span><span>Alerts &amp; Events</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="system-diagnostics" href="#"><span class="material-symbols-outlined text-lg">memory</span><span>System Diagnostics</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">settings</span><span>Settings</span></a></nav></div><div class="p-space-sm border-t border-border-subtle bg-surface-container-low/50"><div class="p-space-sm rounded bg-surface-card border border-border-subtle space-y-1.5"><div class="flex items-center justify-between text-text-muted font-label-sm text-label-sm"><span class="uppercase tracking-wider">Active Nodes</span><span class="font-semibold text-status-safe">3/3 ONLINE</span></div><div class="space-y-1"><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-01 Kaliasaur</span><span class="text-status-safe font-semibold">NORMAL</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-02 Sirobagarh</span><span class="text-status-warning font-semibold">ELEVATED</span></div><div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface"><span>HR-03 Rudraprayag</span><span class="text-status-safe font-semibold">NORMAL</span></div></div></div></div></aside><div class="pl-64"><main class="relative pt-16 pb-8 bg-background-canvas min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Style Rules for RF Beam & Topology Simulation -->
+<style>
+    @keyframes pulseBeamDirect {
+      0% { stroke-dashoffset: 48; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes pulseBeamRelay {
+      0% { stroke-dashoffset: 36; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes packetFlow {
+      0% { offset-distance: 0%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    .flow-line-direct {
+      stroke-dasharray: 6 6;
+      animation: pulseBeamDirect 1.8s linear infinite;
+    }
+    .flow-line-mesh {
+      stroke-dasharray: 5 5;
+      animation: pulseBeamRelay 2.4s linear infinite;
+    }
+    .flow-line-severed {
+      stroke-dasharray: 4 4;
+      animation: pulseBeamDirect 0.8s linear infinite;
+    }
+  </style>
+<div class="p-space-md lg:p-margin-desktop space-y-space-lg">
+<!-- Top Breadcrumb & Context Header Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-card p-space-md rounded-xl shadow-sm">
+<div class="flex flex-col space-y-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm tracking-wider uppercase px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-semibold">
+            RESEARCH LAB &amp; RF BENCHMARK // SUB-GHZ WIRELESS TESTBED
+          </span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-low text-secondary font-mono font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-pulse"></span>
+            SimLoRa v3.4 Engine • Deterministic Radio Propagation Model
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Virtual LoRa Network Laboratory</h1>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Hardware-in-the-Loop RF Link Budget, Multipath Shadowing &amp; Dynamic Mesh Routing Emulation (868.100 MHz India ISM Telemetry Strip)
+        </p>
+</div>
+<!-- Action Triggers -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container text-body-sm font-body-sm transition-colors shadow-sm" id="btnResetRF" type="button">
+<span class="material-symbols-outlined text-sm text-text-muted">restart_alt</span>
+<span>Reset RF Baselines</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-low text-tertiary hover:bg-surface-container-high text-body-sm font-body-sm transition-colors shadow-sm" id="btnMonsoon" type="button">
+<span class="material-symbols-outlined text-sm">thunderstorm</span>
+<span>Inject 35% Monsoon Scattering</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-primary-container text-on-primary-container hover:bg-primary text-body-sm font-body-sm transition-colors shadow-sm" id="btnExportPcap" type="button">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Export Capture (.PCAP)</span>
+</button>
+</div>
+</div>
+<!-- Top KPI Performance Cards (4-Column Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1: Packet Delivery Rate -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Aggregated Packet Delivery Rate</span>
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold">TARGET &gt;95.0%</span>
+</div>
+<div class="my-3 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface" id="kpiPdrValue">98.4%</span>
+<span class="font-label-md text-label-md text-status-safe font-medium">▲ +0.3% (24h)</span>
+</div>
+<div class="flex flex-col space-y-1">
+<div class="w-full bg-surface-container-low h-1.5 rounded-full overflow-hidden">
+<div class="bg-status-safe h-full rounded-full transition-all duration-500" id="pdrBar" style="width: 98.4%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted font-mono">
+<span>Simulated Frame Loss: 1.6%</span>
+<span>Frames: 148,290</span>
+</div>
+</div>
+</div>
+<!-- KPI 2: Band Airtime & Duty Cycle -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted">ISM Band Airtime &amp; Duty Cycle</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-text-muted font-label-sm text-label-sm font-semibold">1.00% MAX CE</span>
+</div>
+<div class="my-3 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface" id="kpiAirtimeValue">0.84%</span>
+<span class="font-label-md text-label-md text-secondary font-medium">30.2s / hr</span>
+</div>
+<div class="flex flex-col space-y-1">
+<div class="w-full bg-surface-container-low h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" id="airtimeBar" style="width: 84%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted font-mono">
+<span>Payload ToA: 184.8 ms</span>
+<span class="text-status-safe font-semibold">REGULATION OK</span>
+</div>
+</div>
+</div>
+<!-- KPI 3: Edge Gateway Basecamp GW-01 -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between transition-colors" id="kpiGwCard">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Basecamp Edge Gateway</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold" id="kpiGwBadge">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-pulse"></span>
+            GW-01 ONLINE
+          </span>
+</div>
+<div class="my-3 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-primary" id="kpiGwFreq">868.100</span>
+<span class="font-label-md text-label-md text-text-muted font-mono">MHz</span>
+</div>
+<div class="flex flex-col space-y-1 font-label-sm text-label-sm text-text-muted font-mono">
+<div class="flex justify-between">
+<span>Sens: -131 dBm (BW125)</span>
+<span class="text-on-surface font-semibold" id="kpiGwPing">Ping: 138ms RTT</span>
+</div>
+<div class="flex justify-between">
+<span>RX Ch: 8 Ch Dual-LoRa</span>
+<span class="text-secondary">LoS SNR: +8.5 dB</span>
+</div>
+</div>
+</div>
+<!-- KPI 4: Active Mesh Topology -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Active LoRa Mesh Topology</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-label-sm text-label-sm font-semibold">DETERMINISTIC</span>
+</div>
+<div class="my-3 flex items-baseline gap-2">
+<span class="font-data-metric text-data-metric text-on-surface">3 <span class="font-headline-sm text-headline-sm font-normal text-text-muted">NODES</span></span>
+<span class="font-label-md text-label-md text-status-safe font-medium">1 Relay Hop</span>
+</div>
+<div class="flex flex-col space-y-1 font-label-sm text-label-sm text-text-muted font-mono">
+<div class="flex justify-between">
+<span>HR-01: Direct Vector</span>
+<span class="text-status-safe">1.8 km LoS</span>
+</div>
+<div class="flex justify-between">
+<span>HR-03: Rerouted (via HR-02)</span>
+<span class="text-status-warning">+18dB Occl</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Visualizer & Cross-Section Interactive Topology Canvas -->
+<div class="bg-surface-card rounded-xl shadow-sm overflow-hidden">
+<!-- Panel Header Bar -->
+<div class="px-space-md py-space-sm bg-surface-container-low/70 flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-lg">radar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Himalayan Valley Dynamic RF Propagation Profile</span>
+<span class="hidden md:inline px-2 py-0.5 rounded bg-surface-card text-text-muted font-label-sm text-label-sm">Sector 4 NH-109 Elevation Cross-Section</span>
+</div>
+<!-- Live Map Status Pills -->
+<div class="flex items-center gap-2">
+<span class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-card text-text-muted font-label-sm text-label-sm shadow-sm font-mono">
+<span class="w-2 h-2 rounded-full bg-status-safe animate-pulse"></span>
+            Simulated TX Frequency: 868.100 MHz (SF9)
+          </span>
+<button class="px-2.5 py-1 rounded bg-surface-card hover:bg-surface-container-high text-tertiary font-label-sm text-label-sm shadow-sm transition-colors font-medium" id="btnToggleRFRays" type="button">
+            Toggle Fresnel Envelopes
+          </button>
+</div>
+</div>
+<!-- Schematic Diagram Container -->
+<div class="relative w-full h-[440px] bg-gradient-to-b from-surface-container-low/40 via-surface-card to-surface-container-low/80 p-4 overflow-hidden select-none">
+<!-- Alpine Background Contour Sketch Vector -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 1000 440">
+<defs>
+<lineargradient id="mountainGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#E2E8F0" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#CBD5E1" stop-opacity="0.08"></stop>
+</lineargradient>
+<lineargradient id="fresnelGrad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#15803D" stop-opacity="0.08"></stop>
+<stop offset="50%" stop-color="#15803D" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#15803D" stop-opacity="0.08"></stop>
+</lineargradient>
+<lineargradient id="fresnelObstructedGrad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#DC2626" stop-opacity="0.05"></stop>
+<stop offset="50%" stop-color="#DC2626" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#DC2626" stop-opacity="0.05"></stop>
+</lineargradient>
+</defs>
+<!-- Far Ridgeline silhouette -->
+<polygon fill="url(#mountainGrad)" points="0,260 140,210 260,240 420,150 560,190 730,120 880,180 1000,140 1000,440 0,440"></polygon>
+<!-- Midground Valley & Talus Slope Obstruction -->
+<path d="M0,380 Q180,370 280,340 T520,290 T660,220 T820,190 L980,130 L1000,440 L0,440 Z" fill="#F1F5F9"></path>
+<!-- Talus Cliff Shadow Zone Hatching (Between HR-03 and Gateway) -->
+<polygon fill="#FFE4E6" opacity="0.45" points="260,340 370,270 450,290 350,380"></polygon>
+<!-- First Fresnel Zone Ellipse (HR-01 to GW-01 Direct LoS) -->
+<ellipse cx="540" cy="245" fill="url(#fresnelGrad)" id="fresnelDirect" rx="350" ry="24" transform="rotate(-15.5 540 245)"></ellipse>
+<!-- Obstructed Line of Sight HR-03 Direct to Gateway (Fails LoS clearance) -->
+<line opacity="0.35" stroke="#DC2626" stroke-dasharray="3 3" stroke-width="1.5" x1="240" x2="880" y1="330" y2="350"></line>
+<!-- RF Vector HR-01 -> Basecamp GW-01 -->
+<line class="flow-line-direct" id="beamDirect" stroke="#15803D" stroke-width="2.5" x1="840" x2="880" y1="140" y2="350"></line>
+<!-- Mesh Vector HR-03 -> HR-02 Relay -->
+<line class="flow-line-mesh" id="beamMeshHop1" stroke="#D97706" stroke-width="2.5" x1="240" x2="520" y1="330" y2="210"></line>
+<!-- Mesh Vector HR-02 -> GW-01 Gateway Forward -->
+<line class="flow-line-direct" id="beamMeshHop2" stroke="#15803D" stroke-width="2.5" x1="520" x2="880" y1="210" y2="350"></line>
+</svg>
+<!-- Dynamic Animated Signal Pulses (Visual Indicator Dots) -->
+<div class="absolute top-[140px] left-[840px] w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-status-safe shadow-sm ring-4 ring-emerald-100 animate-ping"></div>
+<div class="absolute top-[210px] left-[520px] w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-status-warning shadow-sm ring-4 ring-amber-100"></div>
+<div class="absolute top-[330px] left-[240px] w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-secondary shadow-sm ring-4 ring-secondary-container"></div>
+<div class="absolute top-[350px] left-[880px] w-4 h-4 -mt-2 -ml-2 rounded-full bg-primary shadow-sm ring-4 ring-primary-fixed-dim" id="gwPulsePoint"></div>
+<!-- Node Marker 1: HR-01 Ridge Crest -->
+<div class="absolute top-[50px] left-[660px] md:left-[720px] bg-surface-card p-3 rounded-lg shadow-md border-l-4 border-l-status-safe min-w-[220px]">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Node HR-01</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold">DIRECT LoS</span>
+</div>
+<div class="text-body-sm font-body-sm text-text-muted">Ridge Crest • 2,450m ASL</div>
+<div class="mt-2 pt-2 border-t border-surface-container-low font-label-sm text-label-sm font-mono space-y-0.5 text-on-surface">
+<div class="flex justify-between"><span>RSSI / SNR:</span> <span class="font-semibold text-status-safe">-78 dBm / +8.5 dB</span></div>
+<div class="flex justify-between"><span>Vector Dist:</span> <span>1.8 km (Clear LoS)</span></div>
+<div class="flex justify-between"><span>Calculated PDR:</span> <span class="font-semibold text-status-safe">99.8%</span></div>
+</div>
+</div>
+<!-- Node Marker 2: HR-02 Mid-Slope Escarpment (Anchor Relay) -->
+<div class="absolute top-[110px] left-[340px] md:left-[390px] bg-surface-card p-3 rounded-lg shadow-md border-l-4 border-l-status-warning min-w-[230px]">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Node HR-02</span>
+<span class="px-1.5 py-0.5 rounded bg-amber-50 text-status-warning font-label-sm text-label-sm font-semibold">MESH FORWARDER</span>
+</div>
+<div class="text-body-sm font-body-sm text-text-muted">Mid-Slope Escarpment • 2,180m ASL</div>
+<div class="mt-2 pt-2 border-t border-surface-container-low font-label-sm text-label-sm font-mono space-y-0.5 text-on-surface">
+<div class="flex justify-between"><span>RSSI / SNR:</span> <span class="font-semibold text-status-warning">-89 dBm / +4.1 dB</span></div>
+<div class="flex justify-between"><span>Vector Dist:</span> <span>2.4 km (Mid Ridge)</span></div>
+<div class="flex justify-between"><span>Mesh Forwarding:</span> <span class="text-secondary font-semibold">Relaying HR-03</span></div>
+</div>
+</div>
+<!-- Node Marker 3: HR-03 Debris Chute Toe (Obstructed Terrain) -->
+<div class="absolute top-[230px] left-[20px] md:left-[35px] bg-surface-card p-3 rounded-lg shadow-md border-l-4 border-l-secondary min-w-[240px]">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Node HR-03</span>
+<span class="px-1.5 py-0.5 rounded bg-rose-50 text-status-critical font-label-sm text-label-sm font-semibold">OCCLUDED (+18dB)</span>
+</div>
+<div class="text-body-sm font-body-sm text-text-muted">Debris Chute Toe • 1,840m ASL</div>
+<div class="mt-2 pt-2 border-t border-surface-container-low font-label-sm text-label-sm font-mono space-y-0.5 text-on-surface">
+<div class="flex justify-between"><span>RSSI / SNR:</span> <span class="font-semibold text-text-muted">-108 dBm / -4.5 dB</span></div>
+<div class="flex justify-between"><span>Path Profile:</span> <span class="text-status-warning font-semibold">Hop 1 → HR-02</span></div>
+<div class="flex justify-between"><span>PDR via Relay:</span> <span class="font-semibold text-status-safe">96.2%</span></div>
+</div>
+</div>
+<!-- Basecamp Edge Gateway: GW-01 -->
+<div class="absolute bottom-[20px] right-[20px] md:right-[50px] bg-surface-card p-3.5 rounded-lg shadow-xl border-l-4 border-l-primary min-w-[250px]" id="gwOverlayCard">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base">cell_tower</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Basecamp GW-01</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold" id="gwStatusPill">ONLINE</span>
+</div>
+<div class="text-body-sm font-body-sm text-text-muted">River Basin Basecamp • 1,750m ASL</div>
+<div class="mt-2 pt-2 border-t border-surface-container-low font-label-sm text-label-sm font-mono space-y-0.5 text-on-surface">
+<div class="flex justify-between"><span>Modem RX:</span> <span>Semtech SX1302</span></div>
+<div class="flex justify-between"><span>Concurrent Links:</span> <span class="font-semibold text-secondary">3 Nodes Aggregated</span></div>
+<div class="flex justify-between"><span>Uplink Pipe:</span> <span class="font-semibold text-status-safe" id="gwPipeStatus">Active IP / Satellite</span></div>
+</div>
+</div>
+<!-- Terrain Occlusion Callout Banner in Valley -->
+<div class="absolute bottom-[100px] left-[320px] hidden md:flex items-center gap-2 bg-amber-50/90 backdrop-blur-sm p-2 rounded shadow-sm text-amber-900 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm text-status-warning">mountain_flag</span>
+<span><strong>Talus Ridge Diffraction:</strong> +18 dB Fresnel loss blocks direct beam to GW-01. Automated mesh route shifted to HR-02.</span>
+</div>
+<!-- Scientific Disclaimer Notice Bottom Left -->
+<div class="absolute bottom-2 left-4 text-text-muted font-label-sm text-label-sm select-none">
+          *All RF propagation vectors, Fresnel clearances, and multipath scattering are deterministic numerical test models.
+        </div>
+</div>
+</div>
+<!-- Engineering Instrument Split Control Grid (Configurable Rack + Edge Failover Simulator) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- Left Panel: Configurable RF Transmission Parameters (8 Columns) -->
+<div class="xl:col-span-8 bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">tune</span>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold">LoRa PHY Waveform &amp; Stress Parameters</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted font-mono">SX1262 / SX1302 Calibrated Profile</span>
+</div>
+<!-- Controls Matrix Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-md">
+<!-- Radio Frequency -->
+<div class="space-y-1.5">
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Center Frequency</label>
+<select class="w-full bg-surface-container-low px-3 py-2 rounded font-label-md text-label-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container" id="rfFreqSelect">
+<option selected="" value="868.100">868.100 MHz (IN-Default)</option>
+<option value="868.300">868.300 MHz (Aux-Ch1)</option>
+<option value="868.500">868.500 MHz (Aux-Ch2)</option>
+<option value="865.0625">865.0625 MHz (TRAI Sub)</option>
+</select>
+<span class="block font-label-sm text-label-sm text-text-muted">India ISM 865-868 Band</span>
+</div>
+<!-- Spreading Factor SF -->
+<div class="space-y-1.5">
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Spreading Factor (SF)</label>
+<select class="w-full bg-surface-container-low px-3 py-2 rounded font-label-md text-label-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container" id="rfSfSelect">
+<option value="7">SF7 (Fastest / Low Range)</option>
+<option value="8">SF8 (Balanced)</option>
+<option selected="" value="9">SF9 (Alpine Recommended)</option>
+<option value="10">SF10 (High Sensitivity)</option>
+<option value="11">SF11 (Deep Shadowed)</option>
+<option value="12">SF12 (Max Range / High ToA)</option>
+</select>
+<div class="flex justify-between font-label-sm text-label-sm font-mono text-secondary">
+<span>Time-on-Air:</span>
+<span class="font-semibold" id="toaIndicator">184.8 ms</span>
+</div>
+</div>
+<!-- Bandwidth (BW) -->
+<div class="space-y-1.5">
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Ch Bandwidth (BW)</label>
+<select class="w-full bg-surface-container-low px-3 py-2 rounded font-label-md text-label-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container" id="rfBwSelect">
+<option selected="" value="125">125 kHz (Standard)</option>
+<option value="250">250 kHz (High Throughput)</option>
+<option value="500">500 kHz (Wideband)</option>
+</select>
+<span class="block font-label-sm text-label-sm text-text-muted">Rx Noise Floor: -120 dBm</span>
+</div>
+<!-- Coding Rate (CR) -->
+<div class="space-y-1.5">
+<label class="block font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Forward Error (CR)</label>
+<select class="w-full bg-surface-container-low px-3 py-2 rounded font-label-md text-label-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container" id="rfCrSelect">
+<option selected="" value="4/5">CR 4/5 (Fastest)</option>
+<option value="4/6">CR 4/6 (Intermediate)</option>
+<option value="4/7">CR 4/7 (Heavy Noise)</option>
+<option value="4/8">CR 4/8 (Maximum Parity)</option>
+</select>
+<span class="block font-label-sm text-label-sm text-text-muted">Hamming Code Parity</span>
+</div>
+</div>
+<!-- Sliders: TX Power, Virtual Distance & Artificial Packet Loss -->
+<div class="pt-space-sm border-t border-surface-container-low grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- TX Power Slider -->
+<div class="space-y-2">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="uppercase tracking-wider text-text-muted font-medium">TX Radiated Power</span>
+<span class="font-mono font-bold text-primary" id="txPowerVal">+14 dBm (25 mW)</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-low rounded-lg appearance-none cursor-pointer accent-primary-container" id="sliderTxPower" max="20" min="2" step="1" type="range" value="14"/>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted font-mono">
+<span>+2 dBm</span>
+<span>EIRP Max +20 dBm</span>
+</div>
+</div>
+<!-- Artificial Injected Packet Loss Slider -->
+<div class="space-y-2">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="uppercase tracking-wider text-text-muted font-medium">Injected Frame Loss</span>
+<span class="font-mono font-bold text-status-warning" id="lossRateVal">1.6%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-low rounded-lg appearance-none cursor-pointer accent-status-warning" id="sliderLossRate" max="25" min="0" step="0.5" type="range" value="1.6"/>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted font-mono">
+<span>0% (Clean)</span>
+<span>25% (Extreme Storm)</span>
+</div>
+</div>
+<!-- Talus Diffraction Offset Slider -->
+<div class="space-y-2">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="uppercase tracking-wider text-text-muted font-medium">Terrain Shadow Loss</span>
+<span class="font-mono font-bold text-status-critical" id="diffractionVal">+18.0 dB</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-low rounded-lg appearance-none cursor-pointer accent-status-critical" id="sliderDiffraction" max="30" min="0" step="1" type="range" value="18"/>
+<div class="flex justify-between font-label-sm text-label-sm text-text-muted font-mono">
+<span>0 dB LoS</span>
+<span>+30 dB Deep Talus</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Gateway Severance & Autonomous Edge Failover Simulator (4 Columns) -->
+<div class="xl:col-span-4 bg-surface-card p-space-md rounded-xl shadow-sm flex flex-col justify-between space-y-space-md border-l-4 border-l-secondary transition-all" id="severanceCard">
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted font-semibold">HARDWARE FAILOVER HARNESS</span>
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold" id="severanceIndicatorPill">GATEWAY ARMED</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Edge Autonomous Failover Emulation</h2>
+<p class="font-body-sm text-body-sm text-text-muted">
+            Simulate instantaneous gateway backhaul severance to observe sensor nodes transitioning into standalone circular flash buffer storage and autonomous edge alert states.
+          </p>
+</div>
+<!-- Big Toggle Switch Action Box -->
+<div class="bg-surface-container-low/70 p-space-md rounded-lg space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Basecamp GW Link Severance</span>
+<span class="font-label-sm text-label-sm text-text-muted">Drop RF &amp; Cellular backhaul</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="severanceToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-status-critical"></div>
+</label>
+</div>
+<div class="p-2.5 rounded bg-surface-card text-body-sm font-body-sm text-text-muted space-y-1" id="severanceStatusDesc">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm font-semibold text-status-safe">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>NORMAL OPERATIONAL STATE</span>
+</div>
+<div>GW-01 actively receiving frames and forwarding to Sector 4 incident desk via SATCOM. Zero node buffering required.</div>
+</div>
+</div>
+<!-- Node Fallback Mechanism Status Badges -->
+<div class="grid grid-cols-2 gap-2 font-label-sm text-label-sm font-mono">
+<div class="p-2 rounded bg-surface-container-low">
+<span class="text-text-muted block">SPI Flash RingBuffer:</span>
+<span class="font-bold text-on-surface" id="flashBufferStatus">IDLE (0/16,384 pkts)</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low">
+<span class="text-text-muted block">Edge Siren Klaxon:</span>
+<span class="font-bold text-status-safe" id="klaxonEdgeStatus">READY (Local Logic)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Demodulated LoRa PHY Frame Transmission Log (Live Inspector) -->
+<div class="bg-surface-card rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Table Header & Filter Bar -->
+<div class="p-space-md bg-surface-container-low/50 flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">terminal</span>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold">Demodulated LoRa PHY Frame Stream</span>
+<span class="px-2 py-0.5 rounded bg-surface-card text-text-muted font-label-sm text-label-sm font-mono">Real-Time Ingestion</span>
+</div>
+<!-- Node Filters & Control Triggers -->
+<div class="flex flex-wrap items-center gap-2">
+<div class="inline-flex rounded-lg bg-surface-container p-0.5">
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md bg-surface-card text-on-surface font-semibold shadow-sm" id="filterAll" type="button">All Nodes</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-muted hover:text-on-surface" id="filterHR01" type="button">HR-01</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-muted hover:text-on-surface" id="filterHR02" type="button">HR-02</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-muted hover:text-on-surface" id="filterHR03" type="button">HR-03</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-muted hover:text-on-surface" id="filterCRC" type="button">CRC Errors</button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-text-muted hover:text-on-surface transition-colors" id="btnPauseStream" title="Pause Stream" type="button">
+<span class="material-symbols-outlined text-base">pause</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-text-muted hover:text-on-surface transition-colors" id="btnClearLog" title="Clear Buffer" type="button">
+<span class="material-symbols-outlined text-base">clear_all</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tabular Frame Log -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-label-sm text-label-sm uppercase tracking-wider font-mono">
+<th class="py-2.5 px-3">Timestamp (IST)</th>
+<th class="py-2.5 px-3">Frame ID</th>
+<th class="py-2.5 px-3">Origin Node</th>
+<th class="py-2.5 px-3">Routing Hop Path</th>
+<th class="py-2.5 px-3">Frequency</th>
+<th class="py-2.5 px-3 text-right">RSSI</th>
+<th class="py-2.5 px-3 text-right">SNR</th>
+<th class="py-2.5 px-3 text-right">ToA</th>
+<th class="py-2.5 px-3 font-mono">Payload Bytes (Hex Telemetry)</th>
+<th class="py-2.5 px-3 text-center">CRC</th>
+<th class="py-2.5 px-3 text-center">PHY State</th>
+</tr>
+</thead>
+<tbody class="font-label-sm text-label-sm font-mono divide-y divide-surface-container-low text-on-surface" id="frameLogTableBody">
+<!-- Row 1: HR-01 Direct -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-node="HR-01">
+<td class="py-2.5 px-3 font-medium">11:42:18.420</td>
+<td class="py-2.5 px-3 text-text-muted">#0x4E2A</td>
+<td class="py-2.5 px-3 font-bold text-primary">HR-01 (Kaliasaur)</td>
+<td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-semibold">Direct LoS (0 Hops)</span></td>
+<td class="py-2.5 px-3 text-text-muted">868.100 MHz</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-safe">-78.2 dBm</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-safe">+8.5 dB</td>
+<td class="py-2.5 px-3 text-right text-text-muted">184.8 ms</td>
+<td class="py-2.5 px-3 text-secondary font-semibold">01 4B 09 82 2E 1F AA 04 22 9F</td>
+<td class="py-2.5 px-3 text-center"><span class="text-status-safe font-bold">PASS</span></td>
+<td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">DEMOD_OK</span></td>
+</tr>
+<!-- Row 2: HR-02 Relay -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-node="HR-02">
+<td class="py-2.5 px-3 font-medium">11:42:15.110</td>
+<td class="py-2.5 px-3 text-text-muted">#0x4E29</td>
+<td class="py-2.5 px-3 font-bold text-status-warning">HR-02 (Sirobagarh)</td>
+<td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-semibold">Anchor Forwarder</span></td>
+<td class="py-2.5 px-3 text-text-muted">868.100 MHz</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-warning">-89.4 dBm</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-warning">+4.1 dB</td>
+<td class="py-2.5 px-3 text-right text-text-muted">184.8 ms</td>
+<td class="py-2.5 px-3 text-secondary font-semibold">02 3A 05 61 1D 80 BF 02 11 A0</td>
+<td class="py-2.5 px-3 text-center"><span class="text-status-safe font-bold">PASS</span></td>
+<td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">DEMOD_OK</span></td>
+</tr>
+<!-- Row 3: HR-03 Relayed via HR-02 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-node="HR-03">
+<td class="py-2.5 px-3 font-medium">11:42:11.890</td>
+<td class="py-2.5 px-3 text-text-muted">#0x4E28</td>
+<td class="py-2.5 px-3 font-bold text-on-surface">HR-03 (Rudraprayag)</td>
+<td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-amber-50 text-status-warning font-semibold">Relayed via HR-02 [Hop 1]</span></td>
+<td class="py-2.5 px-3 text-text-muted">868.100 MHz</td>
+<td class="py-2.5 px-3 text-right font-semibold text-text-muted">-108.1 dBm</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-critical">-4.5 dB</td>
+<td class="py-2.5 px-3 text-right text-text-muted">369.6 ms</td>
+<td class="py-2.5 px-3 text-secondary font-semibold">03 1C 00 A4 8F C2 99 07 41 EE</td>
+<td class="py-2.5 px-3 text-center"><span class="text-status-safe font-bold">PASS</span></td>
+<td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">MESH_ACK</span></td>
+</tr>
+<!-- Row 4: HR-01 Previous -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-node="HR-01">
+<td class="py-2.5 px-3 font-medium">11:42:08.012</td>
+<td class="py-2.5 px-3 text-text-muted">#0x4E27</td>
+<td class="py-2.5 px-3 font-bold text-primary">HR-01 (Kaliasaur)</td>
+<td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-semibold">Direct LoS (0 Hops)</span></td>
+<td class="py-2.5 px-3 text-text-muted">868.100 MHz</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-safe">-78.0 dBm</td>
+<td class="py-2.5 px-3 text-right font-semibold text-status-safe">+8.7 dB</td>
+<td class="py-2.5 px-3 text-right text-text-muted">184.8 ms</td>
+<td class="py-2.5 px-3 text-secondary font-semibold">01 4B 09 80 2E 1F A9 04 22 9E</td>
+<td class="py-2.5 px-3 text-center"><span class="text-status-safe font-bold">PASS</span></td>
+<td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">DEMOD_OK</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Ribbon -->
+<div class="p-space-sm bg-surface-container-low/30 border-t border-surface-container-low flex flex-wrap items-center justify-between text-text-muted font-label-sm text-label-sm">
+<div class="flex items-center gap-space-md font-mono">
+<span>Active Packet Buffer: 4 / 250 visible</span>
+<span>Demodulator Engine: Deterministic FFT</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span>
+<span>Zero Packet Corruption in current window</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Simulator Client Script -->
+<script>
+    (function initLoRaLab() {
+      // Element references
+      const toggleSeverance = document.getElementById('severanceToggle');
+      const severanceCard = document.getElementById('severanceCard');
+      const severanceIndicatorPill = document.getElementById('severanceIndicatorPill');
+      const severanceStatusDesc = document.getElementById('severanceStatusDesc');
+      const flashBufferStatus = document.getElementById('flashBufferStatus');
+      const klaxonEdgeStatus = document.getElementById('klaxonEdgeStatus');
+      const kpiGwBadge = document.getElementById('kpiGwBadge');
+      const kpiGwCard = document.getElementById('kpiGwCard');
+      const kpiGwPing = document.getElementById('kpiGwPing');
+      const gwStatusPill = document.getElementById('gwStatusPill');
+      const gwPipeStatus = document.getElementById('gwPipeStatus');
+      const gwPulsePoint = document.getElementById('gwPulsePoint');
+      const beamDirect = document.getElementById('beamDirect');
+      const beamMeshHop2 = document.getElementById('beamMeshHop2');
+      const toaIndicator = document.getElementById('toaIndicator');
+      const sfSelect = document.getElementById('rfSfSelect');
+      const sliderTxPower = document.getElementById('sliderTxPower');
+      const txPowerVal = document.getElementById('txPowerVal');
+      const sliderLossRate = document.getElementById('sliderLossRate');
+      const lossRateVal = document.getElementById('lossRateVal');
+      const sliderDiffraction = document.getElementById('sliderDiffraction');
+      const diffractionVal = document.getElementById('diffractionVal');
+      const btnResetRF = document.getElementById('btnResetRF');
+      const btnMonsoon = document.getElementById('btnMonsoon');
+      const btnToggleRFRays = document.getElementById('btnToggleRFRays');
+      const fresnelDirect = document.getElementById('fresnelDirect');
+      const tableBody = document.getElementById('frameLogTableBody');
+      const btnClearLog = document.getElementById('btnClearLog');
+      const btnPauseStream = document.getElementById('btnPauseStream');
+
+      let isStreamPaused = false;
+      let frameCounter = 0x4E2B;
+
+      // Gateway Severance Simulation
+      if (toggleSeverance) {
+        toggleSeverance.addEventListener('change', function () {
+          const isSevered = this.checked;
+          if (isSevered) {
+            severanceCard.classList.remove('border-l-secondary');
+            severanceCard.classList.add('border-l-status-critical', 'bg-rose-50/20');
+            severanceIndicatorPill.className = "px-2 py-0.5 rounded bg-rose-50 text-status-critical font-label-sm text-label-sm font-semibold animate-pulse";
+            severanceIndicatorPill.textContent = "GATEWAY SEVERED (DOWN)";
+
+            severanceStatusDesc.innerHTML = `
+              <div class="flex items-center gap-1.5 font-label-sm text-label-sm font-semibold text-status-critical">
+                <span class="material-symbols-outlined text-sm">emergency_home</span>
+                <span>AUTONOMOUS EDGE FAILOVER ENGAGED</span>
+              </div>
+              <div class="text-rose-900">Zero cloud reachability. HR-01, HR-02, and HR-03 shifted to onboard ring buffer. Local slope displacement triggers automated hardwired sirens directly.</div>
+            `;
+
+            flashBufferStatus.textContent = "LOGGING (Active RingBuffer)";
+            flashBufferStatus.className = "font-bold text-status-warning";
+            klaxonEdgeStatus.textContent = "ARMED LOCAL CLOUD-INDEP";
+            klaxonEdgeStatus.className = "font-bold text-status-critical";
+
+            kpiGwBadge.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-rose-50 text-status-critical font-label-sm text-label-sm font-semibold";
+            kpiGwBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-status-critical"></span> GW-01 OFFLINE';
+            kpiGwPing.textContent = "Ping: UNREACHABLE (TIMEOUT)";
+            kpiGwPing.className = "text-status-critical font-semibold";
+
+            gwStatusPill.className = "px-2 py-0.5 rounded bg-rose-50 text-status-critical font-label-sm text-label-sm font-semibold";
+            gwStatusPill.textContent = "DOWN / SEVERED";
+            gwPipeStatus.className = "font-semibold text-status-critical";
+            gwPipeStatus.textContent = "Offline (Local Only)";
+
+            beamDirect.setAttribute('stroke', '#DC2626');
+            beamDirect.classList.remove('flow-line-direct');
+            beamDirect.classList.add('flow-line-severed');
+
+            beamMeshHop2.setAttribute('stroke', '#DC2626');
+            beamMeshHop2.classList.remove('flow-line-direct');
+            beamMeshHop2.classList.add('flow-line-severed');
+
+            gwPulsePoint.classList.remove('bg-primary');
+            gwPulsePoint.classList.add('bg-status-critical');
+          } else {
+            severanceCard.classList.add('border-l-secondary');
+            severanceCard.classList.remove('border-l-status-critical', 'bg-rose-50/20');
+            severanceIndicatorPill.className = "px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold";
+            severanceIndicatorPill.textContent = "GATEWAY ARMED";
+
+            severanceStatusDesc.innerHTML = `
+              <div class="flex items-center gap-1.5 font-label-sm text-label-sm font-semibold text-status-safe">
+                <span class="material-symbols-outlined text-sm">verified_user</span>
+                <span>NORMAL OPERATIONAL STATE</span>
+              </div>
+              <div>GW-01 actively receiving frames and forwarding to Sector 4 incident desk via SATCOM. Zero node buffering required.</div>
+            `;
+
+            flashBufferStatus.textContent = "IDLE (0/16,384 pkts)";
+            flashBufferStatus.className = "font-bold text-on-surface";
+            klaxonEdgeStatus.textContent = "READY (Local Logic)";
+            klaxonEdgeStatus.className = "font-bold text-status-safe";
+
+            kpiGwBadge.className = "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold";
+            kpiGwBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-pulse"></span> GW-01 ONLINE';
+            kpiGwPing.textContent = "Ping: 138ms RTT";
+            kpiGwPing.className = "text-on-surface font-semibold";
+
+            gwStatusPill.className = "px-2 py-0.5 rounded bg-emerald-50 text-status-safe font-label-sm text-label-sm font-semibold";
+            gwStatusPill.textContent = "ONLINE";
+            gwPipeStatus.className = "font-semibold text-status-safe";
+            gwPipeStatus.textContent = "Active IP / Satellite";
+
+            beamDirect.setAttribute('stroke', '#15803D');
+            beamDirect.classList.add('flow-line-direct');
+            beamDirect.classList.remove('flow-line-severed');
+
+            beamMeshHop2.setAttribute('stroke', '#15803D');
+            beamMeshHop2.classList.add('flow-line-direct');
+            beamMeshHop2.classList.remove('flow-line-severed');
+
+            gwPulsePoint.classList.add('bg-primary');
+            gwPulsePoint.classList.remove('bg-status-critical');
+          }
+        });
+      }
+
+      // Spreading Factor to Time-On-Air Lookup
+      const toaMap = {
+        '7': '61.7 ms',
+        '8': '102.8 ms',
+        '9': '184.8 ms',
+        '10': '328.2 ms',
+        '11': '656.4 ms',
+        '12': '1312.8 ms'
+      };
+
+      if (sfSelect && toaIndicator) {
+        sfSelect.addEventListener('change', function () {
+          const val = this.value;
+          toaIndicator.textContent = toaMap[val] || '184.8 ms';
+        });
+      }
+
+      // Slider Realtime Readouts
+      if (sliderTxPower && txPowerVal) {
+        sliderTxPower.addEventListener('input', function () {
+          const mw = Math.round(Math.pow(10, this.value / 10));
+          txPowerVal.textContent = `+${this.value} dBm (${mw} mW)`;
+        });
+      }
+
+      if (sliderLossRate && lossRateVal) {
+        sliderLossRate.addEventListener('input', function () {
+          lossRateVal.textContent = `${parseFloat(this.value).toFixed(1)}%`;
+          const pdr = (100 - parseFloat(this.value)).toFixed(1);
+          const kpiPdr = document.getElementById('kpiPdrValue');
+          const pdrBar = document.getElementById('pdrBar');
+          if (kpiPdr) kpiPdr.textContent = `${pdr}%`;
+          if (pdrBar) pdrBar.style.width = `${pdr}%`;
+        });
+      }
+
+      if (sliderDiffraction && diffractionVal) {
+        sliderDiffraction.addEventListener('input', function () {
+          diffractionVal.textContent = `+${parseFloat(this.value).toFixed(1)} dB`;
+        });
+      }
+
+      // Toggle Fresnel Ellipse
+      if (btnToggleRFRays && fresnelDirect) {
+        btnToggleRFRays.addEventListener('click', function () {
+          const current = fresnelDirect.getAttribute('opacity') || '1';
+          if (current === '0') {
+            fresnelDirect.setAttribute('opacity', '1');
+            this.textContent = "Hide Fresnel Envelopes";
+          } else {
+            fresnelDirect.setAttribute('opacity', '0');
+            this.textContent = "Show Fresnel Envelopes";
+          }
+        });
+      }
+
+      // Monsoon Scatter Injection Action
+      if (btnMonsoon) {
+        btnMonsoon.addEventListener('click', function () {
+          sliderLossRate.value = 14.2;
+          sliderLossRate.dispatchEvent(new Event('input'));
+          sliderDiffraction.value = 24;
+          sliderDiffraction.dispatchEvent(new Event('input'));
+          this.classList.add('bg-tertiary', 'text-on-tertiary');
+          this.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Scattering Applied (+35%)';
+          setTimeout(() => {
+            this.classList.remove('bg-tertiary', 'text-on-tertiary');
+            this.innerHTML = '<span class="material-symbols-outlined text-sm">thunderstorm</span> Inject 35% Monsoon Scattering';
+          }, 3500);
+        });
+      }
+
+      // Reset Baselines Action
+      if (btnResetRF) {
+        btnResetRF.addEventListener('click', function () {
+          sliderLossRate.value = 1.6;
+          sliderLossRate.dispatchEvent(new Event('input'));
+          sliderDiffraction.value = 18;
+          sliderDiffraction.dispatchEvent(new Event('input'));
+          sliderTxPower.value = 14;
+          sliderTxPower.dispatchEvent(new Event('input'));
+          if (sfSelect) {
+            sfSelect.value = '9';
+            sfSelect.dispatchEvent(new Event('change'));
+          }
+          if (toggleSeverance && toggleSeverance.checked) {
+            toggleSeverance.checked = false;
+            toggleSeverance.dispatchEvent(new Event('change'));
+          }
+        });
+      }
+
+      // Table Filtering Buttons
+      const filterButtons = ['filterAll', 'filterHR01', 'filterHR02', 'filterHR03', 'filterCRC'];
+      filterButtons.forEach(btnId => {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          filterButtons.forEach(id => {
+            const b = document.getElementById(id);
+            if (b) {
+              b.className = "px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-muted hover:text-on-surface";
+            }
+          });
+          this.className = "px-2.5 py-1 text-label-sm font-label-sm rounded-md bg-surface-card text-on-surface font-semibold shadow-sm";
+
+          const rows = tableBody.querySelectorAll('tr');
+          const filterKey = btnId.replace('filter', '');
+          rows.forEach(r => {
+            if (filterKey === 'All') {
+              r.style.display = '';
+            } else if (filterKey === 'CRC') {
+              const crcText = r.children[9]?.textContent.trim();
+              r.style.display = crcText === 'FAIL' ? '' : 'none';
+            } else {
+              const nodeAttr = r.getAttribute('data-node');
+              r.style.display = nodeAttr === filterKey ? '' : 'none';
+            }
+          });
+        });
+      });
+
+      // Clear & Pause Stream Controls
+      if (btnClearLog && tableBody) {
+        btnClearLog.addEventListener('click', function () {
+          tableBody.innerHTML = '';
+        });
+      }
+
+      if (btnPauseStream) {
+        btnPauseStream.addEventListener('click', function () {
+          isStreamPaused = !isStreamPaused;
+          this.innerHTML = isStreamPaused
+            ? '<span class="material-symbols-outlined text-base text-status-warning">play_arrow</span>'
+            : '<span class="material-symbols-outlined text-base">pause</span>';
+        });
+      }
+
+      // Simulated Background Ingestion Generator
+      setInterval(() => {
+        if (isStreamPaused || !tableBody) return;
+
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}.${String(Math.floor(Math.random() * 900 + 100))}`;
+        frameCounter++;
+        const frameHex = `#0x${frameCounter.toString(16).toUpperCase()}`;
+
+        const nodes = [
+          { name: 'HR-01 (Kaliasaur)', id: 'HR-01', route: 'Direct LoS (0 Hops)', routeClass: 'bg-emerald-50 text-status-safe', rssi: '-78.4 dBm', snr: '+8.3 dB', toa: '184.8 ms', hex: '01 4B 09 84 2E 1F AA 04 22 9F' },
+          { name: 'HR-02 (Sirobagarh)', id: 'HR-02', route: 'Anchor Forwarder', routeClass: 'bg-surface-container text-tertiary', rssi: '-89.8 dBm', snr: '+4.0 dB', toa: '184.8 ms', hex: '02 3A 05 62 1D 80 BF 02 11 A0' },
+          { name: 'HR-03 (Rudraprayag)', id: 'HR-03', route: 'Relayed via HR-02 [Hop 1]', routeClass: 'bg-amber-50 text-status-warning', rssi: '-107.9 dBm', snr: '-4.6 dB', toa: '369.6 ms', hex: '03 1C 00 A5 8F C2 99 07 41 EE' }
+        ];
+
+        const pick = nodes[Math.floor(Math.random() * nodes.length)];
+        const isSevered = toggleSeverance && toggleSeverance.checked;
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-surface-container-low/40 transition-colors";
+        tr.setAttribute('data-node', pick.id);
+
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-medium">${timeStr}</td>
+          <td class="py-2.5 px-3 text-text-muted">${frameHex}</td>
+          <td class="py-2.5 px-3 font-bold ${pick.id === 'HR-01' ? 'text-primary' : pick.id === 'HR-02' ? 'text-status-warning' : 'text-on-surface'}">${pick.name}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded ${pick.routeClass} font-semibold">${pick.route}</span></td>
+          <td class="py-2.5 px-3 text-text-muted">868.100 MHz</td>
+          <td class="py-2.5 px-3 text-right font-semibold ${isSevered ? 'text-status-critical' : 'text-status-safe'}">${pick.rssi}</td>
+          <td class="py-2.5 px-3 text-right font-semibold ${pick.id === 'HR-03' ? 'text-status-critical' : 'text-status-safe'}">${pick.snr}</td>
+          <td class="py-2.5 px-3 text-right text-text-muted">${pick.toa}</td>
+          <td class="py-2.5 px-3 text-secondary font-semibold">${pick.hex}</td>
+          <td class="py-2.5 px-3 text-center"><span class="text-status-safe font-bold">PASS</span></td>
+          <td class="py-2.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">${isSevered ? 'BUFFERED_EDGE' : 'DEMOD_OK'}</span></td>
+        `;
+
+        tableBody.insertBefore(tr, tableBody.firstChild);
+
+        // Keep maximum 15 rows in DOM for silky performance
+        if (tableBody.children.length > 15) {
+          tableBody.removeChild(tableBody.lastChild);
+        }
+      }, 3800);
+    })();
+  </script>
+</div></main></div><footer class="fixed bottom-0 left-0 right-0 h-7 z-50 bg-surface-card border-t border-border-subtle flex items-center justify-between px-space-md text-text-muted font-label-sm text-label-sm"><div class="flex items-center gap-space-sm truncate"><span class="w-1.5 h-1.5 rounded-full bg-status-safe shrink-0"></span><span class="truncate">Offline-First Protocol v2.4 • Simulated Local Mesh MeshID: HM-868-ALPHA • Zero Cellular Dependency Mode</span></div><div class="shrink-0 hidden md:block text-text-muted">All readings for illustrative test validation</div></footer></body></html>

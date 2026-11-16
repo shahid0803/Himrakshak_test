@@ -66,6 +66,17 @@
     return '<span class="badge ' + H.mappers.risk(level) + '">' + H.escape(level || "UNAVAILABLE") + "</span>";
   }
 
+  function statusBadge(value) {
+    var text = String(value || "unavailable").replace(/_/g, " ").toUpperCase();
+    var cls = value === "available" || value === "accepted" || value === "live" || value === "monitoring" || value === "connected" ? "ok" :
+      value === "warning" || value === "delayed" || value === "recovering" || value === "retrying" ? "warning" : "offline";
+    return '<span class="badge ' + cls + '">' + H.escape(text) + "</span>";
+  }
+
+  function unwrapV2(payload) {
+    return payload && payload.data ? payload.data : payload;
+  }
+
   function stateNotice(state) {
     if (state.loading && !state.overview) return '<div class="empty">Loading backend state…</div>';
     if (state.error) {
@@ -110,7 +121,7 @@
       '<div><div class="muted">Device sequence</div><div class="kpi-value mono">' + H.escape(reading.sequence) + "</div></div><div><div class=\"muted\">Sensor timestamp</div><div class=\"mono\">" + H.escape(H.formatTime(reading.timestamp)) + "</div></div></div>" +
       '<div class="grid grid-4 telemetry"><div><div class="muted">Moisture</div><div class="kpi-value mono">' + readingCell(reading, "soil_moisture_pct", "%") + "</div></div><div><div class=\"muted\">Tilt</div><div class=\"kpi-value mono\">" + readingCell(reading, "tilt_deg", "°") + "</div></div><div><div class=\"muted\">Vibration</div><div class=\"kpi-value mono\">" + readingCell(reading, "vibration_level") + "</div></div><div><div class=\"muted\">Battery</div><div class=\"kpi-value mono\">" + readingCell(reading, "battery_pct", "%") + "</div></div></div>" +
       '<p class="notice">' + H.escape((assessment.reasons || []).join(" · ") || "No backend risk reasons supplied.") + "</p>" +
-      '<p class="muted">Communication: ' + H.escape(communication.connection_state || "unavailable") + " · pending " + H.escape(communication.pending_packets === undefined ? "—" : communication.pending_packets) + " · delivered " + H.escape(communication.packets_delivered === undefined ? "—" : communication.packets_delivered) + " · dropped " + H.escape(communication.packets_dropped === undefined ? "—" : communication.packets_dropped) + "</p>" +
+      '<p class="muted">Device: ' + statusBadge(communication.device_state) + " · radio: " + statusBadge(communication.radio_state) + " · ingestion: " + statusBadge(communication.ingestion_state) + " · pending " + H.escape(communication.pending_packets === undefined ? "—" : communication.pending_packets) + " · delivered " + H.escape(communication.packets_delivered === undefined ? "—" : communication.packets_delivered) + " · dropped " + H.escape(communication.packets_dropped === undefined ? "—" : communication.packets_dropped) + "</p>" +
       '<h3>Accepted event history</h3>' + renderEvents(events) + "</div>";
     return html;
   }
@@ -159,11 +170,17 @@
   }
 
   function renderDiagnostics(state) {
-    return stateNotice(state) + '<div class="grid grid-3"><div class="card"><div class="muted">Backend mode</div><div class="kpi-value">' + H.escape(H.mappers.modeLabel(state.mode)) + "</div></div><div class=\"card\"><div class=\"muted\">Last successful refresh</div><div class=\"mono\">" + H.escape(H.formatTime(state.lastSuccessAt)) + "</div></div><div class=\"card\"><div class=\"muted\">Risk authority</div><div class=\"kpi-value\">BACKEND</div></div></div><div class=\"card\"><h2>Deferred diagnostics</h2><div class=\"alert\"><strong>Virtual LoRa diagnostics are not yet implemented.</strong><br>RSSI, SNR, airtime, duty cycle, gateway uptime, mesh hops, PCAP and SX1262 state are unavailable.</div></div>";
+    var gateway = state.gateway || {};
+    var radio = state.radio || {};
+    var stationRadio = state.stationRadio || {};
+    return stateNotice(state) + '<div class="grid grid-3"><div class="card"><div class="muted">Backend mode</div><div class="kpi-value">' + H.escape(H.mappers.modeLabel(state.mode)) + "</div></div><div class=\"card\"><div class=\"muted\">Data state</div><div class=\"kpi-value\">" + statusBadge(state.dataState) + "</div><small class=\"muted\">Browser refresh: " + H.escape(H.formatTime(state.lastRefreshAt)) + "</small></div><div class=\"card\"><div class=\"muted\">Risk authority</div><div class=\"kpi-value\">BACKEND</div><small class=\"muted\">Radio: " + H.escape(radio.profile || "unavailable") + "</small></div></div>" +
+      '<div class="grid grid-4"><div class="card"><div class="muted">Gateway</div><div class="kpi-value">' + statusBadge(gateway.gateway_state || (gateway.available ? "available" : "unavailable")) + '</div><small class="muted">Last reception: ' + H.escape(H.formatTime(gateway.last_received_packet_at)) + "</small></div><div class=\"card\"><div class=\"muted\">Channel</div><div class=\"kpi-value\">" + statusBadge(gateway.channel_state) + "</div><small class=\"muted\">Queued: " + H.escape(gateway.queued_packets === undefined ? "—" : gateway.queued_packets) + "</small></div><div class=\"card\"><div class=\"muted\">Ingestion</div><div class=\"kpi-value\">" + statusBadge(gateway.ingestion_state) + "</div><small class=\"muted\">Forwarded: " + H.escape(gateway.last_successful_forward_at ? H.formatTime(gateway.last_successful_forward_at) : "Unavailable") + "</small></div><div class=\"card\"><div class=\"muted\">Selected station radio</div><div class=\"kpi-value\">" + statusBadge(stationRadio.radio_state || stationRadio.connection_state) + "</div><small class=\"muted\">Pending: " + H.escape(stationRadio.pending_transmissions === undefined ? "—" : stationRadio.pending_transmissions) + "</small></div></div>" +
+      '<div class="card"><h2>Recovery diagnostics</h2><p class="muted">Software simulation only. No physical RF metrics or crash persistence are claimed.</p><div class="timeline">' + (state.recoveryEvents || []).map(function (event) { return '<div class="event"><span class="event-dot"></span><div><strong>' + H.escape(event.state || "state change") + '</strong><small>' + H.escape(H.formatTime(event.at)) + " · " + H.escape(event.message || "") + "</small></div></div>"; }).join("") + "</div></div>";
   }
 
   function renderLora(state) {
-    return stateNotice(state) + '<div class="card"><h2>Virtual LoRa Network Laboratory</h2><p class="muted">Current v1 communication counters are software reliability outcomes, not physical RF measurements.</p><div class="alert"><strong>Virtual LoRa diagnostics are not yet implemented.</strong><br>RSSI, SNR, airtime, duty cycle, gateway uptime, mesh hops, PCAP and SX1262 state are unavailable.</div></div>' + renderTable(state, "Station communication state");
+    var gateway = state.gateway || {};
+    return stateNotice(state) + '<div class="card"><h2>Virtual LoRa Network Laboratory</h2><p class="muted">Software reliability outcomes, not physical RF measurements.</p><div class="grid grid-4"><div><div class="muted">Channel</div>' + statusBadge(gateway.channel_state) + '</div><div><div class="muted">Gateway</div>' + statusBadge(gateway.gateway_state || "unavailable") + '</div><div><div class="muted">Ingestion</div>' + statusBadge(gateway.ingestion_state) + '</div><div><div class="muted">Data freshness</div>' + statusBadge(state.freshness) + '</div></div><p class="muted">Queued transmissions: ' + H.escape(gateway.queued_packets === undefined ? "—" : gateway.queued_packets) + ' · delivered: ' + H.escape(gateway.delivered_transmissions === undefined ? "—" : gateway.delivered_transmissions) + ' · dropped: ' + H.escape(gateway.dropped_transmissions === undefined ? "—" : gateway.dropped_transmissions) + '</p></div>' + renderTable(state, "Station communication state");
   }
 
   function renderRoute(route) {
@@ -272,25 +289,44 @@
     var stationId = state.station;
     var generation = state.generation + 1;
     H.state.set({refreshInFlight: true, loading: !state.overview});
-    refreshPromise = Promise.all([H.api.health(), H.api.state(), H.api.stations(), H.api.station(stationId)]).then(function (responses) {
+    function optional(request) {
+      return request().catch(function (error) { return { unavailable: true, error: error }; });
+    }
+    refreshPromise = Promise.all([H.api.health(), H.api.state(), H.api.stations(), H.api.station(stationId), optional(H.api.radioStatus), optional(H.api.gatewayHealth), optional(function () { return H.api.radioDiagnostics(stationId); })]).then(function (responses) {
       var latest = H.state.get();
       if (latest.generation !== generation - 1 || latest.station !== stationId) return;
       setMode(pageMode());
+      var gateway = unwrapV2(responses[5]);
+      var previousState = latest.dataState;
+      var stationDetail = H.mappers.station(responses[3]);
+      var freshness = H.mappers.freshness(H.mappers.reading(latestFor(stationDetail)).timestamp);
+      var dataState = freshness;
+      var recoveryEvents = latest.recoveryEvents || [];
+      if (previousState !== "live" && dataState === "live") {
+        recoveryEvents = [{state: "recovered", at: new Date().toISOString(), message: "Backend telemetry refresh recovered."}].concat(recoveryEvents).slice(0, 20);
+      }
       H.state.set({
         health: responses[0],
         events: responses[1] && Array.isArray(responses[1].events) ? responses[1].events : [],
         overview: responses[2],
-        detail: H.mappers.station(responses[3]),
+        detail: stationDetail,
+        radio: unwrapV2(responses[4]),
+        gateway: gateway,
+        stationRadio: unwrapV2(responses[6]),
+        dataState: dataState,
+        freshness: freshness,
+        recoveryEvents: recoveryEvents,
         loading: false,
         stale: false,
         error: null,
-        lastSuccessAt: new Date().toISOString()
+        lastSuccessAt: new Date().toISOString(),
+        lastRefreshAt: new Date().toISOString()
       });
     }).catch(function (error) {
       var latest = H.state.get();
       if (latest.generation !== generation - 1 || latest.station !== stationId) return;
       setMode(pageMode() === "local" ? "local-unavailable" : "cloud-unavailable");
-      H.state.set({loading: false, stale: Boolean(latest.overview), error: error});
+      H.state.set({loading: false, stale: Boolean(latest.overview), dataState: latest.overview ? "disconnected" : "unavailable", error: error, lastRefreshAt: new Date().toISOString()});
     }).finally(function () {
       H.state.set({refreshInFlight: false});
     });
